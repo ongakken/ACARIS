@@ -5,15 +5,17 @@
 ###########
 
 from transformers import RobertaTokenizerFast, TFRobertaForSequenceClassification, pipeline, logging
+import tensorflow as tf
+import numpy as np
 import os
 
 class emo:
     def __init__(self):
         os.environ["TF_CPP_MIN_LOG_LEVEL"] = '3' # kill off logging
         logging.set_verbosity_error() # kill off logging
-        self.tokenizer = RobertaTokenizerFast.from_pretrained("ongkn/EmoRoBERTa") # set the tokenizer from our repo
-        self.model = TFRobertaForSequenceClassification.from_pretrained("ongkn/EmoRoBERTa") # set the model and pull from our repo, if missing on local
-        self.emotion = pipeline("sentiment-analysis", model="ongkn/EmoRoBERTa") # make the initial prediciton using our model
+        self.tokenizer = RobertaTokenizerFast.from_pretrained("arpanghoshal/EmoRoBERTa") # set the tokenizer from our repo
+        self.model = TFRobertaForSequenceClassification.from_pretrained("arpanghoshal/EmoRoBERTa") # set the model and pull from our repo, if missing on local
+        self.emotion = pipeline("sentiment-analysis", model="arpanghoshal/EmoRoBERTa") # make the initial prediciton using our model
         self.label2id = {
             "admiration": 0, # ahhh, what a clean code!
             "amusement": 1, # amusement?? Yeah, I feel that each time I see a Python developer
@@ -45,9 +47,9 @@ class emo:
             "neutral": 27 # the sentiment of my friends every time I ask how their day is going
         }
 
-    def predict(self, input): # this method handles the prediction. if only I could comment in a header file next to the declaration ...
+    def predict(self, txt): # this method handles the prediction. if only I could comment in a header file next to the declaration ...
         try: # error handling
-            emotionLabels = self.emotion(input) # this runs the prediction itself
+            emotionLabels = self.emotion(txt) # this runs the prediction itself
         except Exception as e: # if something goes wrong
             print(f"Err: {str(e)}")
             return "Err" # in case of an error, the func will return "Err" instead of a sentiment
@@ -56,27 +58,31 @@ class emo:
             predictedEmotion = emotionLabels[0]["label"] # we pull the label and store it in str predictedEmotion
             predictedEmotionInt = self.label2id[predictedEmotion.lower()] # we store the int representation of the predictedEmotion in the predictedEmotionInt var, based on the dict in the beginning
             if emotionLabels[0]["score"] < 0.95: # if our confidence is lower than .95
-                print("input: ", input) # we print the input
+                print("current prediction: ", predictedEmotion) # we print the prediction
+                print("current confidence: ", emotionLabels[0]["score"]) # we print the confidence
+                print("input: ", txt) # we print the input
                 while True: # loop until broken
-                    correctLabel = input("Correct label:\n") # ask for correction of our predicted label
-                    correctLabelInt = self.label2id.get(correntLabel.lower()) # based on the correction entered, look up the int value for the label
+                    correctLabel = input("Correct label: ") # ask for correction of our predicted label
+                    correctLabelInt = self.label2id.get(correctLabel.lower()) # based on the correction entered, look up the int value for the label
                     if correctLabelInt is None: # if not found in the dict, prompt for correction again 
                         print("Invalid label! Retry!!\n")
                     else:
-                        break # break when the entered emotion matched a label from the dict
+                        break # break when the entered emotion matches a label from the dict
                 
                 if predictedEmotionInt != correctLabelInt: # if the entered emotion is different that the one we predicted ...
-                    self.updateModel(input, correctLabelInt) # ... retrain the model to include this seq and the correct label. over time, this will improve accuracy, but it's gonna take a long time
+                    self.updateModel(txt, correctLabelInt) # ... retrain the model to include this seq and the correct label. over time, this will improve accuracy, but it's gonna take a long time
 
         else: # if our confidence is lower or equal to .75 ...
-            return "Not sure ... rather not continuing!" # ... we cannot trust the prediction in this high-stakes circumstance
+            return f"Not sure ... rather not continuing!\n----------------\nDebug:\n----------------\nclass: {emotionLabels[0]['label']}\nconfidence: {emotionLabels[0]['score']}\n" # ... we cannot trust the prediction in this high-stakes circumstance
         
         return predictedEmotion # if all goes well, we return the prediction here
 
     def updateModel(self, input, correctLabelInt): # retrain using the input + corrected label
         x = self.tokenizer(input, return_tensors="tf") # tokenize the input seq
-        y = [correctLabelInt] # set the label as the sole member of this list (batch)
-        self.model.train_on_batch(x=x, y=y) # run training on the sole-member batch
+        y = np.array(correctLabelInt) # set the label as the sole member of this list (batch)
+        print(y)
+        self.model.compile(optimizer="adam") # compile the model
+        self.model.fit(x, y) # run training on the sole-member batch
 
 emo_mdl = emo() # instantiate the class
-print(emo_mdl.predict("I miss you in bed, honey ... <3")) # this quoted part is the actual input seq, so we print the return of the predict() method, passing the seq to it
+print(emo_mdl.predict("you seriously think you're better?!")) # this quoted part is the actual input seq, so we print the return of the predict() method, passing the seq to it
