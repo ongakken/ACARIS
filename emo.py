@@ -85,4 +85,4 @@ class emo:
         self.model.fit(x, y) # run training on the sole-member batch
 
 emo_mdl = emo() # instantiate the class
-print(emo_mdl.predict("you seriously think you're better?!")) # this quoted part is the actual input seq, so we print the return of the predict() method, passing the seq to it
+print(emo_mdl.predict("Oh my God, she's so cute!!!")) # this quoted part is the actual input seq, so we print the return of the predict() method, passing the seq to it
