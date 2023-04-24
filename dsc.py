@@ -10,6 +10,7 @@ from feature_extract import FeatExtractor
 from train import Trainer
 from eval import Eval
 from user_embedder import UserEmbedder
+from msg_buffer import MsgBuffer
 
 from dotenv import load_dotenv
 import os
@@ -27,6 +28,9 @@ class Bot(commands.Bot):
         self.eval = Eval(self.mdl)
         self.userEmbedder = UserEmbedder(userEmbeddingSize=10)
 
+        bufferSize = 250
+        msgBuffer = MsgBuffer(bufferSize, extractor)
+
 
     async def on_ready(self):
         print(f"Init'ed and conn'd to Discord as {self.user}")
@@ -38,9 +42,7 @@ class Bot(commands.Bot):
         userID = message.author.id
         userEmbedding = self.userEmbedder.get_user_embedding(userID)
 
-        tokens = self.preprocessor.tokenize(message.content, userEmbedding)
-
-        feats = self.extractor.extract_feats(tokens)
+        msg
 
         # TODO: Train and eval here.
 
