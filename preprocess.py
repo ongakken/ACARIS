@@ -3,6 +3,10 @@ The preprocess module contains methods for preprocessing text data.
 """
 
 from transformers import AutoTokenizer
+import os
+
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
+
 
 
 class Preprocessor:
@@ -43,3 +47,4 @@ if __name__ == "__main__":
     text = "F* me, hard!"
     tokens = preprocessor.tokenize(text, 64)
     print(f"Sweet, sweet tokens:\n{tokens}")
+    print(f"Decoded tokens:\n{preprocessor.tokenizer.decode(tokens['input_ids'][0])}")

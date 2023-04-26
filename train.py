@@ -14,7 +14,7 @@ from data_loader import load_data
 
 class MdlTrainer:
     def __init__(self, mdl, userEmbedder):
-        self.model = ACARISMdl.from_pretrained(mdl, userEmbedder)
+        self.model = ACARISMdl(mdl, userEmbedder)
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model.to(self.device)
 

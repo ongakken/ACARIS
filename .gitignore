@@ -4,3 +4,4 @@ datasets/
 .env
 *.csv
 *.html
+__pycache__/

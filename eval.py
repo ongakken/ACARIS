@@ -3,7 +3,9 @@ This module runs eval
 """
 
 from sklearn.metrics import accuracy_score, f1_score
-from data_loader import load_dataset
+from data_loader import load_data
+from acaris_mdl import ACARISMdl
+from user_embedder import UserEmbedder
 import torch
 
 
@@ -15,7 +17,7 @@ class Eval:
         self.model.to(self.device)
 
     def eval(self, testDS, batchSize):
-        testLoader = DataLoader(testDS, batch_size=batchSize)
+        testLoader = load_data("test")
         self.model.eval()
 
         all_labels = []
@@ -40,8 +42,11 @@ class Eval:
         return {"accuracy": acc, "f1": f1}
 
 if __name__ == "__main__":
-    eval = Eval(mdl)
-    testDS = load_dataset("test")
+    mdl = "distilbert-base-uncased"
+    userEmbedder = UserEmbedder()
+    model = ACARISMdl(mdl, userEmbedder)
+    eval = Eval(model)
+    testDS = load_data("test")
     metrics = eval.eval(testDS, batchSize=32)
 
     print(f"Metrics:\n{metrics}")

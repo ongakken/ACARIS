@@ -26,7 +26,7 @@ class Bot(commands.Bot):
         self.extractor = FeatExtractor(self.mdl)
         self.trainer = Trainer(self.mdl)
         self.eval = Eval(self.mdl)
-        self.userEmbedder = UserEmbedder(userEmbeddingSize=10)
+        self.userEmbedder = UserEmbedder()
 
         bufferSize = 250
         msgBuffer = MsgBuffer(bufferSize, extractor)

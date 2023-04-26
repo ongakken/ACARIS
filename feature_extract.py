@@ -7,6 +7,7 @@ from transformers import AutoModel, AutoTokenizer, pipeline
 import re
 import string
 import numpy as np
+import pandas as pd
 from collections import Counter
 from datetime import datetime, timedelta
 from sklearn.feature_extraction.text import CountVectorizer
@@ -171,11 +172,12 @@ class FeatExtractor:
     mean_punctuation_count.requiredFields = ["content"]
 
     def mean_sentiment_score(self, msgs):
-        if len(msgs[0]["content"].split()) <= 1:
+        sentMapping = {"pos": 1, "neg": -1, "neu": 0}
+        if len(msgs.iloc[0]["content"].split()) <= 1:
             raise ValueError("Can't proceed without words!")
-        sentimentScores = [self.sentPipeline(msg["content"])[0]["score"] if len(msg["content"].split()) > 1 else 0 for msg in msgs]
+        sentimentScores = [sentMapping[row["sentiment"]] if len(row["content"].split()) > 1 else 0 for _, row in msgs.iterrows()]
         return np.mean(sentimentScores)
-    mean_sentiment_score.requiredFields = ["content"]
+    mean_sentiment_score.requiredFields = ["sentiment"]
 
     def dominant_topics(self, msgs):
         msgTexts = [msg["content"] for msg in msgs]
@@ -247,8 +249,8 @@ if __name__ == "__main__":
     # if os.path.splitext("./datasets/msgs.txt")[1] == ".txt":
     #     txt_to_csv("./datasets/msgs.txt", "./datasets/msgs.csv", args.uid)
 
-    #msgs = extractor.read_msgs_from_file("./datasets/reknez.csv")
-    msgs = extractor.txt_to_csv("./datasets/msgLog.txt", "./datasets/reknezLog.csv", "Reknez#9257")
+    msgs = extractor.read_msgs_from_file("./datasets/sents_merged.csv")
+    #msgs = extractor.txt_to_csv("./datasets/msgLog.txt", "./datasets/reknezLog.csv", "Reknez#9257")
 
     breakpoint()
 

@@ -6,7 +6,7 @@ import torch
 
 
 class UserEmbedder:
-    def __init__(self, userEmbeddingSize):
+    def __init__(self, userEmbeddingSize=10):
         self.userEmbeddings = {}
         self.userEmbeddingSize = userEmbeddingSize
 
