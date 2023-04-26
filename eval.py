@@ -3,6 +3,9 @@ This module runs eval
 """
 
 from sklearn.metrics import accuracy_score, f1_score
+from data_loader import load_dataset
+import torch
+
 
 
 class Eval:
