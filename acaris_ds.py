@@ -1,4 +1,5 @@
 from torch.utils.data import Dataset
+import torch
 from preprocess import Preprocessor
 from user_embedder import UserEmbedder
 
