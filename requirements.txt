@@ -2,3 +2,11 @@ discord.py
 torch
 transformers
 scikit-learn
+gensim
+pandas
+numpy
+matplotlib
+pyLDAvis
+nltk
+wordcloud
+tensorflow
