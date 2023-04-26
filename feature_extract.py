@@ -87,17 +87,20 @@ class FeatExtractor:
             msgs = [row for row in reader]
         return msgs
 
-    ##### !!! DISABLED TEMPOARILY !!! #####
-    def txt_to_csv(self, txtPath, csvPath, uid):
-        raise NotImplementedError
-        with open(txtPath, "r") as f:
-            msgs = f.readlines()
-
-        with open(csvPath, "w") as f:
-            writer = csv.writer(f, fieldnames=["uid", "timestamp", "content"])
+    def txt_to_csv(self, txtPath, csvPath, soughtUser):
+        pattern = r"(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{6}):: .+\/(.+?): (.+)"
+        with open(txtPath, "r") as infile, open(csvPath, "w") as outfile:
+            writer = csv.DictWriter(outfile, fieldnames=["timestamp", "uid", "content"])
             writer.writeheader()
-            for msg in msgs:
-                writer.writerow({"uid": uid, "timestamp": None, "content": msg.strip()})
+
+            for line in infile:
+                match = re.match(pattern, line)
+                if match:
+                    timestamp, discordTag, content = match.groups()
+                    #if "The Butler#5636" not in discordTag and "MarkTheBot#5636" not in discordTag:
+                    if soughtUser in discordTag:
+                        writer.writerow({"uid": discordTag, "timestamp": timestamp, "content": content})
+        print(f"Saved {csvPath}")
 
     def cleanup_csv(self, csvPath):
         raise NotImplementedError
@@ -212,7 +215,7 @@ class FeatExtractor:
     def mean_abbreviations_per_msg(self, msgs):
         abbreviationsCount = [len(abbreviationsPattern.findall(msg["content"])) for msg in msgs]
         return np.mean(abbreviationsCount)
-    mean_abbreviations_per_msg.requiredFields = ["content"]
+    mean_abbreviations_per_msg.requiredFields = ["content"] 
 
     def mean_hashtag_count_per_msg(self, msgs):
         hashtagCount = [len(hashtagPattern.findall(msg["content"])) for msg in msgs]
@@ -244,7 +247,8 @@ if __name__ == "__main__":
     # if os.path.splitext("./datasets/msgs.txt")[1] == ".txt":
     #     txt_to_csv("./datasets/msgs.txt", "./datasets/msgs.csv", args.uid)
 
-    msgs = extractor.read_msgs_from_file("./datasets/reknez.csv")
+    #msgs = extractor.read_msgs_from_file("./datasets/reknez.csv")
+    msgs = extractor.txt_to_csv("./datasets/msgLog.txt", "./datasets/reknezLog.csv", "Reknez#9257")
 
     breakpoint()
 

@@ -8,6 +8,7 @@ from transformers import RobertaTokenizerFast, TFRobertaForSequenceClassificatio
 import tensorflow as tf
 import numpy as np
 import os
+import csv
 
 class emo:
     def __init__(self):
@@ -61,16 +62,16 @@ class emo:
                 print("current prediction: ", predictedEmotion) # we print the prediction
                 print("current confidence: ", emotionLabels[0]["score"]) # we print the confidence
                 print("input: ", txt) # we print the input
-                while True: # loop until broken
-                    correctLabel = input("Correct label: ") # ask for correction of our predicted label
-                    correctLabelInt = self.label2id.get(correctLabel.lower()) # based on the correction entered, look up the int value for the label
-                    if correctLabelInt is None: # if not found in the dict, prompt for correction again 
-                        print("Invalid label! Retry!!\n")
-                    else:
-                        break # break when the entered emotion matches a label from the dict
+                # while True: # loop until broken
+                #     correctLabel = input("Correct label: ") # ask for correction of our predicted label
+                #     correctLabelInt = self.label2id.get(correctLabel.lower()) # based on the correction entered, look up the int value for the label
+                #     if correctLabelInt is None: # if not found in the dict, prompt for correction again 
+                #         print("Invalid label! Retry!!\n")
+                #     else:
+                #         break # break when the entered emotion matches a label from the dict
                 
-                if predictedEmotionInt != correctLabelInt: # if the entered emotion is different that the one we predicted ...
-                    self.updateModel(txt, correctLabelInt) # ... retrain the model to include this seq and the correct label. over time, this will improve accuracy, but it's gonna take a long time
+                # if predictedEmotionInt != correctLabelInt: # if the entered emotion is different that the one we predicted ...
+                #     self.updateModel(txt, correctLabelInt) # ... retrain the model to include this seq and the correct label. over time, this will improve accuracy, but it's gonna take a long time
 
         else: # if our confidence is lower or equal to .75 ...
             return f"Not sure ... rather not continuing!\n----------------\nDebug:\n----------------\nclass: {emotionLabels[0]['label']}\nconfidence: {emotionLabels[0]['score']}\n" # ... we cannot trust the prediction in this high-stakes circumstance
@@ -85,4 +86,18 @@ class emo:
         self.model.fit(x, y) # run training on the sole-member batch
 
 emo_mdl = emo() # instantiate the class
-print(emo_mdl.predict("Oh my God, she's so cute!!!")) # this quoted part is the actual input seq, so we print the return of the predict() method, passing the seq to it
+with open("./datasets/msgLog.csv", "r") as f: # open the input file
+    reader = csv.DictReader(f, delimiter=",", fieldnames=["uid", "timestamp", "content"])
+
+    with open("output.csv", "w", newline="") as out:
+        fieldnames = ["uid", "timestamp", "content", "sentiment"]
+        writer = csv.DictWriter(out, fieldnames=fieldnames, delimiter=",")
+        writer.writeheader()
+
+        for idx, row in enumerate(reader):
+            print(row)
+            msg = row["content"]
+            inferredSentiment = emo_mdl.predict(msg)
+            newRow = {"uid": row["uid"], "timestamp": row["timestamp"], "content": row["content"], "sentiment": inferredSentiment}
+            writer.writerow(newRow)
+# print(emo_mdl.predict("Oh my God, she's so cute!!!")) # this quoted part is the actual input seq, so we print the return of the predict() method, passing the seq to it

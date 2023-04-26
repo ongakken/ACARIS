@@ -32,13 +32,14 @@ class Preprocessor:
         dictionary can be either PyTorch tensors or TensorFlow tensors depending on the value of the
         returnTensors parameter.
         """
-        tokens = self.tokenizer(text, max_length=max_length, padding=padding, truncation=truncation, return_tensors=return_tensors)
+        tokens = self.tokenizer(text, max_length=maxLen, padding=padding, truncation=truncation, return_tensors=returnTensors)
         #tokens["input_ids"] = torch.cat([userEmbedding, tokens["input_ids"]], dim=-1)
+        #tokens["userID"] = torch.tensor(userID, dtype=torch.long)
         return tokens
 
 if __name__ == "__main__":
     mdl = "distilbert-base-uncased"
     preprocessor = Preprocessor(mdl)
-    text = "Fuck me, hard!"
+    text = "F* me, hard!"
     tokens = preprocessor.tokenize(text, 64)
     print(f"Sweet, sweet tokens:\n{tokens}")

@@ -2,3 +2,5 @@ wandb/
 dataset/
 datasets/
 .env
+*.csv
+*.html
