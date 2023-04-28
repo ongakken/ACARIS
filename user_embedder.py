@@ -7,8 +7,16 @@ import torch
 
 class UserEmbedder:
     def __init__(self, userEmbeddingSize=10):
+        self.userIndices = {}
         self.userEmbeddings = {}
         self.userEmbeddingSize = userEmbeddingSize
+        self.currentIndex = 0
+
+    def get_user_index(self, userID):
+        if userID not in self.userIndices:
+            self.userIndices[userID] = self.currentIndex
+            self.currentIndex += 1
+        return self.userIndices[userID]
 
     def get_user_embedding(self, userID):
         if userID not in self.userEmbeddings:

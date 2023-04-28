@@ -7,10 +7,17 @@ from torch.utils.data import DataLoader
 from transformers import AutoModelForSequenceClassification, Trainer, TrainingArguments
 from acaris_mdl import ACARISMdl
 from acaris_ds import ACARISDs
+from acaris_trainer import ACARISTrainer
+from acaris_ds import ACARISDs
+from acaris_collator import ACARISCollator
 from user_embedder import UserEmbedder
 from preprocess import Preprocessor
 from data_loader import load_data
 import os
+
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
+os.environ["CUDA_LAUNCH_BLOCKING"] = "1"
+
 
 
 class MdlTrainer:
@@ -19,10 +26,10 @@ class MdlTrainer:
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model.to(self.device)
 
-    def fine_tune(self, trainDS, valDS, epochs, batchSize, outputDir):
+    def fine_tune(self, trainLoader, valLoader, epochs, batchSize, outputDir):
         if not os.path.exists(outputDir):
             os.makedirs(outputDir)
-        trainingArgs = TrainingArguments(
+        trainingArgs = TrainingArguments(  
             output_dir=outputDir,
             num_train_epochs=epochs,
             per_device_train_batch_size=batchSize,
@@ -34,11 +41,11 @@ class MdlTrainer:
             metric_for_best_model="accuracy"
         )
 
-        trainer = Trainer(
+        trainer = ACARISTrainer(
             model=self.model,
             args=trainingArgs,
-            train_dataset=trainDS,
-            eval_dataset=valDS,
+            trainLoader=trainLoader,
+            evalLoader=valLoader,
             compute_metrics=self.compute_metrics
         )
 
@@ -56,6 +63,9 @@ if __name__ == "__main__":
     userEmbedder = UserEmbedder()
     trainer = MdlTrainer(mdl, userEmbedder)
     preprocessor = Preprocessor(mdl)
+    collator = ACARISCollator()
+
+    batchSize = 32
 
     train = load_data("train")
     val = load_data("val")
@@ -63,4 +73,7 @@ if __name__ == "__main__":
     trainDS = ACARISDs(train, preprocessor, userEmbedder)
     valDS = ACARISDs(val, preprocessor, userEmbedder)
 
-    trainer.fine_tune(trainDS, valDS, epochs=5, batchSize=32, outputDir="./output")
+    trainLoader = DataLoader(trainDS, batch_size=batchSize, shuffle=True, collate_fn=collator)
+    valLoader = DataLoader(valDS, batch_size=batchSize, shuffle=False, collate_fn=collator)
+
+    trainer.fine_tune(trainLoader=trainLoader, valLoader=valLoader, epochs=5, batchSize=32, outputDir="./output")

@@ -10,7 +10,7 @@ import numpy as np
 import pandas as pd
 from collections import Counter
 from datetime import datetime, timedelta
-from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import LatentDirichletAllocation
 from preprocess import Preprocessor
 import pickle
@@ -48,10 +48,15 @@ abbreviationsPattern = re.compile(
 class FeatExtractor:
 	def __init__(self, mdl, nTopics = 10):
 		self.sentPipeline = pipeline("sentiment-analysis", model=mdl)
-		self.vectorizer = CountVectorizer(max_df=0.95, min_df=2, stop_words="english")
+		self.vectorizer = TfidfVectorizer(stop_words="english")
 		self.lda = LatentDirichletAllocation(n_components=nTopics, random_state=69)
 
 	def extract_feats(self, msgs):
+		if not msgs:
+			return []
+		msgs = [msg for msg in msgs if len(msg["content"]) >= 25]
+		if not msgs:
+			return []
 		feats = {
 			"meanWordcount": self.mean_wordcount(msgs),
 			"vocabRichness": self.vocab_richness(msgs),
@@ -72,7 +77,7 @@ class FeatExtractor:
 			#"dominantActiveHours": self.dominant_active_hours(msgs)
 		}
 		print(feats)
-		return feats
+		return feats if feats else []
 
 	def save_feats_for_later(self, feats, path):
 		with open(path, "wb") as f:
@@ -171,51 +176,57 @@ class FeatExtractor:
 		groupedMsgs = self.group_msgs_by_user(msgs)
 
 		for uid, userMsgs in groupedMsgs.items():
+			if len(userMsgs) < 25:
+				print(f"Skipping {uid} because they have less than 25 messages")
+				continue
 			feats = self.extract_feats(userMsgs)
 			print(len(feats))
-			picklePath = os.path.join(path, f"{path}{uid.split('#')[0]}_feats.pkl") # using only the first part of the uid as the filename
+			print(f"for {uid}")
+			picklePath = os.path.join(path, f"{uid.split('#')[0]}_feats.pkl") # using only the first part of the uid as the filename
 			self.save_feats_for_later(feats, picklePath)
 
 	### Feature extraction methods ###
 
 	def mean_wordcount(self, msgs):
 		print("Extracting mean wordcount...")
-		return np.mean([len(msg["content"].split()) for msg in msgs])
+		return round(np.mean([len(msg["content"].split()) for msg in msgs]), 2)
 	mean_wordcount.requiredFields = ["content"]
 
 	def vocab_richness(self, msgs):
 		print("Extracting vocabulary richness...")
 		words = [word for msg in msgs for word in msg["content"].split()]
 		uniqueWords = len(set(words))
-		return uniqueWords / len(words)
+		if len(words) == 0:
+			return 0
+		else:
+			return round(uniqueWords / len(words), 2)
 	vocab_richness.requiredFields = ["content"]
 
 	def mean_emoji_count(self, msgs):
 		print("Extracting mean emoji count...")
 		emojiCount = [len(emojiPattern.findall(msg["content"])) for msg in msgs]
-		return np.mean(emojiCount)
+		return round(np.mean(emojiCount), 2)
 	mean_emoji_count.requiredFields = ["content"]
 
 	def mean_emoticon_count(self, msgs):
 		print("Extracting mean emoticon count...")
 		emoticonCount = [len(emoticonPattern.findall(msg["content"])) for msg in msgs]
-		return np.mean(emoticonCount)
+		return round(np.mean(emoticonCount), 2)
 	mean_emoticon_count.requiredFields = ["content"]
 
 	def mean_punctuation_count(self, msgs):
 		print("Extracting mean punctuation count...")
 		punctCount = [sum(char in string.punctuation for char in msg["content"]) for msg in msgs]
-		return np.mean(punctCount)
+		return round(np.mean(punctCount), 2)
 	mean_punctuation_count.requiredFields = ["content"]
 
 	def mean_sentiment_score(self, msgs):
 		print("Extracting mean sentiment score...")
 		sentMapping = {"pos": 1, "neg": -1, "neu": 0}
 		msgs = self.remove_none(msgs)
-		if not msgs:
-			raise ValueError("Can't proceed without messages!")
-		if len(msgs[0]["content"].split()) < 1:
-			raise ValueError("Can't proceed without words!")
+		if not msgs or len(msgs[0]["content"].split()) < 1:
+			print(f"Empty msgs!")
+			return None
 		sentimentScores = []
 		for row in msgs:
 			try:
@@ -224,7 +235,7 @@ class FeatExtractor:
 			except KeyError as e:
 				print(f"KeyError: at {row}")
 				raise e
-		return np.mean(sentimentScores)
+		return round(np.mean(sentimentScores), 2)
 	mean_sentiment_score.requiredFields = ["sentiment"]
 
 	def dominant_topics(self, msgs):
@@ -241,26 +252,30 @@ class FeatExtractor:
 		timestamps = [datetime.fromisoformat(msg["timestamp"]) for msg in msgs]
 		responseTimes = [timestamps[i + 1] - timestamps[i] for i in range(len(timestamps) - 1)]
 		responseTimes = [rt for rt in responseTimes if rt < timedelta(hours=1)]
-		return np.mean(responseTimes).total_seconds()
+		if not responseTimes:
+			return 0.0
+		return round(np.mean(responseTimes).total_seconds(), 2)
 	mean_response_time.requiredFields = ["timestamp"]
 
 	def mean_msg_count_per_day(self, msgs):
 		print("Extracting mean message count per day...")
 		timestamps = [datetime.fromisoformat(msg["timestamp"]).date() for msg in msgs]
+		if len(timestamps) < 2 or timestamps[-1] == timestamps[0] or not timestamps:
+			return 0.0
 		days = (timestamps[-1] - timestamps[0]).days
-		return len(timestamps) / days
+		return round(len(timestamps) / days, 2)
 	mean_msg_count_per_day.requiredFields = ["timestamp"]
 
 	def mean_links_per_msg(self, msgs):
 		print("Extracting mean links per message...")
 		linkCount = [len(linkPattern.findall(msg["content"])) for msg in msgs]
-		return np.mean(linkCount)
+		return round(np.mean(linkCount), 2)
 	mean_links_per_msg.requiredFields = ["content"]
 
 	def mean_code_snippets_per_msg(self, msgs):
 		print("Extracting mean code snippets per message...")
 		codeSnippetCount = [len(codeSnippetPattern.findall(msg["content"])) for msg in msgs]
-		return np.mean(codeSnippetCount)
+		return round(np.mean(codeSnippetCount), 2)
 	mean_code_snippets_per_msg.requiredFields = ["content"]
 
 	def dominant_writing_styles(self, msgs):
@@ -271,13 +286,13 @@ class FeatExtractor:
 	def mean_abbreviations_per_msg(self, msgs):
 		print("Extracting mean abbreviations per message...")
 		abbreviationsCount = [len(abbreviationsPattern.findall(msg["content"])) for msg in msgs]
-		return np.mean(abbreviationsCount)
+		return round(np.mean(abbreviationsCount), 2)
 	mean_abbreviations_per_msg.requiredFields = ["content"]
 
 	def mean_hashtag_count_per_msg(self, msgs):
 		print("Extracting mean hashtag count per message...")
 		hashtagCount = [len(hashtagPattern.findall(msg["content"])) for msg in msgs]
-		return np.mean(hashtagCount)
+		return round(np.mean(hashtagCount), 2)
 	mean_hashtag_count_per_msg.requiredFields = ["content"]
 
 	def mean_attachment_count_per_msg(self, msgs):

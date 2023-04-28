@@ -3,6 +3,7 @@ import csv
 smtnUsernames = {
 	"motoko#0001": "simtoon",
 	"motoko#9418": "simtoon",
+	"motoko#3842": "simtoon",
 	"TheKentuckian#0001": "simtoon",
 	"DrippingPussyUS#0001": "simtoon",
 	"PrincessAhegao#0001": "simtoon",
@@ -12,7 +13,7 @@ smtnUsernames = {
 	"DerFeuchteGigachad#8218": "simtoon"
 }
 
-with open("sents.csv", "r") as f_in, open("sents_merged.csv", "w", newline="") as f_out:
+with open("./datasets/sents.csv", "r") as f_in, open("./datasets/sents_merged.csv", "w", newline="") as f_out:
 	reader = csv.reader(f_in, delimiter=",")
 	writer = csv.writer(f_out, delimiter=",")
 	for row in reader:

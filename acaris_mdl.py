@@ -11,10 +11,21 @@ class ACARISMdl(nn.Module):
 		self.classifier = nn.Linear(self.bert.config.hidden_size + userEmbedder.userEmbeddingSize, self.bert.config.num_labels)
 		self.userEmbedder = userEmbedder
 
-	def forward(self, input_ids, attention_mask, userIDs):
-		userEmbeddings = torch.stack([self.userEmbedder.get_user_embedding(userID.item()) for userID in userIDs]).to(input_ids.device)
+	def forward(self, input_ids, attention_mask, userIDs, labels=None):
+		#userIndices = [self.userEmbedder.get_user_index(userID.item()) for userID in userIDs]
+		userIndices = [self.userEmbedder.get_user_index(userID) for userID in userIDs]
+		userIndices = torch.tensor(userIndices, dtype=torch.long, device=input_ids.device)
+		userEmbeddings = [self.userEmbedder.get_user_embedding(userID) for userID in userIDs]
+		userEmbeddings = torch.stack(userEmbeddings)
 		bertOut = self.bert(input_ids=input_ids, attention_mask=attention_mask)
 		tokenEmbs = bertOut.last_hidden_state[:, 0, :]
+		userEmbeddings = userEmbeddings.to(tokenEmbs.device)
 		combinedEmbs = torch.cat((tokenEmbs, userEmbeddings), dim=-1)
 		logits = self.classifier(combinedEmbs)
-		return logits
+
+		if labels is not None:
+			lossFct = nn.CrossEntropyLoss()
+			loss = lossFct(logits.view(-1, self.bert.config.num_labels), labels.view(-1))
+			return {"loss": loss, "logits": logits}
+		else:
+			return {"logits": logits}

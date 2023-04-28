@@ -11,7 +11,7 @@ class ACARISDs(Dataset):
 		self.userEmbedder = userEmbedder
 
 		self.tokenized = [self.preprocessor.tokenize(text, maxLen=None, padding=False, truncation=False, returnTensors=None) for text in self.data["content"]]
-		self.maxLen = max([len(x) for x in self.tokenized])
+		self.maxLen = 128
 
 	def __len__(self):
 		return len(self.data)
@@ -31,8 +31,8 @@ class ACARISDs(Dataset):
 
 		tokens = self.preprocessor.tokenize(content, maxLen=self.maxLen)
 
-		inputIDsPadded = torch.zeros(64, dtype=torch.long)
-		attentionMaskPadded = torch.zeros(64, dtype=torch.long)
+		inputIDsPadded = torch.zeros(128, dtype=torch.long)
+		attentionMaskPadded = torch.zeros(128, dtype=torch.long)
 
 		inputIDsPadded[:len(tokens["input_ids"].squeeze())] = tokens["input_ids"].squeeze()
 		attentionMaskPadded[:len(tokens["attention_mask"].squeeze())] = tokens["attention_mask"].squeeze()
@@ -43,9 +43,12 @@ class ACARISDs(Dataset):
 		print(f"attention_mask shapes: {tokens['attention_mask'].squeeze().shape}")
 		print(f"userEmbedding shape: {userEmbedding.shape}")
 
+		print(f"returning uid: {userID}")
+
 		return {
 			"input_ids": tokens["input_ids"].squeeze(),
 			"attention_mask": tokens["attention_mask"].squeeze(),
-			"userEmbedding": userEmbedding,
+			#"userEmbedding": userEmbedding,
+			"uid": userID,
 			"label": torch.tensor(label, dtype=torch.long)
 		}

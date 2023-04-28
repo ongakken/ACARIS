@@ -13,7 +13,7 @@ class Preprocessor:
     def __init__(self, mdl):
         self.tokenizer = AutoTokenizer.from_pretrained(mdl)
 
-    def tokenize(self, text, maxLen, padding=True, truncation=True, returnTensors="pt"):
+    def tokenize(self, text, maxLen=128, padding=True, truncation=True, returnTensors="pt"):
         """
         This function tokenizes text using a specified tokenizer and returns the resulting tokens with
         optional padding and truncation.

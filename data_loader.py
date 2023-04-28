@@ -16,6 +16,9 @@ def load_data(dataType):
 
 	data = pd.read_csv(f"datasets/{dataType}.csv")
 
+	if "neu" in data.columns:
+		data = data.rename(columns={"neu": "sentiment"})
+
 	return data
 
 def split_data(data, trainRatio, valRatio):
@@ -39,4 +42,4 @@ def split_data(data, trainRatio, valRatio):
 	print(f"Train columns: {trainData.columns}")
 
 if __name__ == "__main__":
-	split_data("datasets/sents_merged.csv", 0.75, 0.1)
+	split_data("./datasets/sents_merged.csv", 0.75, 0.1)
