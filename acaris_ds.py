@@ -10,17 +10,38 @@ class ACARISDs(Dataset):
 		self.preprocessor = preprocessor
 		self.userEmbedder = userEmbedder
 
+		self.tokenized = [self.preprocessor.tokenize(text, maxLen=None, padding=False, truncation=False, returnTensors=None) for text in self.data["content"]]
+		self.maxLen = max([len(x) for x in self.tokenized])
+
 	def __len__(self):
 		return len(self.data)
 
 	def __getitem__(self, idx):
-		sample = self.data[idx]
-		text = sample["text"]
-		label = sample["label"]
-		userID = sample["userID"]
+		sentMapping = {"pos": 1, "neg": -1, "neu": 0}
+		if idx < 0 or idx >= len(self.data):
+			raise IndexError(f"Index {idx} is out of bounds for dataset of size {len(self.data)}")
+		sample = self.data.iloc[idx]
+		content = sample["content"]
+		label = sentMapping[sample["sentiment"]]
+		try:
+			userID = sample["uid"]
+		except KeyError:
+			print(f"KeyError at index {idx} with text {content} and label {label}")
+			raise
 
-		tokens = self.preprocessor.tokenize(text, maxLen=64, padding=True, truncation=True)
+		tokens = self.preprocessor.tokenize(content, maxLen=self.maxLen)
+
+		inputIDsPadded = torch.zeros(64, dtype=torch.long)
+		attentionMaskPadded = torch.zeros(64, dtype=torch.long)
+
+		inputIDsPadded[:len(tokens["input_ids"].squeeze())] = tokens["input_ids"].squeeze()
+		attentionMaskPadded[:len(tokens["attention_mask"].squeeze())] = tokens["attention_mask"].squeeze()
+
 		userEmbedding = self.userEmbedder.get_user_embedding(userID)
+
+		print(f"input_ids shapes: {tokens['input_ids'].squeeze().shape}")
+		print(f"attention_mask shapes: {tokens['attention_mask'].squeeze().shape}")
+		print(f"userEmbedding shape: {userEmbedding.shape}")
 
 		return {
 			"input_ids": tokens["input_ids"].squeeze(),

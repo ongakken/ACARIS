@@ -1,6 +1,8 @@
 wandb/
 dataset/
 datasets/
+pickles/
+logs/
 .env
 *.csv
 *.html

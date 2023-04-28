@@ -20,6 +20,9 @@ def load_data(dataType):
 
 def split_data(data, trainRatio, valRatio):
 	data = pd.read_csv(data)
+	data = data.loc[:, ~data.columns.str.startswith("Unnamed")]
+
+	print(f"Columns: {data.columns}")
 
 	testRatio = 1 - (trainRatio + valRatio)
 
@@ -32,6 +35,8 @@ def split_data(data, trainRatio, valRatio):
 	trainData.to_csv("datasets/train.csv", index=False)
 	valData.to_csv("datasets/val.csv", index=False)
 	testData.to_csv("datasets/test.csv", index=False)
+
+	print(f"Train columns: {trainData.columns}")
 
 if __name__ == "__main__":
 	split_data("datasets/sents_merged.csv", 0.75, 0.1)

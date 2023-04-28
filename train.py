@@ -10,6 +10,7 @@ from acaris_ds import ACARISDs
 from user_embedder import UserEmbedder
 from preprocess import Preprocessor
 from data_loader import load_data
+import os
 
 
 class MdlTrainer:
@@ -19,12 +20,15 @@ class MdlTrainer:
         self.model.to(self.device)
 
     def fine_tune(self, trainDS, valDS, epochs, batchSize, outputDir):
+        if not os.path.exists(outputDir):
+            os.makedirs(outputDir)
         trainingArgs = TrainingArguments(
             output_dir=outputDir,
             num_train_epochs=epochs,
             per_device_train_batch_size=batchSize,
             per_device_eval_batch_size=batchSize,
             evaluation_strategy="epoch",
+            save_strategy="epoch",
             logging_dir="./logs",
             load_best_model_at_end=True,
             metric_for_best_model="accuracy"

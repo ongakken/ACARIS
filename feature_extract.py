@@ -71,6 +71,7 @@ class FeatExtractor:
 			#"meanQuoteCountPerMsg": self.mean_quote_count_per_msg(msgs),
 			#"dominantActiveHours": self.dominant_active_hours(msgs)
 		}
+		print(feats)
 		return feats
 
 	def save_feats_for_later(self, feats, path):
@@ -96,6 +97,15 @@ class FeatExtractor:
 				msg.pop(None, None)
 				print(msg)
 		return msgs
+
+	def group_msgs_by_user(self, msgs):
+		groups = {}
+		for msg in msgs:
+			uid = msg["uid"]
+			if uid not in groups:
+				groups[uid] = []
+			groups[uid].append(msg)
+		return groups
 
 	def txt_to_csv(self, txtPath, csvPath, soughtUser):
 		pattern = r"(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{6}):: .+\/(.+?): (.+)"
@@ -158,8 +168,13 @@ class FeatExtractor:
 	def extract_and_store_feats(self, msgs, path):
 		requiredFields = self.get_required_fields()
 		self.check_if_fields_exist(msgs, requiredFields)
-		feats = self.extract_feats(msgs)
-		self.save_feats_for_later(feats, path)
+		groupedMsgs = self.group_msgs_by_user(msgs)
+
+		for uid, userMsgs in groupedMsgs.items():
+			feats = self.extract_feats(userMsgs)
+			print(len(feats))
+			picklePath = os.path.join(path, f"{path}{uid.split('#')[0]}_feats.pkl") # using only the first part of the uid as the filename
+			self.save_feats_for_later(feats, picklePath)
 
 	### Feature extraction methods ###
 
@@ -299,4 +314,4 @@ if __name__ == "__main__":
 
 	#breakpoint()
 
-	extractor.extract_and_store_feats(msgs, "./pickles/feats.pkl")
+	extractor.extract_and_store_feats(msgs, "./pickles/")
