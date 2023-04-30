@@ -11,9 +11,11 @@ class ACARISMdl(nn.Module):
 		self.classifier = nn.Linear(self.bert.config.hidden_size + 13, numLabels)
 		self.userEmbedder = userEmbedder
 
-	def forward(self, input_ids, attention_mask, userEmbedding, labels=None):
+	def forward(self, input_ids, attention_mask, userEmbedding):
 		bertOut = self.bert(input_ids=input_ids, attention_mask=attention_mask)
 		tokenEmbs = bertOut.last_hidden_state[:, 0, :]
+		if userEmbedding is None:
+			userEmbedding = torch.zeros((input_ids.shape[0], 13), device=tokenEmbs.device)
 		userEmbs = userEmbedding.to(tokenEmbs.device)
 		print(f"tokenEmbs.shape: {tokenEmbs.shape}")
 		print(f"userEmbs.shape: {userEmbs.shape}")

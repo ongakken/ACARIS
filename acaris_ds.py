@@ -50,5 +50,5 @@ class ACARISDs(Dataset):
 			"input_ids": inputIDsPadded,
 			"attention_mask": attentionMaskPadded,
 			"userEmbedding": userEmbedding,
-			"label": torch.tensor(label, dtype=torch.long)
+			"labels": torch.tensor(label, dtype=torch.long)
 		}

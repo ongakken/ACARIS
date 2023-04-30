@@ -14,7 +14,6 @@ class Preprocessor:
         self.tokenizer = AutoTokenizer.from_pretrained(mdl)
 
     def tokenize(self, text, maxLen=512, padding=True, truncation=True, returnTensors="pt"):
-        print(type(text))
         if type(text) == float:
             raise ValueError(f"Got float: {text}")
         lenTokenized = len(self.tokenizer.tokenize(text))

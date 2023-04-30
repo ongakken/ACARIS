@@ -6,18 +6,19 @@ from tqdm.auto import tqdm
 
 
 class ProgressCb(TrainerCallback):
-    def __init__(self):
-        super().__init__()
+	def __init__(self):
+		super().__init__()
 
-    def on_epoch_begin(self, args, state, control, **kwargs):
-        print(f"Epoch {state.epoch +1}")
-        self.progressBar = tqdm(total=state.max_steps, desc="Training", leave=True)
+	def on_epoch_begin(self, args, state, control, **kwargs):
+		print(f"Epoch {state.epoch +1}")
+		self.progressBar = tqdm(total=state.max_steps, desc="Training", leave=True)
 
-    def on_step_end(self, args, state, control, **kwargs):
-        self.progressBar.update(1)
+	def on_step_end(self, args, state, control, **kwargs):
+		self.progressBar.update(1)
+		print(f"Loss: {state.loss}")
 
-    def on_epoch_end(self, args, state, control, **kwargs):
-        self.progressBar.close()
+	def on_epoch_end(self, args, state, control, **kwargs):
+		self.progressBar.close()
 
 
 
@@ -47,28 +48,44 @@ class ACARISTrainer(Trainer):
 
 
 	def compute_loss(self, model, inputs, return_outputs=False):
-		self.labels = inputs.pop("label").to(inputs["input_ids"].device)
-		userEmbedding = inputs.pop("userEmbedding").to(inputs["input_ids"].device)
+		labels = inputs.pop("labels", None)
+		userEmbedding = inputs.pop("userEmbedding", None)
+		if userEmbedding is None or labels is None:
+			return (None, None) if return_outputs else None
+		userEmbedding = userEmbedding.to(inputs["input_ids"].device)
 		outputs = model(**inputs, userEmbedding=userEmbedding)
 		logits = outputs["logits"]
 
-		print(f"labels.shape: {self.labels.shape}")
-		print(f"logits.shape: {logits.shape}")
+		if labels is not None:
+			print(f"labels.shape: {labels.shape}")
+			print(f"logits.shape: {logits.shape}")
 
-		lossFct = nn.CrossEntropyLoss()
-		self.labels = torch.clamp(self.labels, min=0, max=model.bert.config.num_labels - 1)
-		loss = lossFct(logits, self.labels)
+			lossFct = nn.CrossEntropyLoss()
+			labels = torch.clamp(labels, min=0, max=model.bert.config.num_labels - 1)
+			loss = lossFct(logits, labels)
+		else:
+			loss = None
 
 		return (loss, outputs) if return_outputs else loss
 
-	def prediction_step(self, mdl, inputs, prediction_loss_only, ignore_keys=None):
-		hasLabels = all(inputs.get(k) is not None for k in self.labels)
+	def prediction_step(self, mdl, inputs, prediction_loss_only, ignore_keys=()):
+		hasLabels = "labels" in inputs
 		inputs = self._prepare_inputs(inputs)
 
+		if hasLabels:
+			labels = inputs.pop("labels", None)
+			if labels is not None:
+				labels = labels.to(inputs["input_ids"].device)
+
 		with torch.no_grad():
-			outputs = mdl(**inputs)
+			userEmbs = inputs.pop("userEmbedding", None)
+			if userEmbs is not None:
+				userEmbs = userEmbs.to(inputs["input_ids"].device)
+			outputs = mdl(**inputs, userEmbedding=userEmbs)
 			if hasLabels:
-				loss = self.compute_loss(mdl, inputs)
+				loss, _ = self.compute_loss(mdl, inputs, return_outputs=True)
+				if loss is None:
+					return (None, None, None)
 				loss = loss.mean().detach()
 				if self.args.prediction_loss_only:
 					return (loss, None, None)
@@ -78,7 +95,7 @@ class ACARISTrainer(Trainer):
 			logits = logits[0]
 
 		if hasLabels:
-			labels = tuple(inputs.get(name).detach() for name in self.labels)
+			labels = tuple(inputs.get(name).detach() for name in labels)
 			if len(labels) == 1:
 				labels = labels[0]
 			return (loss, logits, labels)
