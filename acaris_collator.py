@@ -13,13 +13,16 @@ class ACARISCollator:
 			inputIDs[idx, :len(feat["input_ids"])] = feat["input_ids"]
 			attentionMask[idx, :len(feat["attention_mask"])] = feat["attention_mask"]
 
-		#userEmbeddings = torch.stack([feat["userEmbedding"] for feat in feats])
+			if len(feat["input_ids"]) < maxLen:
+				inputIDs[idx, len(feat["input_ids"]):] = torch.zeros(maxLen - len(feat["input_ids"]), dtype=torch.long)
+				attentionMask[idx, len(feat["attention_mask"]):] = torch.zeros(maxLen - len(feat["attention_mask"]), dtype=torch.long)
+
+		userEmbs = torch.stack([feat["userEmbedding"] for feat in feats])
 		labels = torch.stack([feat["label"] for feat in feats])
 
 		return {
 			"input_ids": inputIDs,
 			"attention_mask": attentionMask,
-			#"userEmbedding": userEmbeddings,
-			"uid": [feat["uid"] for feat in feats],
+			"userEmbedding": userEmbs,
 			"label": labels
 		}

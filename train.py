@@ -14,9 +14,20 @@ from user_embedder import UserEmbedder
 from preprocess import Preprocessor
 from data_loader import load_data
 import os
+import wandb
+from acaris_trainer import ProgressCb
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 os.environ["CUDA_LAUNCH_BLOCKING"] = "1"
+
+config = {
+    "mdl": "distilbert-base-uncased",
+    "epochs": 1,
+    "batchSize": 8,
+    "outputDir": "./output"
+}
+
+wandb.init(project="MarkIII_ACARIS", entity="simtoonia", config=config)
 
 
 
@@ -24,9 +35,12 @@ class MdlTrainer:
     def __init__(self, mdl, userEmbedder):
         self.model = ACARISMdl(mdl, userEmbedder)
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        #self.device = torch.device("cpu") # TODO: #1 fuck me, not enough VRAM. fuck me hard. ffs
         self.model.to(self.device)
+        wandb.watch(self.model, log="all")
 
     def fine_tune(self, trainLoader, valLoader, epochs, batchSize, outputDir):
+        progressCb = ProgressCb()
         if not os.path.exists(outputDir):
             os.makedirs(outputDir)
         trainingArgs = TrainingArguments(  
@@ -36,6 +50,7 @@ class MdlTrainer:
             per_device_eval_batch_size=batchSize,
             evaluation_strategy="epoch",
             save_strategy="epoch",
+            fp16=True,
             logging_dir="./logs",
             load_best_model_at_end=True,
             metric_for_best_model="accuracy"
@@ -46,7 +61,8 @@ class MdlTrainer:
             args=trainingArgs,
             trainLoader=trainLoader,
             evalLoader=valLoader,
-            compute_metrics=self.compute_metrics
+            compute_metrics=self.compute_metrics,
+            progressCb=progressCb
         )
 
         trainer.train()
@@ -56,24 +72,28 @@ class MdlTrainer:
         predictions = torch.argmax(logits, dim=-1)
         
         acc = (predictions == labels).sum().item() / len(labels)
+        wandb.log({"accuracy": acc})
         return {"accuracy": acc}
 
 if __name__ == "__main__":
-    mdl = "distilbert-base-uncased"
+    mdl = config["mdl"]
     userEmbedder = UserEmbedder()
-    trainer = MdlTrainer(mdl, userEmbedder)
+    trainer = MdlTrainer(mdl=mdl, userEmbedder=userEmbedder)
     preprocessor = Preprocessor(mdl)
     collator = ACARISCollator()
 
-    batchSize = 32
+    batchSize = config["batchSize"]
 
     train = load_data("train")
+    print(f"Train len: {len(train)}")
     val = load_data("val")
 
     trainDS = ACARISDs(train, preprocessor, userEmbedder)
     valDS = ACARISDs(val, preprocessor, userEmbedder)
 
-    trainLoader = DataLoader(trainDS, batch_size=batchSize, shuffle=True, collate_fn=collator)
-    valLoader = DataLoader(valDS, batch_size=batchSize, shuffle=False, collate_fn=collator)
+    trainLoader = DataLoader(trainDS, batch_size=config["batchSize"], shuffle=True, collate_fn=collator, drop_last=False)
+    valLoader = DataLoader(valDS, batch_size=config["batchSize"], shuffle=False, collate_fn=collator, drop_last=False)
 
-    trainer.fine_tune(trainLoader=trainLoader, valLoader=valLoader, epochs=5, batchSize=32, outputDir="./output")
+    trainer.fine_tune(trainLoader=trainLoader, valLoader=valLoader, epochs=config["epochs"], batchSize=config["batchSize"], outputDir=config["outputDir"])
+
+    wandb.finish()

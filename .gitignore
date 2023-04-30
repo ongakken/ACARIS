@@ -6,4 +6,5 @@ logs/
 .env
 *.csv
 *.html
+*.pyc
 __pycache__/

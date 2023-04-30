@@ -43,6 +43,8 @@ abbreviationsPattern = re.compile(
 	r"\b(?:[a-z]*[A-Z][a-z]*(?:[A-Z][a-z]*)?|[A-Z]+(?![a-z]))\b"
 )
 
+customDscEmojiPattern = re.compile(r"<(a)?:\w+:\d+>")
+
 
 
 class FeatExtractor:
@@ -51,12 +53,15 @@ class FeatExtractor:
 		self.vectorizer = TfidfVectorizer(stop_words="english")
 		self.lda = LatentDirichletAllocation(n_components=nTopics, random_state=69)
 
-	def extract_feats(self, msgs):
+	def extract_feats(self, msgs, userID=None):
 		if not msgs:
 			return []
 		msgs = [msg for msg in msgs if len(msg["content"]) >= 25]
 		if not msgs:
 			return []
+
+		msgs = self.removeDscEmoji(msgs)
+
 		feats = {
 			"meanWordcount": self.mean_wordcount(msgs),
 			"vocabRichness": self.vocab_richness(msgs),
@@ -76,12 +81,21 @@ class FeatExtractor:
 			#"meanQuoteCountPerMsg": self.mean_quote_count_per_msg(msgs),
 			#"dominantActiveHours": self.dominant_active_hours(msgs)
 		}
-		print(feats)
-		return feats if feats else []
+
+		for k, v in feats.items():
+			if v is None:
+				print(f"Feature {k} is None for user {userID}")
+				raise ValueError
+		return feats if all(v is not None for v in feats.values()) else []
 
 	def save_feats_for_later(self, feats, path):
 		with open(path, "wb") as f:
 			pickle.dump(feats, f)
+		
+		with open(path + ".csv", "w") as f:
+			writer = csv.writer(f)
+			for feat in feats:
+				writer.writerow(feat)
 
 	def load_feats(self, path):
 		with open(path, "rb") as f:
@@ -170,20 +184,44 @@ class FeatExtractor:
 		msgs = cleaned
 		return msgs
 
-	def extract_and_store_feats(self, msgs, path):
+	def removeDscEmoji(self, msgs):
+		clnMsgs = []
+		for msg in msgs:
+			cln = customDscEmojiPattern.sub("", msg["content"])
+			clnMsg = msg.copy()
+			clnMsg["content"] = cln
+			clnMsgs.append(clnMsg)
+			msgs = clnMsgs
+		return msgs
+
+	def extract_and_store_feats(self, msgs, userID=None, path="./pickles/"):
 		requiredFields = self.get_required_fields()
 		self.check_if_fields_exist(msgs, requiredFields)
 		groupedMsgs = self.group_msgs_by_user(msgs)
 
-		for uid, userMsgs in groupedMsgs.items():
-			if len(userMsgs) < 25:
-				print(f"Skipping {uid} because they have less than 25 messages")
-				continue
-			feats = self.extract_feats(userMsgs)
-			print(len(feats))
-			print(f"for {uid}")
-			picklePath = os.path.join(path, f"{uid.split('#')[0]}_feats.pkl") # using only the first part of the uid as the filename
-			self.save_feats_for_later(feats, picklePath)
+		if userID is not None:
+			feats = []
+			msgs = groupedMsgs[userID]
+			feats = self.extract_feats(msgs=msgs)
+			if not feats:
+				print(f"{userID} has 0 feats!")
+				return None
+			else:
+				print(f"Extracted {len(feats)} features from {userID}")
+				return feats
+
+		else:
+			for uid, userMsgs in groupedMsgs.items():
+				if len(userMsgs) < 25:
+					print(f"Skipping {uid} because they have less than 25 messages")
+					continue
+				feats.append(self.extract_feats(userMsgs))
+				feats = [feat for feat in feats for feat in feat]
+				print(f"Extracted {len(feats)} features from {uid}")
+
+				picklePath = os.path.join(path, f"{uid.split('#')[0]}_feats.pkl") # using only the first part of the uid as the filename
+				self.save_feats_for_later(feats, picklePath)
+			return feats
 
 	### Feature extraction methods ###
 
@@ -244,7 +282,7 @@ class FeatExtractor:
 		docTermMatrix = self.vectorizer.fit_transform(msgTexts)
 		self.lda.fit(docTermMatrix)
 		topicDistr = np.mean(self.lda.transform(docTermMatrix), axis=0)
-		return topicDistr.argmax()
+		return int(topicDistr.argmax())
 	dominant_topics.requiredFields = ["content"]
 
 	def mean_response_time(self, msgs):
@@ -323,10 +361,10 @@ if __name__ == "__main__":
 	# if os.path.splitext("./datasets/msgs.txt")[1] == ".txt":
 	#     txt_to_csv("./datasets/msgs.txt", "./datasets/msgs.csv", args.uid)
 
-	msgs = extractor.read_msgs_from_file("./datasets/sents_merged.csv")
+	msgs = extractor.read_msgs_from_file("./datasets/sents_merged_cleaned.csv")
 	print(msgs[0].keys())
 	#msgs = extractor.txt_to_csv("./datasets/msgLog.txt", "./datasets/reknezLog.csv", "Reknez#9257")
 
 	#breakpoint()
 
-	extractor.extract_and_store_feats(msgs, "./pickles/")
+	extractor.extract_and_store_feats(msgs=msgs, userID=None, path="./pickles/")
