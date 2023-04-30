@@ -48,16 +48,16 @@ class ACARISTrainer(Trainer):
 
 	def compute_loss(self, model, inputs, return_outputs=False):
 		self.labels = inputs.pop("label").to(inputs["input_ids"].device)
-		userEmbs = inputs.pop("userEmbedding").to(inputs["input_ids"].device)
-		outputs = model(**inputs, userEmbs=userEmbs)
+		userEmbedding = inputs.pop("userEmbedding").to(inputs["input_ids"].device)
+		outputs = model(**inputs, userEmbedding=userEmbedding)
 		logits = outputs["logits"]
 
-		print(f"labels.shape: {labels.shape}")
+		print(f"labels.shape: {self.labels.shape}")
 		print(f"logits.shape: {logits.shape}")
 
 		lossFct = nn.CrossEntropyLoss()
-		labels = torch.clamp(labels, min=0, max=model.bert.config.num_labels - 1)
-		loss = lossFct(logits, labels)
+		self.labels = torch.clamp(self.labels, min=0, max=model.bert.config.num_labels - 1)
+		loss = lossFct(logits, self.labels)
 
 		return (loss, outputs) if return_outputs else loss
 

@@ -103,7 +103,7 @@ class FeatExtractor:
 		return feats
 
 	def read_msgs_from_file(self, path):
-		with open(path, "r") as f:
+		with open(path, "r", encoding="utf8") as f:
 			fieldNames = ["uid", "timestamp", "content", "sentiment"]
 			reader = csv.DictReader(f, fieldnames=fieldNames)
 			next(reader)
