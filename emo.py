@@ -9,6 +9,7 @@ import tensorflow as tf
 import numpy as np
 import os
 import csv
+from alert import send_alert
 
 class emo:
     def __init__(self):
@@ -86,18 +87,21 @@ class emo:
         self.model.fit(x, y) # run training on the sole-member batch
 
 emo_mdl = emo() # instantiate the class
-with open("./datasets/msgLog.csv", "r") as f: # open the input file
+with open("./datasets/cleanedMsg/msgLog.csv", "r") as f: # open the input file
     reader = csv.DictReader(f, delimiter=",", fieldnames=["uid", "timestamp", "content"])
 
-    with open("output.csv", "w", newline="") as out:
+    with open("./datasets/emoAnalyzedAndClean/msgLog.csv", "w", newline="") as out:
         fieldnames = ["uid", "timestamp", "content", "sentiment"]
-        writer = csv.DictWriter(out, fieldnames=fieldnames, delimiter=",")
+        writer = csv.DictWriter(out, fieldnames=fieldnames, delimiter="|")
         writer.writeheader()
 
         for idx, row in enumerate(reader):
+            if not all(key in row for key in ["uid", "timestamp", "content"]):
+                raise ValueError(f"Row {idx} is missing a key: {row}")
             print(row)
             msg = row["content"]
             inferredSentiment = emo_mdl.predict(msg)
             newRow = {"uid": row["uid"], "timestamp": row["timestamp"], "content": row["content"], "sentiment": inferredSentiment}
             writer.writerow(newRow)
+        send_alert("AAAAAAH! I FINISHED!!!", "Emotion analysis finished!", "normal", 5000)
 # print(emo_mdl.predict("Oh my God, she's so cute!!!")) # this quoted part is the actual input seq, so we print the return of the predict() method, passing the seq to it

@@ -18,7 +18,7 @@ import wandb
 from acaris_trainer import ProgressCb
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
-os.environ["CUDA_LAUNCH_BLOCKING"] = "1"
+#os.environ["CUDA_LAUNCH_BLOCKING"] = "1"
 
 config = {
 	"mdl": "distilbert-base-uncased",
@@ -64,12 +64,43 @@ class MdlTrainer:
 			trainLoader=trainLoader,
 			evalLoader=valLoader,
 			compute_metrics=ACARISTrainer.compute_metrics,
-			progressCb=progressCb
+			callbacks=[ProgressCb()]
 		)
 
 		trainer.train()
 
 if __name__ == "__main__":
+
+	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
+	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
+	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
+	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
+	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
+	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
+	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
+	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
+	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
+	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
+	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
+	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
+	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
+	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
+	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
+	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
+	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
+	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
+	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
+	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
+	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
+	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
+	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
+	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
+	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
+	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
+	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
+	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
+	raise Exception("ERR: !!! DO NOT TRAIN UNTIL DATA IS FIXED !!!")
+
 	mdl = config["mdl"]
 	userEmbedder = UserEmbedder()
 	trainer = MdlTrainer(mdl=mdl, userEmbedder=userEmbedder)

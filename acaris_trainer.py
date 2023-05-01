@@ -1,4 +1,4 @@
-from transformers import Trainer, TrainerCallback
+from transformers import Trainer, TrainerCallback, EvalPrediction
 import torch.nn as nn
 import torch
 from tqdm.auto import tqdm
@@ -15,8 +15,11 @@ class ProgressCb(TrainerCallback):
 		self.progressBar = tqdm(total=state.max_steps, desc="Training", leave=True)
 
 	def on_step_end(self, args, state, control, **kwargs):
-		self.progressBar.update(1)
-		print(f"Loss: {state.loss}")
+		if state.log_history:
+			lastLog = state.log_history[-1]
+			if "loss" in lastLog:
+				self.progressBar.update(1)
+				print(f"Loss on step end: {lastLog['loss']}")
 
 	def on_epoch_end(self, args, state, control, **kwargs):
 		self.progressBar.close()
@@ -28,7 +31,6 @@ class ACARISTrainer(Trainer):
 		super().__init__(*args, **kwargs)
 		self.trainLoader = trainLoader
 		self.evalLoader = evalLoader
-		self.progressCb = ProgressCb
 
 	def get_train_dataloader(self):
 		if self.trainLoader is not None:
@@ -43,8 +45,6 @@ class ACARISTrainer(Trainer):
 			return super().get_eval_dataloader(*args, **kwargs)
 
 	def train(self):
-		if self.progressCb is not None:
-			self.progressCb = self.progressCb()
 		super().train()
 
 
@@ -75,8 +75,8 @@ class ACARISTrainer(Trainer):
 
 		return (loss, outputs) if return_outputs else loss
 
-	def compute_metrics(self, evalPred):
-		logits, labels = evalPred
+	def compute_metrics(self, evalPred: EvalPrediction):
+		logits, labels = evalPred.predictions, evalPred.label_ids
 		predictions = torch.argmax(logits, dim=-1)
 
 		if len(labels) > 0:
@@ -98,13 +98,16 @@ class ACARISTrainer(Trainer):
 			if userEmbs is not None:
 				userEmbs = userEmbs.to(inputs["input_ids"].device)
 			outputs = mdl(**inputs, userEmbedding=userEmbs)
+			if outputs is None:
+				return (None, None, None)
 			print(f"mdl output: {outputs}")
 			if labels is not None:
 				print(f"labels before loss: {labels}")
 				loss, _ = self.compute_loss(mdl, inputs, labels=labels, return_outputs=True)
 				print(f"loss: {loss}")
 				if loss is None:
-					return (None, None, None)
+					#return (None, None, None)
+					loss = torch.tensor(1e6).to(mdl.device)
 				loss = loss.mean().detach()
 				if self.args.prediction_loss_only:
 					return (loss, None, None)
