@@ -2,6 +2,7 @@ from transformers import Trainer, TrainerCallback
 import torch.nn as nn
 import torch
 from tqdm.auto import tqdm
+from sklearn.metrics import accuracy_score, f1_score
 
 
 
@@ -47,18 +48,24 @@ class ACARISTrainer(Trainer):
 		super().train()
 
 
-	def compute_loss(self, model, inputs, return_outputs=False):
+	def compute_loss(self, model, inputs, labels=None, return_outputs=False):
 		labels = inputs.pop("labels", None)
 		userEmbedding = inputs.pop("userEmbedding", None)
 		if userEmbedding is None or labels is None:
 			return (None, None) if return_outputs else None
-		userEmbedding = userEmbedding.to(inputs["input_ids"].device)
+		
+		inputs = {k: v.to(model.device) for k, v in inputs.items()}
+		userEmbedding = userEmbedding.to(model.device)
+
 		outputs = model(**inputs, userEmbedding=userEmbedding)
 		logits = outputs["logits"]
 
+		print(f"inputs: {inputs}")
+		print(f"logits: {logits}")
+
 		if labels is not None:
-			print(f"labels.shape: {labels.shape}")
-			print(f"logits.shape: {logits.shape}")
+			# print(f"labels.shape: {labels.shape}")
+			# print(f"logits.shape: {logits.shape}")
 
 			lossFct = nn.CrossEntropyLoss()
 			labels = torch.clamp(labels, min=0, max=model.bert.config.num_labels - 1)
@@ -68,22 +75,34 @@ class ACARISTrainer(Trainer):
 
 		return (loss, outputs) if return_outputs else loss
 
-	def prediction_step(self, mdl, inputs, prediction_loss_only, ignore_keys=()):
-		hasLabels = "labels" in inputs
-		inputs = self._prepare_inputs(inputs)
+	def compute_metrics(self, evalPred):
+		logits, labels = evalPred
+		predictions = torch.argmax(logits, dim=-1)
 
-		if hasLabels:
-			labels = inputs.pop("labels", None)
-			if labels is not None:
-				labels = labels.to(inputs["input_ids"].device)
+		if len(labels) > 0:
+			acc = (predictions == labels).sum().item() / len(labels)
+		else:
+			acc = 0
+			
+		wandb.log({"eval_accuracy": acc})
+		metrics = {"eval_accuracy": acc}
+		print(f"metrics: {metrics}")
+		return metrics
+
+	def prediction_step(self, mdl, inputs, prediction_loss_only, ignore_keys=()):
+		labels = inputs.pop("labels", None)
+		inputs = self._prepare_inputs(inputs)
 
 		with torch.no_grad():
 			userEmbs = inputs.pop("userEmbedding", None)
 			if userEmbs is not None:
 				userEmbs = userEmbs.to(inputs["input_ids"].device)
 			outputs = mdl(**inputs, userEmbedding=userEmbs)
-			if hasLabels:
-				loss, _ = self.compute_loss(mdl, inputs, return_outputs=True)
+			print(f"mdl output: {outputs}")
+			if labels is not None:
+				print(f"labels before loss: {labels}")
+				loss, _ = self.compute_loss(mdl, inputs, labels=labels, return_outputs=True)
+				print(f"loss: {loss}")
 				if loss is None:
 					return (None, None, None)
 				loss = loss.mean().detach()
@@ -94,7 +113,7 @@ class ACARISTrainer(Trainer):
 		if len(logits) == 1:
 			logits = logits[0]
 
-		if hasLabels:
+		if labels is not None:
 			labels = tuple(inputs.get(name).detach() for name in labels)
 			if len(labels) == 1:
 				labels = labels[0]

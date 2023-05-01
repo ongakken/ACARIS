@@ -39,10 +39,8 @@ class Bot(commands.Bot):
         if message.author == self.user:
             return
 
-        userID = message.author.id
-        userEmbedding = self.userEmbedder.get_user_embedding(userID)
-
-        msg
+        #userID = message.author.id
+        #userEmbedding = self.userEmbedder.get_user_embedding(userID)
 
         # TODO: Train and eval here.
 

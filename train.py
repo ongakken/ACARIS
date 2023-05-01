@@ -49,13 +49,13 @@ class MdlTrainer:
 			per_device_train_batch_size=batchSize,
 			per_device_eval_batch_size=batchSize,
 			evaluation_strategy="steps",
-			eval_steps=100,
+			eval_steps=500,
 			save_strategy="steps",
-			save_steps=200,
+			save_steps=1000,
 			fp16=True,
 			logging_dir="./logs",
 			load_best_model_at_end=True,
-			metric_for_best_model="accuracy"
+			metric_for_best_model="eval_accuracy"
 		)
 
 		trainer = ACARISTrainer(
@@ -63,26 +63,18 @@ class MdlTrainer:
 			args=trainingArgs,
 			trainLoader=trainLoader,
 			evalLoader=valLoader,
-			compute_metrics=self.compute_metrics,
+			compute_metrics=ACARISTrainer.compute_metrics,
 			progressCb=progressCb
 		)
 
 		trainer.train()
-
-	def compute_metrics(self, evalPred):
-		logits, labels = evalPred
-		predictions = torch.argmax(logits, dim=-1)
-		
-		acc = (predictions == labels).sum().item() / len(labels)
-		wandb.log({"accuracy": acc})
-		return {"accuracy": acc, "eval_accuracy": acc}
 
 if __name__ == "__main__":
 	mdl = config["mdl"]
 	userEmbedder = UserEmbedder()
 	trainer = MdlTrainer(mdl=mdl, userEmbedder=userEmbedder)
 	preprocessor = Preprocessor(mdl)
-	collator = ACARISCollator()
+	collator = ACARISCollator(trainer.device)
 
 	batchSize = config["batchSize"]
 

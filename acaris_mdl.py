@@ -10,6 +10,8 @@ class ACARISMdl(nn.Module):
 		self.bert = AutoModel.from_pretrained(mdl)
 		self.classifier = nn.Linear(self.bert.config.hidden_size + 13, numLabels)
 		self.userEmbedder = userEmbedder
+		self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+		self.to(self.device)
 
 	def forward(self, input_ids, attention_mask, userEmbedding):
 		bertOut = self.bert(input_ids=input_ids, attention_mask=attention_mask)
@@ -17,8 +19,8 @@ class ACARISMdl(nn.Module):
 		if userEmbedding is None:
 			userEmbedding = torch.zeros((input_ids.shape[0], 13), device=tokenEmbs.device)
 		userEmbs = userEmbedding.to(tokenEmbs.device)
-		print(f"tokenEmbs.shape: {tokenEmbs.shape}")
-		print(f"userEmbs.shape: {userEmbs.shape}")
+		# print(f"tokenEmbs.shape: {tokenEmbs.shape}")
+		# print(f"userEmbs.shape: {userEmbs.shape}")
 		combinedEmbs = torch.cat((tokenEmbs, userEmbs), dim=-1)
 		logits = self.classifier(combinedEmbs)
 

@@ -3,6 +3,9 @@ import torch
 
 
 class ACARISCollator:
+	def __init__(self, device):
+		self.device = device
+
 	def __call__(self, feats: List[Dict[str, torch.Tensor]]) -> Dict[str, torch.Tensor]:
 		maxLen = max([len(feat["input_ids"]) for feat in feats])
 
