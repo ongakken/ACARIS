@@ -75,7 +75,9 @@ class emo:
                 #     self.updateModel(txt, correctLabelInt) # ... retrain the model to include this seq and the correct label. over time, this will improve accuracy, but it's gonna take a long time
 
         else: # if our confidence is lower or equal to .75 ...
-            return f"Not sure ... rather not continuing!\n----------------\nDebug:\n----------------\nclass: {emotionLabels[0]['label']}\nconfidence: {emotionLabels[0]['score']}\n" # ... we cannot trust the prediction in this high-stakes circumstance
+            # return f"Not sure ... rather not continuing!\n----------------\nDebug:\n----------------\nclass: {emotionLabels[0]['label']}\nconfidence: {emotionLabels[0]['score']}\n" # ... we cannot trust the prediction in this high-stakes circumstance
+            predictedEmotion = emotionLabels[0]["label"]
+            return predictedEmotion # not trustworthy, but for this use-case, better than NaN
         
         return predictedEmotion # if all goes well, we return the prediction here
 

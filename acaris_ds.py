@@ -10,6 +10,7 @@ class ACARISDs(Dataset):
 		self.preprocessor = preprocessor
 		self.userEmbedder = userEmbedder
 
+		self.data = self.data.iloc[1:] # remove zeroth row (header)
 		self.data = self.data[self.data["uid"].apply(lambda uid: self.userEmbedder.get_user_embedding(uid) is not None)]
 		print(f"Number of samples after filtering: {len(self.data)}")
 
@@ -19,10 +20,13 @@ class ACARISDs(Dataset):
 	def __len__(self):
 		return len(self.data)
 
-	def __getitem__(self, idx):
-		sentMapping = {"pos": 1, "neg": -1, "neu": 0}
-		if idx < 0 or idx >= len(self.data):
-			raise IndexError(f"Index {idx} is out of bounds for dataset of size {len(self.data)}")
+	def __getitem__(self, idx: int):
+		sentMapping = {"pos": 2, "neg": 0, "neu": 1} # adjusted due to CrossEntropyLoss
+		try:
+			if idx < 0 or idx >= len(self.data):
+				raise IndexError(f"Index {idx} is out of bounds for dataset of size {len(self.data)}")
+		except TypeError:
+			raise TypeError(f"Index {idx} is not an integer")
 		sample = self.data.iloc[idx]
 		content = sample["content"]
 		label = sentMapping[sample["sentiment"]]

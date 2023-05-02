@@ -13,7 +13,7 @@ class ACARISMdl(nn.Module):
 		self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 		self.to(self.device)
 
-	def forward(self, input_ids, attention_mask, userEmbedding):
+	def forward(self, input_ids, attention_mask, userEmbedding, labels=None):
 		bertOut = self.bert(input_ids=input_ids, attention_mask=attention_mask)
 		tokenEmbs = bertOut.last_hidden_state[:, 0, :]
 		if userEmbedding is None:
@@ -24,4 +24,9 @@ class ACARISMdl(nn.Module):
 		combinedEmbs = torch.cat((tokenEmbs, userEmbs), dim=-1)
 		logits = self.classifier(combinedEmbs)
 
-		return {"logits": logits}
+		if labels is not None:
+			lossFct = ACARISCrossEntropyLoss(self.bert.config.num_labels)
+			loss = lossFct(logits, labels)
+			return {"loss": loss, "logits": logits}
+		else:
+			return {"logits": logits}

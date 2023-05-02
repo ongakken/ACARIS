@@ -26,6 +26,22 @@ class ProgressCb(TrainerCallback):
 
 
 
+class ACARISCrossEntropyLoss(nn.Module):
+	def __init__(self, nClasses):
+		super(ACARISCrossEntropyLoss, self).__init__()
+		self.nClasses = nClasses
+		self.loss = nn.CrossEntropyLoss()
+
+	def forward(self, logits, labels):
+		mapped = (labels + 1) // 2
+		print(f"mapped labels: {mapped}")
+		print(f"mapped labels.shape: {mapped.shape}")
+		print(f"original labels: {labels}")
+		print(f"original labels.shape: {labels.shape}")
+		return self.loss(logits, mapped)
+
+
+
 class ACARISTrainer(Trainer):
 	def __init__(self, trainLoader, evalLoader, progressCb=None, *args, **kwargs):
 		super().__init__(*args, **kwargs)
@@ -57,21 +73,24 @@ class ACARISTrainer(Trainer):
 		inputs = {k: v.to(model.device) for k, v in inputs.items()}
 		userEmbedding = userEmbedding.to(model.device)
 
+		print(f"labels in compute_loss: {labels}")
+		print(f"userEmbedding in compute_loss: {userEmbedding}")
+
 		outputs = model(**inputs, userEmbedding=userEmbedding)
 		logits = outputs["logits"]
 
-		print(f"inputs: {inputs}")
-		print(f"logits: {logits}")
+		print(f"inputs in compute_loss: {inputs}")
+		print(f"logits in compute_loss: {logits}")
 
 		if labels is not None:
-			# print(f"labels.shape: {labels.shape}")
-			# print(f"logits.shape: {logits.shape}")
+			print(f"labels.shape in compute_loss: {labels.shape}")
+			print(f"logits.shape in compute_loss: {logits.shape}")
 
-			lossFct = nn.CrossEntropyLoss()
+			lossFct = ACARISCrossEntropyLoss(model.bert.config.num_labels)
 			labels = torch.clamp(labels, min=0, max=model.bert.config.num_labels - 1)
 			loss = lossFct(logits, labels)
 		else:
-			loss = None
+			raise ValueError("labels is None")
 
 		return (loss, outputs) if return_outputs else loss
 
@@ -97,9 +116,14 @@ class ACARISTrainer(Trainer):
 			userEmbs = inputs.pop("userEmbedding", None)
 			if userEmbs is not None:
 				userEmbs = userEmbs.to(inputs["input_ids"].device)
+				print(f"userEmbs: {userEmbs}")
+			else:
+				raise ValueError("userEmbedding is None")
+			print(f"mdl out before forward: {mdl(**inputs, userEmbedding=userEmbs)}")
 			outputs = mdl(**inputs, userEmbedding=userEmbs)
 			if outputs is None:
-				return (None, None, None)
+				#return (None, None, None)
+				raise ValueError("outputs is None")
 			print(f"mdl output: {outputs}")
 			if labels is not None:
 				print(f"labels before loss: {labels}")
@@ -107,11 +131,14 @@ class ACARISTrainer(Trainer):
 				print(f"loss: {loss}")
 				if loss is None:
 					#return (None, None, None)
-					loss = torch.tensor(1e6).to(mdl.device)
+					raise ValueError("loss is None")
 				loss = loss.mean().detach()
 				if self.args.prediction_loss_only:
 					return (loss, None, None)
 
+		if outputs is None:
+			return (None, None, None)
+		print(f"outputs before logits tuple: {outputs}\nitems: {outputs.items()}")
 		logits = tuple(v for k, v in outputs.items() if k not in ignore_keys)
 		if len(logits) == 1:
 			logits = logits[0]

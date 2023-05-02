@@ -13,9 +13,9 @@ smtnUsernames = {
 	"DerFeuchteGigachad#8218": "simtoon"
 }
 
-with open("./datasets/sents.csv", "r") as f_in, open("./datasets/sents_merged.csv", "w", newline="") as f_out:
-	reader = csv.reader(f_in, delimiter=",")
-	writer = csv.writer(f_out, delimiter=",")
+with open("./datasets/sentAnal/sents.csv", "r") as f_in, open("./datasets/sentAnal/sents_merged.csv", "w", newline="") as f_out:
+	reader = csv.reader(f_in, delimiter="|")
+	writer = csv.writer(f_out, delimiter="|")
 	for row in reader:
 		userID = row[0]
 		if userID in smtnUsernames:

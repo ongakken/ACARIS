@@ -105,7 +105,7 @@ class FeatExtractor:
 	def read_msgs_from_file(self, path):
 		with open(path, "r", encoding="utf8") as f:
 			fieldNames = ["uid", "timestamp", "content", "sentiment"]
-			reader = csv.DictReader(f, fieldnames=fieldNames)
+			reader = csv.DictReader(f, fieldnames=fieldNames, delimiter="|")
 			next(reader)
 			header = reader.fieldnames
 			print(header)
@@ -211,6 +211,7 @@ class FeatExtractor:
 				return feats
 
 		else:
+			feats = []
 			for uid, userMsgs in groupedMsgs.items():
 				if len(userMsgs) < 25:
 					print(f"Skipping {uid} because they have less than 25 messages")
@@ -260,7 +261,7 @@ class FeatExtractor:
 
 	def mean_sentiment_score(self, msgs):
 		print("Extracting mean sentiment score...")
-		sentMapping = {"pos": 1, "neg": -1, "neu": 0}
+		sentMapping = {"pos": 2, "neg": 0, "neu": 1} # adjusted due to CrossEntropyLoss
 		msgs = self.remove_none(msgs)
 		if not msgs or len(msgs[0]["content"].split()) < 1:
 			print(f"Empty msgs!")
@@ -361,7 +362,7 @@ if __name__ == "__main__":
 	# if os.path.splitext("./datasets/msgs.txt")[1] == ".txt":
 	#     txt_to_csv("./datasets/msgs.txt", "./datasets/msgs.csv", args.uid)
 
-	msgs = extractor.read_msgs_from_file("./datasets/sents_merged_cleaned.csv")
+	msgs = extractor.read_msgs_from_file("./datasets/sentAnal/sents_merged_cleaned.csv")
 	print(msgs[0].keys())
 	#msgs = extractor.txt_to_csv("./datasets/msgLog.txt", "./datasets/reknezLog.csv", "Reknez#9257")
 
