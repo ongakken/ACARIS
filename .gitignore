@@ -3,6 +3,7 @@ dataset/
 datasets/
 pickles/
 logs/
+output/
 .env
 *.csv
 *.html

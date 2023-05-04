@@ -5,26 +5,28 @@ This mod fine-tunes a BERT model on the ACARIS dataset for comparison with ACARI
 import torch
 from torch import nn
 from torch.utils.data import Dataset, DataLoader
-from transformers import BertTokenizerFast, BertForSequenceClassification, TrainingArguments, Trainer, AdamW, EarlyStoppingCallback
+from transformers import RobertaTokenizerFast, RobertaForSequenceClassification, TrainingArguments, Trainer, AdamW, EarlyStoppingCallback
 from datasets import load_dataset, Dataset
 import pandas as pd
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support
 import wandb
 
 config = {
-	"mdl": "bert-base-uncased",
-	"epochs": 1,
+	"mdl": "roberta-base",
+	"epochs": 5,
 	"batchSize": 12,
     "maxLen": 512,
     "warmupSteps": 500,
     "weightDecay": 0.01,
 	"outputDir": "./output",
     "earlyStopping": True,
-    "earlyStoppingPatience": 2,
-    "dropout": 0.1
+    "earlyStoppingPatience": 2
 }
 
 wandb.init(project="MarkIII_ACARIS", entity="simtoonia", config=config)
+
+l2id = {"pos": 2, "neg": 0, "neu": 1}
+id2l = {2: "pos", 0: "neg", 1: "neu"}
 
 
 
@@ -32,8 +34,8 @@ class ACARISBERT:
     def __init__(self, trainPath, valPath):
         self.trainPath = trainPath
         self.valPath = valPath
-        self.tokenizer = BertTokenizerFast.from_pretrained(config["mdl"])
-        self.model = BertForSequenceClassification.from_pretrained(config["mdl"], num_labels=3)
+        self.tokenizer = RobertaTokenizerFast.from_pretrained(config["mdl"])
+        self.model = RobertaForSequenceClassification.from_pretrained(config["mdl"], num_labels=3, id2label=id2l, label2id=l2id)
         
     def read_data(self, path):
         df = pd.read_csv(path, sep="|", usecols=["content", "sentiment"])
@@ -83,16 +85,16 @@ class ACARISBERT:
             warmup_steps=config["warmupSteps"],
             weight_decay=config["weightDecay"],
             logging_dir="./logs",
-            logging_steps=10,
+            logging_steps=100,
             evaluation_strategy="epoch",
             save_strategy="epoch",
             load_best_model_at_end=True,
             metric_for_best_model="accuracy",
             save_total_limit=5,
-            push_to_hub=True,
-            hub_strategy="checkpoint",
-            push_to_hub_organization="ongknsro",
-			push_to_hub_model_id="ACARIS-wordEmbOnly-dsc-sent_BERT"
+            push_to_hub=False,
+			hub_model_id="ongknsro/ACARIS-wordEmbOnly-dsc-sent_RoBERTa",
+			hub_private_repo=True,
+			hub_strategy="checkpoint"
         )
         
         trainer = Trainer(
@@ -100,7 +102,6 @@ class ACARISBERT:
             args=trainingArgs,
             train_dataset=trainDS,
             eval_dataset=valDS,
-            dropout=config["dropout"],
             compute_metrics=self.compute_metrics,
             callbacks=[EarlyStoppingCallback(early_stopping_patience=config["earlyStoppingPatience"])]
         )

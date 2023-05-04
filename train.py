@@ -99,7 +99,7 @@ if __name__ == "__main__":
 	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
 	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
 	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
-	raise Exception("ERR: !!! DO NOT TRAIN UNTIL DATA IS FIXED !!!")
+	#2raise Exception("ERR: !!! DO NOT TRAIN UNTIL DATA IS FIXED !!!")
 
 	mdl = config["mdl"]
 	userEmbedder = UserEmbedder()
@@ -114,7 +114,9 @@ if __name__ == "__main__":
 	val = load_data("val")
 
 	trainDS = ACARISDs(train, preprocessor, userEmbedder)
+	print(f"train sent counts: {train['sentiment'].value_counts()}")
 	valDS = ACARISDs(val, preprocessor, userEmbedder)
+	print(f"val sent counts: {val['sentiment'].value_counts()}")
 
 	trainLoader = DataLoader(trainDS, batch_size=config["batchSize"], shuffle=True, collate_fn=collator, drop_last=False)
 	valLoader = DataLoader(valDS, batch_size=config["batchSize"], shuffle=False, collate_fn=collator, drop_last=False)

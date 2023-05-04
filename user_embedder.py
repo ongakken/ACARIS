@@ -12,7 +12,7 @@ class UserEmbedder:
         self.userEmbeddings = {}
         self.userEmbeddingSize = userEmbeddingSize
         self.extractor = FeatExtractor(self.mdl)
-        self.msgs = self.extractor.read_msgs_from_file("./datasets/sents_merged_cleaned.csv")
+        self.msgs = self.extractor.read_msgs_from_file("./datasets/sentAnal/sents_merged_cleaned.csv")
 
     def get_user_embedding(self, userID):
         if userID not in self.userEmbeddings:

@@ -5,7 +5,7 @@ This mod fine-tunes a BERT model on the ACARIS dataset for comparison with ACARI
 import torch
 from torch import nn
 from torch.utils.data import Dataset, DataLoader
-from transformers import DistilBertTokenizerFast, DistilBertForSequenceClassification, TrainingArguments, Trainer, AdamW
+from transformers import DistilBertTokenizerFast, DistilBertForSequenceClassification, TrainingArguments, Trainer, AdamW, EarlyStoppingCallback
 from datasets import load_dataset, Dataset
 import pandas as pd
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support
@@ -13,12 +13,15 @@ import wandb
 
 config = {
 	"mdl": "distilbert-base-uncased",
-	"epochs": 10,
+	"epochs": 5,
 	"batchSize": 12,
     "maxLen": 512,
     "warmupSteps": 500,
     "weightDecay": 0.01,
-	"outputDir": "./output"
+	"outputDir": "./output",
+    "earlyStopping": True,
+    "earlyStoppingPatience": 2,
+    "dropout": 0.1
 }
 
 wandb.init(project="MarkIII_ACARIS", entity="simtoonia", config=config)
@@ -29,8 +32,8 @@ class ACARISBERT:
     def __init__(self, trainPath, valPath):
         self.trainPath = trainPath
         self.valPath = valPath
-        self.tokenizer = DistilBertTokenizerFast.from_pretrained("distilbert-base-uncased")
-        self.model = DistilBertForSequenceClassification.from_pretrained("distilbert-base-uncased", num_labels=3)
+        self.tokenizer = DistilBertTokenizerFast.from_pretrained(config["mdl"])
+        self.model = DistilBertForSequenceClassification.from_pretrained(config["mdl"], num_labels=3)
         
     def read_data(self, path):
         df = pd.read_csv(path, sep="|", usecols=["content", "sentiment"])
@@ -80,11 +83,16 @@ class ACARISBERT:
             warmup_steps=config["warmupSteps"],
             weight_decay=config["weightDecay"],
             logging_dir="./logs",
-            logging_steps=10,
+            logging_steps=100,
             evaluation_strategy="epoch",
             save_strategy="epoch",
-            load_best_model_at_end=False,
-            metric_for_best_model="accuracy"
+            load_best_model_at_end=True,
+            metric_for_best_model="accuracy",
+            save_total_limit=5,
+            push_to_hub=True,
+            push_to_hub_organization="ongknsro",
+			push_to_hub_model_id="ACARIS-wordEmbOnly-dsc-sent_DistilBERT",
+            hub_strategy="checkpoint"
         )
         
         trainer = Trainer(
@@ -92,7 +100,9 @@ class ACARISBERT:
             args=trainingArgs,
             train_dataset=trainDS,
             eval_dataset=valDS,
-            compute_metrics=self.compute_metrics
+            dropout=config["dropout"],
+            compute_metrics=self.compute_metrics,
+            callbacks=[EarlyStoppingCallback(early_stopping_patience=config["earlyStoppingPatience"])]
         )
         
         trainer.train()
@@ -102,3 +112,5 @@ class ACARISBERT:
 if __name__ == "__main__":
     acaris_bert = ACARISBERT("./datasets/train.csv", "./datasets/val.csv")
     acaris_bert.train()
+    acaris_bert.push_to_hub()
+    wandb.finish()

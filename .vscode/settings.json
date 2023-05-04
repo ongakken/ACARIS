@@ -1,4 +1,34 @@
 {
     "docwriter.style": "Doxygen",
-    "docwriter.progress.trackMethods": true
+    "docwriter.progress.trackMethods": true,
+
+    
+    "python.analysis.typeCheckingMode": "strict",
+    "better-comments.tags": [
+        {
+            "tag": "0",
+            "color": "#EEFF00",
+            "strikethrough": false,
+            "backgroundColor": "transparent"
+        },
+        {
+            "tag" : "1",
+            "color" : "#FFA500",
+            "strikethrough" : false,
+            "backgroundColor" : "transparent"
+        },
+        {
+            "tag": "69",
+            "color": "#FF00FF",
+            "strikethrough": false,
+            "backgroundColor": "transparent"
+        },
+        {
+            "tag": "2",
+            "color": "#00FFFF",
+            "strikethrough": false,
+            "backgroundColor": "transparent"
+        }
+    ]
+    
 }
