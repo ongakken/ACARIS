@@ -31,7 +31,7 @@ emoToSent = {
     "neutral": "neu"
 }
 
-with open("./datasets/emoAnalyzedAndClean/msgLog.csv", "r") as f_in, open("./datasets/sentAnal/sents.csv", "w", newline="") as f_out:
+with open("./datasets/msgsNewLabeled.csv", "r") as f_in, open("./datasets/sentAnal/sents.csv", "w", newline="") as f_out:
 	reader = csv.reader(f_in, delimiter="|")
 	writer = csv.writer(f_out, delimiter="|")
 	for row in reader:

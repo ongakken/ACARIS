@@ -128,16 +128,21 @@ class FeatExtractor:
 
 	def txt_to_csv(self, txtPath, csvPath, soughtUser):
 		pattern = r"(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{6}):: .+\/(.+?): (.+)"
+		alsoPattern = r"^(\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2})\s::\s([\w#]+):\s(.+)$"
 		with open(txtPath, "r") as infile, open(csvPath, "w") as outfile:
-			writer = csv.DictWriter(outfile, fieldnames=["timestamp", "uid", "content"])
+			writer = csv.DictWriter(outfile, fieldnames=["uid", "timestamp", "content"], delimiter="|")
 			writer.writeheader()
 
 			for line in infile:
 				match = re.match(pattern, line)
+				alsoMatch = re.match(alsoPattern, line)
 				if match:
 					timestamp, discordTag, content = match.groups()
-					#if "The Butler#5636" not in discordTag and "MarkTheBot#5636" not in discordTag:
-					if soughtUser in discordTag:
+					if "The Butler#5636" not in discordTag and "MarkTheBot#5636" not in discordTag:
+						writer.writerow({"uid": discordTag, "timestamp": timestamp, "content": content})
+				elif alsoMatch:
+					timestamp, discordTag, content = alsoMatch.groups()
+					if "The Butler#5636" not in discordTag and "MarkTheBot#5636" not in discordTag:
 						writer.writerow({"uid": discordTag, "timestamp": timestamp, "content": content})
 		print(f"Saved {csvPath}")
 
@@ -359,13 +364,13 @@ if __name__ == "__main__":
 	mdl = "distilbert-base-uncased"
 	extractor = FeatExtractor(mdl)
 
-	# if os.path.splitext("./datasets/msgs.txt")[1] == ".txt":
-	#     txt_to_csv("./datasets/msgs.txt", "./datasets/msgs.csv", args.uid)
+	if os.path.splitext("./datasets/messagesNew.txt")[1] == ".txt":
+		extractor.txt_to_csv("./datasets/messagesNew.txt", "./datasets/msgsNew.csv", args.uid)
 
-	msgs = extractor.read_msgs_from_file("./datasets/sentAnal/sents_merged_cleaned.csv")
-	print(msgs[0].keys())
+	#msgs = extractor.read_msgs_from_file("./datasets/sentAnal/sents_merged_cleaned.csv")
+	#print(msgs[0].keys())
 	#msgs = extractor.txt_to_csv("./datasets/msgLog.txt", "./datasets/reknezLog.csv", "Reknez#9257")
 
 	#breakpoint()
 
-	extractor.extract_and_store_feats(msgs=msgs, userID=None, path="./pickles/")
+	#extractor.extract_and_store_feats(msgs=msgs, userID=None, path="./pickles/")

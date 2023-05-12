@@ -15,7 +15,7 @@ userTopics = {}
 def get_user_msgs(userID, csvPath):
 	msgs = []
 	with open(csvPath, "r") as f_in:
-		reader = csv.reader(f_in, delimiter=",")
+		reader = csv.reader(f_in, delimiter="|")
 		for row in reader:
 			if row[0] == userID:
 				msgs.append(row[2])
@@ -27,7 +27,7 @@ def preprocess_msgs(msgs):
 	processedMsgs = []
 	for msg in msgs:
 		words = re.findall(r"\b(?!\d+\b)\w+\b", msg)
-		words = [word.lower() for word in words if word.lower() not in stopWords and "smiling" not in word.lower() and "eyes" not in word.lower() and "face" not in word.lower() and "https" not in word.lower() and "grinning" not in word.lower()]
+		words = [word.lower() for word in words if word.lower() not in stopWords and "smiling" not in word.lower() and "eyes" not in word.lower() and "face" not in word.lower() and "https" not in word.lower() and "grinning" not in word.lower() and "clyde" not in word.lower() and "unclyde" not in word.lower()]
 		processedMsgs.append(words)
 	return processedMsgs
 
@@ -65,7 +65,7 @@ def get_user_topics(lda, dict, stopWords, processedMsgs):
 def get_most_common_sentiment(userID, csvPath):
 	sents = []
 	with open(csvPath, "r") as f_in:
-		reader = csv.reader(f_in, delimiter=",")
+		reader = csv.reader(f_in, delimiter="|")
 		for row in reader:
 			if row[0] == userID:
 				sents.append(row[3])
@@ -83,7 +83,10 @@ def generate_wordcloud(processedMsgs):
 
 def main():
 	stopw = set(stopwords.words("english"))
-	msgs = get_user_msgs("Reknez#9257", "sents_merged.csv")
+	#msgs = get_user_msgs("Reknez#9257", "./datasets/sentAnal/sents_merged_sents_merged_cleaned_expanded.csv")
+	msgs = get_user_msgs("simtoon", "./datasets/sentAnal/sents_merged_cleaned_expanded.csv")
+	# msgs = get_user_msgs("Clyde#0000", "./datasets/sentAnal/sents_merged_cleaned_expanded.csv")
+	#msgs = get_user_msgs("Reknez#9257", "./datasets/sentAnal/sents_merged_cleaned_expanded.csv")
 	processedMsgs = preprocess_msgs(msgs)
 	generate_wordcloud(processedMsgs)
 	dict = corpora.Dictionary(processedMsgs)
@@ -103,7 +106,7 @@ def main():
 		for topic, topicProb in sortedTopics:
 			print(f"{userID} is most likely to talk about topic {topic} ({topicProb})")
 
-	print(f"The most common sentiment for Reknez#9257 is {get_most_common_sentiment('Reknez#9257', 'sents_merged.csv')}")
+	print(f"The most common sentiment for Reknez#9257 is {get_most_common_sentiment('Reknez#9257', './datasets/sentAnal/sents_merged_cleaned.csv')}")
 
 if __name__ == "__main__":
 	main()

@@ -10,14 +10,15 @@ from datasets import load_dataset, Dataset
 import pandas as pd
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support
 import wandb
+import huggingface_hub
 
 config = {
 	"mdl": "distilbert-base-uncased",
 	"epochs": 5,
 	"batchSize": 12,
     "maxLen": 512,
-    "warmupSteps": 500,
-    "weightDecay": 0.01,
+    "warmupSteps": 750,
+    "weightDecay": 0.02,
 	"outputDir": "./output",
     "earlyStopping": True,
     "earlyStoppingPatience": 2,
@@ -33,7 +34,7 @@ class ACARISBERT:
         self.trainPath = trainPath
         self.valPath = valPath
         self.tokenizer = DistilBertTokenizerFast.from_pretrained(config["mdl"])
-        self.model = DistilBertForSequenceClassification.from_pretrained(config["mdl"], num_labels=3)
+        self.model = DistilBertForSequenceClassification.from_pretrained(config["mdl"], num_labels=3, dropout=config["dropout"], attention_dropout=config["dropout"])
         
     def read_data(self, path):
         df = pd.read_csv(path, sep="|", usecols=["content", "sentiment"])
@@ -84,15 +85,13 @@ class ACARISBERT:
             weight_decay=config["weightDecay"],
             logging_dir="./logs",
             logging_steps=100,
+            learning_rate=2e-5,
             evaluation_strategy="epoch",
             save_strategy="epoch",
             load_best_model_at_end=True,
             metric_for_best_model="accuracy",
             save_total_limit=5,
-            push_to_hub=True,
-            push_to_hub_organization="ongknsro",
-			push_to_hub_model_id="ACARIS-wordEmbOnly-dsc-sent_DistilBERT",
-            hub_strategy="checkpoint"
+            fp16=True,
         )
         
         trainer = Trainer(
@@ -100,7 +99,6 @@ class ACARISBERT:
             args=trainingArgs,
             train_dataset=trainDS,
             eval_dataset=valDS,
-            dropout=config["dropout"],
             compute_metrics=self.compute_metrics,
             callbacks=[EarlyStoppingCallback(early_stopping_patience=config["earlyStoppingPatience"])]
         )
@@ -112,5 +110,4 @@ class ACARISBERT:
 if __name__ == "__main__":
     acaris_bert = ACARISBERT("./datasets/train.csv", "./datasets/val.csv")
     acaris_bert.train()
-    acaris_bert.push_to_hub()
     wandb.finish()

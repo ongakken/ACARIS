@@ -89,10 +89,10 @@ class emo:
         self.model.fit(x, y) # run training on the sole-member batch
 
 emo_mdl = emo() # instantiate the class
-with open("./datasets/cleanedMsg/msgLog.csv", "r") as f: # open the input file
-    reader = csv.DictReader(f, delimiter=",", fieldnames=["uid", "timestamp", "content"])
+with open("./datasets/msgsNew.csv", "r") as f: # open the input file
+    reader = csv.DictReader(f, delimiter="|", fieldnames=["uid", "timestamp", "content"])
 
-    with open("./datasets/emoAnalyzedAndClean/msgLog.csv", "w", newline="") as out:
+    with open("./datasets/msgsNewLabeled.csv", "w", newline="") as out:
         fieldnames = ["uid", "timestamp", "content", "sentiment"]
         writer = csv.DictWriter(out, fieldnames=fieldnames, delimiter="|")
         writer.writeheader()
