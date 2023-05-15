@@ -27,7 +27,8 @@ def split_data(data, trainRatio, valRatio):
 
 	dropped = 0
 
-	data.columns = ["uid", "timestamp", "content", "sentiment"]
+	# data.columns = ["uid", "timestamp", "content", "sentiment"]
+	data.columns = ["uid", "content", "sentiment"]
 
 	try:
 		data = data.drop(columns=["nan"])
@@ -56,4 +57,5 @@ def split_data(data, trainRatio, valRatio):
 	print(f"Dropped {dropped} rows")
 
 if __name__ == "__main__":
-	split_data("./datasets/sentAnal/sents_merged_cleaned.csv", 0.75, 0.1)
+	#split_data("./datasets/sentAnal/sents_merged_cleaned.csv", 0.75, 0.1)
+	split_data("./datasets/all_noTimestamps.csv", 0.75, 0.1)

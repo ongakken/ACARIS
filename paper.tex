@@ -4,6 +4,8 @@
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{multirow}
+\usepackage[backend=biber, sorting=none]{biblatex}
+\addbibresource{refs.bib}
 %\usepackage{multicol}
 
 \title{ACARIS: Improving Conversational AI and Human Social Skills using User Embeddings}
@@ -31,9 +33,9 @@ ACARIS, Conversational AI, Social Skills, User Embeddings, BERT, DistilBERT, Sen
 	\item \textbf{LogReg} - Logistic Regression - a statistical model that in its basic form uses a logistic function to model a binary dependent variable, although many more complex extensions exist
 	\item \textbf{RF} - Random Forest - an ensemble learning method for classification, regression and other tasks that operate by constructing a multitude of decision trees at training time and outputting the class that is the mode of the classes (classification) or mean prediction (regression) of the individual trees
 	\item \textbf{TF-IDF} - Term Frequency - Inverse Document Frequency - a numerical statistic that is intended to reflect how important a word is to a document in a collection or corpus
-	\item \textbf{the Transformer} - a deep learning model introduced in 2017, used primarily in the field of NLP
-	\item \textbf{BERT} - Bidirectional Encoder Representations from Transformers - a transformer-based machine learning technique for natural language processing pre-training developed by Google
-	\item \textbf{DistilBERT} - DistilBERT is a smaller, faster, cheaper version of BERT developed by HuggingFace
+	\item \textbf{the Transformer} - a deep learning model introduced in 2017, used primarily in the field of NLP\cite{vaswani2017attention}
+	\item \textbf{BERT} - Bidirectional Encoder Representations from Transformers - a transformer-based machine learning technique for natural language processing pre-training developed by Google\cite{devlin2019bert}
+	\item \textbf{DistilBERT} - DistilBERT is a smaller, faster, cheaper version of BERT developed by HuggingFace\cite{sanh2020distilbert}
 	\item \textbf{Vector} - a quantity that has both magnitude and direction
 	\item \textbf{Vector Space} - a collection of vectors, which may be added together and multiplied ("scaled") by numbers, called scalars
 	\item \textbf{Embedding Space} - a vector space with a coordinate for each word in the vocabulary, such that words that share common contexts in the corpus are located close to one another in the space
@@ -41,9 +43,10 @@ ACARIS, Conversational AI, Social Skills, User Embeddings, BERT, DistilBERT, Sen
 	\item \textbf{User Embedding} - A vector representation of a user's personality, emotional state, intent, and interest
 	\item \textbf{ReLU} - Rectified Linear Unit - an activation function that returns the input value if it is positive, otherwise it returns zero
 	\item \textbf{Loss} - a number indicating how bad the model's prediction was on a single example
-	\item \textbf{Loss Gradient} - the gradient of the loss with respect to the model parameters
+	\item \textbf{Cross-Entropy Loss} - a loss function used for classification problems
+	\item \textbf{Adam} - an optimization algorithm that can be used instead of the classical stochastic gradient descent procedure to update network weights
 	\item \textbf{Ablation Study} - a study in which specific components of a system are removed to analyze their impact on the overall performance
-	
+\end{itemize}
 \section{Motivation and Premise}
 I've always had an issue with interpersonal relationships. I could never fully understand the way people work on a social level. I understand the technical and biological fundamentals, and superficially, how the mind works, but not how all this becomes so much more complex when actually talking and dealing with people. Sometimes, I feel that another person and I broadcast on different frequencies, because we are unable to either understand one another or maintain a (romantic) relationship for an extended period of time. I have tried for many years to find a technical solution to this problem, but only after coming to Denmark, I acquired the core knowledge to try and accomplish this ambitious goal by really getting into it and self-studying as much as I could.\\
 I firmly believe that all things in nature are governed by rules and these rules can be observed, measured, and then, based on that data, predicted. This includes human behavior and emotions. We’re nothing more than complex electrobiochemical machines driven by electrical impulses and hormones. Apart from that, even if we don’t understand our own minds yet, we still have many, many years of knowledge about how human personalities work and how we make decisions based on what happens to or around us. On a fundamental level, this doesn’t change. Sure, they say that we’re all different. However, the core remains. We all share many attributes that make us human. I believe that we, given enough data, can use these attributes to predict human behavior, reactions, emotional state, and intent.
@@ -55,35 +58,66 @@ Given enough conversational data per person, human behavior (emotional state, in
 \section{Introduction}
 Interpersonal communication has always been an integral part of human lives. With the rise of the Internet and, subsequently, social media and other forms of online text communication, the manner in which we talk has changed dramatically. This has led to a drop in social skills in humans, particularly those of the last generation. ACARIS attempts to adjust for this by providing a way to analyze the emotional state, intent, and interest of text communication parties, providing them with a way to improve their social skills, while also improving the performance of conversational AI systems, which are becoming increasingly prevalent in our society, and their ability to understand human emotions, intent, and interest is becoming more and more important, especially in AI systems that directly interact with humans, such as digital assistants, chatbots, and others.
 
-\section{Literature Review and Related Work}
-\subsection{Studied Literature}
-\subsubsection{Human Emotions}
+\subsection{Literature Review and Related Work}
+\subsubsection{Studied Literature}
 \begin{itemize}
-	\item 
-\end{itemize}
-\subsubsection{Sentiment Analysis}
-\begin{itemize}
-	\item \textbf{Machine Learning with PyTorch and Scikit-Learn} by Yuxi Liu, Vahid Mirjalili, Sebastian Raschka
-	\item \textbf{Hands-on Machine Learning with Scikit-Learn, Keras, and TensorFlow} by Aurélien Géron
+	\item \textbf{Machine Learning with PyTorch and Scikit-Learn}\cite{raschka2022machine} by Yuxi Liu, Vahid Mirjalili, Sebastian Raschka
+	\item \textbf{Hands-on Machine Learning with Scikit-Learn, Keras, and TensorFlow}\cite{geron2022hands} by Aurélien Géron
 \end{itemize}
 
-\section{Initial Attempts}
-Our initial attempts of implementing ACARIS included the use of SVMs, DTs, LogReg, and RFs, each paired with TF-IDF in the preprocessing stage. None of these methods have proven to be accurate enough (barely reaching 50\% accuracy) for large amounts of complex language, especially casual language that often includes slang, sarcasm, emoji, and similar elements. The primary issue was the lack of these methods' ability to capture semantical and contextual aspects of our dataset. Another issue was TF-IDF's lack of word order understanding. Knowing that the Transformer architecture is capable of capturing these aspects due to its positional encodinds and self-attention mechanism, we decided to use it as the basis for ACARIS.
+\subsection{Initial Attempts}
+Our initial attempts of implementing ACARIS included the use of SVMs, DTs, LogReg, and RFs, each paired with TF-IDF in the preprocessing stage. None of these methods have proven to be accurate enough (barely reaching 50\% accuracy) for large amounts of complex language, especially casual language that often includes slang, sarcasm, emoji, and similar elements. The primary issue was the lack of these methods' ability to capture semantical and contextual aspects of our dataset. Another issue was TF-IDF's lack of word order understanding. Knowing that the Transformer\cite{vaswani2017attention} architecture is capable of capturing these aspects due to its positional encodinds and self-attention mechanism, we decided to use it as the basis for ACARIS.
+
+\subsection{Short Intro on Transformers}
+The Transformer\cite{vaswani2017attention} is a deep learning model proposed in 2017 by a team of Google Brain researchers. It is mainly used in NLP, but it has also found its way into numerous vision projects (Latent Diffusion\cite{rombach2021highresolution}/Stable Diffusion/LLaVA\cite{liu2023visual}, to name a few).
 
 \section{Methodology}
-In this section, we provide a detailed description of our approach, including the initialization of user embeddings, concatenation with word embeddings, modifications to the model architecture, and the training and evaluation processes.
+In this section, we provide a detailed description of our approach, including the computation of user embeddings, concatenation with word embeddings, modifications to the model architecture, and the training and evaluation processes.
+
+% features:
+% - Mean wordcount (per msg)
+% - Vocab richness (type-token ratio?) - Unique words / total words
+% - Mean emoji count (per msg)
+% - Mean emoticon count (per msg)
+% - Mean punctuation count (per msg)
+% - Mean sentiment score (per msg)
+% - Dominant/prevalent topics
+% - Mean response time (!exclude closing messages, such as "Goodnight")
+% - Mean message count (per day)
+% - Mean links (per msg)
+% - Mean markdown code snippet sections (per msg)
+% - Mean abbreviations and acronyms (per msg) (such as "lol", "omg", "FBI", ...)
+% - Mean hashtag count (per msg)
+
+\subsection{Dataset}
+To build our dataset, we collected 100 thousand messages from our Discord server, classified them into 3 classes (pos, neg, neu), and augmented them with the GoEmotions\cite{demszky2020goemotions} dataset, which contains 58 thousand messages classified into 27 classes. We squashed the 27 classes into 3 classes (pos, neg, neu) and concatenated the two datasets. To minimize error caused by input data, we removed all users with less than 25 messages, URLs, markdown code blocks, Discord mentions and custom emoji, and attachments. The resulting dataset was split into 85\% training, 10\% validation, and 5\% test sets.
 
 \subsection{User Embeddings Initialization}
-For each user $u$, we create an initial user embedding $e_u$ of size $d_e$, where $d_e$ is the dimensionality of the user embeddings. We initialize $e_u$ with random values sampled from a Gaussian distribution:
+For each user $u$, we loop through all messages $m$ sent by $u$ and extract these features:
+\begin{itemize}
+	\item \textbf{Mean word count (per all $m$)} - \(\overline{w} = \frac{1}{N} \sum_{i=1}^{N} w_i \), where $w_i$ is the word count of $i$-th message and $N$ is the total number of messages
+	\item \textbf{Vocabulary richness (per all $m$)} - \(r = \frac{U}{W} \), where $U$ is the number of unique words and $W$ is the total number of words
+	\item \textbf{Mean emoji count (per all $m$)} - \(\overline{e} = \frac{1}{N} \sum_{i=1}^{N} e_i \), where $e_i$ is the emoji count of $i$-th message and $N$ is the total number of messages
+	\item \textbf{Mean emoticon count (per all $m$)} - \(\overline{em} = \frac{1}{N} \sum_{i=1}^{N} em_i \), where $e_i$ is the emoticon count of $i$-th message and $N$ is the total number of messages
+	\item \textbf{Mean punctuation count (per all $m$)} - \(\overline{p} = \frac{1}{N} \sum_{i=1}^{N} p_i \), where $p_i$ is the punctuation count of $i$-th message and $N$ is the total number of messages
+	\item \textbf{Mean sentiment score (per all $m$)} - \(\overline{s} = \frac{1}{N} \sum_{i=1}^{N} s_i \), where $s_i$ is the sentiment score of $i$-th message and $N$ is the total number of messages
+	\item \textbf{Dominant/prevalent topics (per all $m$)} - the most common topics in all messages
+	\item \textbf{Mean response time (per all $m$)} - \(\overline{r} = \frac{1}{N} \sum_{i=1}^{N} r_i \), where $r_i$ is the response time of $i$-th message and $N$ is the total number of messages
+	\item \textbf{Mean message count (per day)} - \(\overline{m} = \frac{1}{D} \sum_{i=1}^{D} m_i \), where $m_i$ is the message count of $i$-th day and $D$ is the total number of days
+	\item \textbf{Mean links (per all $m$)} - \(\overline{l} = \frac{1}{N} \sum_{i=1}^{N} l_i \), where $l_i$ is the link count of $i$-th message and $N$ is the total number of messages
+	\item \textbf{Mean markdown code snippet sections (per all $m$)} - \(\overline{c} = \frac{1}{N} \sum_{i=1}^{N} c_i \), where $c_i$ is the markdown code snippet section count of $i$-th message and $N$ is the total number of messages
+	\item \textbf{Mean abbreviations and acronyms (per all $m$)} - \(\overline{a} = \frac{1}{N} \sum_{i=1}^{N} a_i \), where $a_i$ is the abbreviation and acronym count of $i$-th message and $N$ is the total number of messages
+	\item \textbf{Mean hashtag count (per all $m$)} - \(\overline{h} = \frac{1}{N} \sum_{i=1}^{N} h_i \), where $h_i$ is the hashtag count of $i$-th message and $N$ is the total number of messages
+\end{itemize}
+Then, we concatenate all the features into a single vector $e_u$ (of size $d_e$):
 \begin{equation}
 \begin{aligned}
-&\text{\texttt{from torch import randn}} \\
-&e_u = \text{\texttt{randn}}(d_e)
+&\text{\texttt{from torch import cat}} \\
+&e_u = \textnormal{\texttt{cat}}([\overline{w}, r, \overline{e}, \overline{em}, \overline{p}, \overline{s}, \overline{r}, \overline{m}, \overline{l}, \overline{c}, \overline{a}, \overline{h}], \textnormal{dim}=-1)
 \end{aligned}
 \end{equation}
-
 \subsection{Concatenation of User and Word Embeddings}
-Given a message $w$ (converted to a word embedding) with its word embedding $e_w$ (of size $d_m$) from a BERT-like pre-trained model such as DistilBERT, we concatenate the user embedding $e_u$ to the word embedding $e_w$ to create a joint representation $e_\textnormal{joint}$ (of size $d_e + d_m$):
+Given a message $m$ with its word embedding $e_w$ (of size $d_m$) from a BERT-like pre-trained model, which, in our case, was DistilBERT\cite{sanh2020distilbert}, we concatenate the user embedding $e_u$ to the word embedding $e_w$ to create a joint representation $e_\textnormal{joint}$ (of size $d_e + d_m$):
 \begin{equation}
 \begin{aligned}
 &\text{\texttt{from torch import cat}} \\
@@ -91,8 +125,8 @@ Given a message $w$ (converted to a word embedding) with its word embedding $e_w
 \end{aligned}
 \end{equation}
 
-\subsection[Model Architecture Modification]{Model Architecture\\ Modification}
-To accommodate the concatenated embeddings, we create a custom input layer with the new input size $d_e + d_m$ within a BERT-flavored model. An alternative could be to use a separate fully-connected layer (with ReLU activation) to map the concatenated embeddings to a compatible size:
+\subsection{Model Architecture Modification}
+To accommodate the concatenated embeddings, we create a custom input layer with the new input size $d_e + d_m$ within a BERT-flavored model. An alternative that we thought of using was to use a separate fully-connected layer (with ReLU activation) to map the concatenated embeddings to a compatible size:
 \begin{equation}
 \begin{aligned}
 &\text{\texttt{from torch import randn}} \\
@@ -105,27 +139,24 @@ To accommodate the concatenated embeddings, we create a custom input layer with 
 \end{equation}
 Then, pass $e_\textnormal{map}$ through the existing model architecture.
 
-\subsection[Training with User Embeddings]{Training with\\ User Embeddings}
-We train the model with the concatenated embeddings, which involves modifying the training loop to include user embeddings for each message. For each training step, we fetch the corresponding user embeddings, concatenate them with word embeddings, and pass the result to the model. The model learns to associate user-specific patterns with the message content.
+\subsection{Training with User Embeddings}
+For each training step, we pass the concatenated embeddings $e_\textnormal{joint}$ through the model and compute the cross-entropy loss $L$. Then, we backpropagate the gradients from the loss to the model parameters and update the parameters using Adam. The model thus learns to associate every message $m$ with a user embedding $e_u$ and a sentiment label $y$.
 
-\subsection[Updating User Embeddings]{Updating User\\ Embeddings}
-To update user embeddings over time, we backpropagate the gradients from the model loss to the user embeddings. This requires a custom training loop to ensure that the gradients are properly propagated. Alternatively, we can consider methods like moving averages or other heuristics to update the embeddings based on new interactions.
-
-For example, if using gradient descent, the user embedding update could look like this:
-
-\begin{equation}
-e_u = e_u - \text{lr} \cdot \frac{\partial L}{\partial e_u}
-\end{equation}
-where $\frac{\partial L}{\partial e_u}$ is the gradient of the loss with respect to the user embedding $e_u$ and $\text{lr}$ is the learning rate.
+\subsection{Updating User Embeddings}
+The user embeddings $e_u$ are not updated during training. Instead, they are pre-computed during data preprocessing and stored in an embedding matrix. We repeat training every week, using new data from the previous week to update the user embeddings $e_u$. The reason for this decision is that we want the user embeddings $e_u$ in a static state to prevent any potential issues with losses. We considered updating the user embeddings $e_u$ during training, but we decided against it because we believe that it would be too computationally expensive and would not provide any significant benefits. It could actually worsen the model's performance, as the user embeddings $e_u$ would be constantly changing, which could lead to the model being unable to learn to associate messages $m$ with user embeddings $e_u$.
 
 \section{Evaluation}
-We evaluate our approach using benchmark datasets for various conversational AI tasks, such as sentiment analysis and intent classification. We compare the performance of models trained with and without user embeddings to demonstrate the effectiveness of our method. We also perform ablation studies to analyze the impact of various components, such as the user embedding size and update methods.
+NaN
 
+\section{Validation}
+To validate our approach, we compared the performance of our model with the performance of a baseline model. We used the same model, DistilBERT, but without the user embeddings $e_u$. We fine-tuned both models on the same dataset and compared their performance on the same test set.
 \section{Results}
 NaN
 
 \section{Conclusion}
 NaN
+
+\printbibliography
 
 %\end{multicols}
 
