@@ -13,9 +13,10 @@ class ACARISMdl(nn.Module):
 		self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 		self.to(self.device)
 
-	def forward(self, input_ids, attention_mask, userEmbedding, labels=None):
+	def forward(self, input_ids, attention_mask, userID, labels=None):
 		bertOut = self.bert(input_ids=input_ids, attention_mask=attention_mask)
 		tokenEmbs = bertOut.last_hidden_state[:, 0, :]
+		userEmbedding = self.userEmbedder.get_user_embedding(userID)
 		if userEmbedding is None:
 			userEmbedding = torch.zeros((input_ids.shape[0], 13), device=tokenEmbs.device)
 		userEmbs = userEmbedding.to(tokenEmbs.device)

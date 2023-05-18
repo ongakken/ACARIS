@@ -44,15 +44,12 @@ class ACARISDs(Dataset):
 		inputIDsPadded[:len(tokens["input_ids"].squeeze())] = tokens["input_ids"].squeeze()
 		attentionMaskPadded[:len(tokens["attention_mask"].squeeze())] = tokens["attention_mask"].squeeze()
 
-		userEmbedding = self.userEmbedder.get_user_embedding(userID)
-
 		print(f"input_ids shapes: {tokens['input_ids'].squeeze().shape}")
 		print(f"attention_mask shapes: {tokens['attention_mask'].squeeze().shape}")
-		print(f"userEmbedding shape: {userEmbedding.shape}")
 
 		return {
 			"input_ids": inputIDsPadded,
 			"attention_mask": attentionMaskPadded,
-			"userEmbedding": userEmbedding,
+			"userID": userID,
 			"labels": torch.tensor(label, dtype=torch.long)
 		}

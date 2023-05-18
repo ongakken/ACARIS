@@ -9,7 +9,8 @@
 %\usepackage{multicol}
 
 \title{ACARIS: Improving Conversational AI and Human Social Skills using User Embeddings}
-\author{Simon Slamka}
+\author{Simon Slamka\\
+\small\textbf{OngakkenAI}}
 \date{June 1, 2023}
 
 \begin{document}
@@ -20,10 +21,11 @@
 In this paper, we propose ACARIS, the Advanced Communication Augmentor and Relational Insights System, a system utilizing a novel method to analyze emotional state, intent, and interest of text communication parties. ACARIS is being built with the goal of improving social skills of humans, while also improving the performance of human-facing AI systems. We go over our approach, including the initialization of user embeddings from message features, concatenation of user embeddings with word embeddings, modifications of the BERT architecture, and the training and evaluation processes. We also go over the results of our experiments, which demonstrate the effectiveness of our method.
 \end{abstract}
 
-\section{Keywords}
+\section{Introduction}
+\subsection{Keywords}
 ACARIS, Conversational AI, Social Skills, User Embeddings, BERT, DistilBERT, Sentiment Analysis, Intent Classification, Emotion Recognition, Interest Recognition
 
-\section{Definitions}
+\subsection{Definitions}
 \begin{itemize}
 	\item \textbf{ACARIS} - the Advanced Communication Augmentor and Relational Insights System
 	\item \textbf{NLP} - Natural Language Processing - a subfield of linguistics, computer science, and artificial intelligence concerned with the interactions between computers and human language, in particular how to program computers to process and analyze large amounts of natural language data
@@ -33,8 +35,8 @@ ACARIS, Conversational AI, Social Skills, User Embeddings, BERT, DistilBERT, Sen
 	\item \textbf{LogReg} - Logistic Regression - a statistical model that in its basic form uses a logistic function to model a binary dependent variable, although many more complex extensions exist
 	\item \textbf{RF} - Random Forest - an ensemble learning method for classification, regression and other tasks that operate by constructing a multitude of decision trees at training time and outputting the class that is the mode of the classes (classification) or mean prediction (regression) of the individual trees
 	\item \textbf{TF-IDF} - Term Frequency - Inverse Document Frequency - a numerical statistic that is intended to reflect how important a word is to a document in a collection or corpus
-	\item \textbf{the Transformer} - a deep learning model introduced in 2017, used primarily in the field of NLP\cite{vaswani2017attention}
-	\item \textbf{BERT} - Bidirectional Encoder Representations from Transformers - a transformer-based machine learning technique for natural language processing pre-training developed by Google\cite{devlin2019bert}
+	\item \textbf{the Transformer} - a deep learning architecture introduced in 2017, used primarily in the field of NLP\cite{vaswani2017attention}
+	\item \textbf{BERT} - Bidirectional Encoder Representations from Transformers - a transformer-based machine learning model for natural language processing pre-training developed by Google\cite{devlin2019bert}
 	\item \textbf{DistilBERT} - DistilBERT is a smaller, faster, cheaper version of BERT developed by HuggingFace\cite{sanh2020distilbert}
 	\item \textbf{Vector} - a quantity that has both magnitude and direction
 	\item \textbf{Vector Space} - a collection of vectors, which may be added together and multiplied ("scaled") by numbers, called scalars
@@ -47,29 +49,38 @@ ACARIS, Conversational AI, Social Skills, User Embeddings, BERT, DistilBERT, Sen
 	\item \textbf{Adam} - an optimization algorithm that can be used instead of the classical stochastic gradient descent procedure to update network weights
 	\item \textbf{Ablation Study} - a study in which specific components of a system are removed to analyze their impact on the overall performance
 \end{itemize}
-\section{Motivation and Premise}
+\subsection{Motivation}
 I've always had an issue with interpersonal relationships. I could never fully understand the way people work on a social level. I understand the technical and biological fundamentals, and superficially, how the mind works, but not how all this becomes so much more complex when actually talking and dealing with people. Sometimes, I feel that another person and I broadcast on different frequencies, because we are unable to either understand one another or maintain a (romantic) relationship for an extended period of time. I have tried for many years to find a technical solution to this problem, but only after coming to Denmark, I acquired the core knowledge to try and accomplish this ambitious goal by really getting into it and self-studying as much as I could.\\
 I firmly believe that all things in nature are governed by rules and these rules can be observed, measured, and then, based on that data, predicted. This includes human behavior and emotions. We’re nothing more than complex electrobiochemical machines driven by electrical impulses and hormones. Apart from that, even if we don’t understand our own minds yet, we still have many, many years of knowledge about how human personalities work and how we make decisions based on what happens to or around us. On a fundamental level, this doesn’t change. Sure, they say that we’re all different. However, the core remains. We all share many attributes that make us human. I believe that we, given enough data, can use these attributes to predict human behavior, reactions, emotional state, and intent.
 
-\section{Hypothesis}
+\subsection{Hypothesis}
 Given enough conversational data per person, human behavior (emotional state, intent) in text communication can be predicted with a high level of confidence ($>80\%$) due to the fact that humans are, on a fundamental level, very similar to one another.
 
+Additionally, we posit that person-specific performance improvements can be achieved by individualizing predictions by using a unique vector representation of a person's personality, emotional state, intent, and interest, which we call a user embedding. The postulate stems in the core concept of neural networks being universal function approximators. Therefore, in theory, a neural network should be able to learn to associate a user embedding with a person's behavior in text communication and use that information to improve its predictions.
+
 %\begin{multicols}{2}
-\section{Introduction}
-Interpersonal communication has always been an integral part of human lives. With the rise of the Internet and, subsequently, social media and other forms of online text communication, the manner in which we talk has changed dramatically. This has led to a drop in social skills in humans, particularly those of the last generation. ACARIS attempts to adjust for this by providing a way to analyze the emotional state, intent, and interest of text communication parties, providing them with a way to improve their social skills, while also improving the performance of conversational AI systems, which are becoming increasingly prevalent in our society, and their ability to understand human emotions, intent, and interest is becoming more and more important, especially in AI systems that directly interact with humans, such as digital assistants, chatbots, and others.
+\subsection{Premise}
+Interpersonal communication has always been an integral part of human lives and is critical from the moment we're born. With the rise of the Internet and, subsequently, social media and other forms of online text communication, the manner in which we talk has changed dramatically. This has led to a drop in social skills in humans, particularly those of the last generation. ACARIS attempts to adjust for this by providing a way to analyze the emotional state, intent, and interest of text communication parties, providing them with a way to improve their social skills, while also improving the performance of conversational AI systems, which are becoming increasingly prevalent in our society, and their ability to understand human emotions, intent, and interest is becoming more and more important, especially in AI systems that directly interact with humans, such as digital assistants, chatbots, and others.
 
 \subsection{Literature Review and Related Work}
 \subsubsection{Studied Literature}
 \begin{itemize}
 	\item \textbf{Machine Learning with PyTorch and Scikit-Learn}\cite{raschka2022machine} by Yuxi Liu, Vahid Mirjalili, Sebastian Raschka
 	\item \textbf{Hands-on Machine Learning with Scikit-Learn, Keras, and TensorFlow}\cite{geron2022hands} by Aurélien Géron
+	\item \textbf{Transformers for Natural Language Processing}\cite{rothman2022transformers} by Denis Rothman, Antonio Gulli
+\end{itemize}
+\subsubsection{Related Work}
+\begin{itemize}
+	\item \textbf{Human-AI Collaboration Enables More Empathic Conversations in Text-based Peer-to-Peer Mental Health Support}\cite{sharma2022humanai}
+	\item \textbf{Context Matters: Recovering Human Semantic Structure from Machine Learning Analysis of Large-Scale Text Corpora}\cite{https://doi.org/10.1111/cogs.13085}
 \end{itemize}
 
 \subsection{Initial Attempts}
-Our initial attempts of implementing ACARIS included the use of SVMs, DTs, LogReg, and RFs, each paired with TF-IDF in the preprocessing stage. None of these methods have proven to be accurate enough (barely reaching 50\% accuracy) for large amounts of complex language, especially casual language that often includes slang, sarcasm, emoji, and similar elements. The primary issue was the lack of these methods' ability to capture semantical and contextual aspects of our dataset. Another issue was TF-IDF's lack of word order understanding. Knowing that the Transformer\cite{vaswani2017attention} architecture is capable of capturing these aspects due to its positional encodinds and self-attention mechanism, we decided to use it as the basis for ACARIS.
+Our initial attempts of implementing ACARIS included the use of SVMs, DTs, LogReg, and RFs, each paired with TF-IDF in the preprocessing stage. None of these methods have proven to be accurate enough (barely reaching 50\% accuracy) for large amounts of complex language, especially casual language that often includes slang, sarcasm, emoji, and similar elements. The primary issue was the lack of these methods' ability to capture semantical and contextual aspects of our dataset. SVMs, DTs, LogReg, and RFs weren't built specifically for sequential data. For sequential data, RNNs and CNNs were classically used. However, due to the long-term dependency problem of RNNs, we made the decision to not use them, as we believed that they would not be able to capture the long-term dependencies in our dataset. Additionally, we weren't able to guarantee that during inference, there would be no long-term dependencies.
+Another issue was TF-IDF's lack of word order understanding. Knowing that the Transformer\cite{vaswani2017attention} architecture is capable of capturing these aspects due to its positional encodinds and self-attention mechanism, we decided to use it as the basis for ACARIS.
 
 \subsection{Short Intro on Transformers}
-The Transformer\cite{vaswani2017attention} is a deep learning model proposed in 2017 by a team of Google Brain researchers. It is mainly used in NLP, but it has also found its way into numerous vision projects (Latent Diffusion\cite{rombach2021highresolution}/Stable Diffusion/LLaVA\cite{liu2023visual}, to name a few).
+The Transformer is a deep learning model proposed in 2017 by a team of Google Brain/Google Research researchers. It is mainly used in NLP, but it has also found its way into numerous vision projects (Latent Diffusion\cite{rombach2021highresolution}/Stable Diffusion/LLaVA\cite{liu2023visual}, to name a few).
 
 \section{Methodology}
 In this section, we provide a detailed description of our approach, including the computation of user embeddings, concatenation with word embeddings, modifications to the model architecture, and the training and evaluation processes.
@@ -90,7 +101,7 @@ In this section, we provide a detailed description of our approach, including th
 % - Mean hashtag count (per msg)
 
 \subsection{Dataset}
-To build our dataset, we collected 100 thousand messages from our Discord server, classified them into 3 classes (pos, neg, neu), and augmented them with the GoEmotions\cite{demszky2020goemotions} dataset, which contains 58 thousand messages classified into 27 classes. We squashed the 27 classes into 3 classes (pos, neg, neu) and concatenated the two datasets. To minimize error caused by input data, we removed all users with less than 25 messages, URLs, markdown code blocks, Discord mentions and custom emoji, and attachments. The resulting dataset was split into 85\% training, 10\% validation, and 5\% test sets.
+To build our dataset, we collected 100 thousand messages from our Discord server, classified them into 3 classes (pos, neg, neu), and augmented them with the GoEmotions\cite{demszky2020goemotions} dataset, which contains 58 thousand messages classified into 27 classes. We squashed the 27 classes into 3 classes (pos, neg, neu) and concatenated the two datasets. To minimize error caused by input data, we removed all users with less than 25 messages, URLs, markdown code blocks, Discord mentions and custom emoji, and attachments. The resulting dataset was split into 75\% training, 10\% validation, and 15\% test sets.
 
 \subsection{User Embeddings Initialization}
 For each user $u$, we loop through all messages $m$ sent by $u$ and extract these features:
@@ -109,6 +120,7 @@ For each user $u$, we loop through all messages $m$ sent by $u$ and extract thes
 	\item \textbf{Mean abbreviations and acronyms (per all $m$)} - \(\overline{a} = \frac{1}{N} \sum_{i=1}^{N} a_i \), where $a_i$ is the abbreviation and acronym count of $i$-th message and $N$ is the total number of messages
 	\item \textbf{Mean hashtag count (per all $m$)} - \(\overline{h} = \frac{1}{N} \sum_{i=1}^{N} h_i \), where $h_i$ is the hashtag count of $i$-th message and $N$ is the total number of messages
 \end{itemize}
+These features were selected based on what we thought would most accurately represent a user's text communication behavior. We projected that no two users would have the same or closely similar values for all of these features, which would allow us to differentiate between them.
 Then, we concatenate all the features into a single vector $e_u$ (of size $d_e$):
 \begin{equation}
 \begin{aligned}
