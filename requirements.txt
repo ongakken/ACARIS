@@ -45,7 +45,7 @@ lit==15.0.7
 Markdown==3.4.3
 MarkupSafe==2.1.2
 matplotlib==3.7.1
-mpmath==1.2.1
+mpmath==1.3.0
 multidict==6.0.4
 multiprocess==0.70.14
 mypy-extensions==1.0.0
@@ -69,7 +69,7 @@ opt-einsum==3.3.0
 packaging==23.1
 pandas==2.0.1
 pathtools==0.1.2
-Pillow==9.3.0
+Pillow==9.4.0
 protobuf==3.19.6
 psutil==5.9.5
 pyarrow==12.0.0
@@ -82,7 +82,7 @@ python-dateutil==2.8.2
 pytz==2023.3
 PyYAML==6.0
 regex==2023.5.5
-requests==2.28.1
+requests==2.31.0
 requests-oauthlib==1.3.1
 responses==0.18.0
 rsa==4.9
@@ -121,3 +121,5 @@ xformers==0.0.19
 xxhash==3.2.0
 yarl==1.9.2
 zipp==3.15.0
+setuptools>=65.5.1 # not directly required, pinned by Snyk to avoid a vulnerability
+wheel>=0.38.0 # not directly required, pinned by Snyk to avoid a vulnerability
