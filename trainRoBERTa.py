@@ -1,5 +1,5 @@
 """
-This mod fine-tunes a BERT model on the ACARIS dataset for comparison with ACARISMdl.
+This mod fine-tunes a RoBERTa model on the ACARIS dataset for comparison with ACARISMdl.
 """
 
 import torch
@@ -105,7 +105,7 @@ class ACARISBERT:
             compute_metrics=self.compute_metrics,
             callbacks=[EarlyStoppingCallback(early_stopping_patience=config["earlyStoppingPatience"])]
         )
-        
+        trainer.evaluate()
         trainer.train()
         trainer.save_model(config["outputDir"])
         
@@ -113,5 +113,5 @@ class ACARISBERT:
 if __name__ == "__main__":
     acaris_bert = ACARISBERT("./datasets/train.csv", "./datasets/val.csv")
     acaris_bert.train()
-    acaris_bert.push_to_hub()
+    #acaris_bert.push_to_hub()
     wandb.finish()

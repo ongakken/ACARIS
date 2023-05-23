@@ -20,7 +20,7 @@ class ACARISCollator:
 				inputIDs[idx, len(feat["input_ids"]):] = torch.zeros(maxLen - len(feat["input_ids"]), dtype=torch.long)
 				attentionMask[idx, len(feat["attention_mask"]):] = torch.zeros(maxLen - len(feat["attention_mask"]), dtype=torch.long)
 
-		userEmbs = torch.stack([feat["userEmbedding"] for feat in feats])
+		userEmbs = torch.stack([self.userEmbedder.get_user_embedding(feat["userID"]) for feat in feats])
 		labels = torch.stack([feat["labels"] for feat in feats])
 
 		return {

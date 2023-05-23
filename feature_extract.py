@@ -18,7 +18,6 @@ import csv
 import argparse
 import os
 
-os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
 
 emojiPattern = re.compile("["
 	u"\U0001F600-\U0001F64F" # facial emojis
@@ -56,7 +55,6 @@ class FeatExtractor:
 	def extract_feats(self, msgs, userID=None):
 		if not msgs:
 			return []
-		msgs = [msg for msg in msgs if len(msg["content"]) >= 25]
 		if not msgs:
 			return []
 
@@ -70,8 +68,8 @@ class FeatExtractor:
 			"meanPunctuationCount": self.mean_punctuation_count(msgs),
 			"meanSentimentScore": self.mean_sentiment_score(msgs),
 			"dominantTopics": self.dominant_topics(msgs),
-			"meanResponseTime": self.mean_response_time(msgs),
-			"meanMsgCountPerDay": self.mean_msg_count_per_day(msgs),
+			#"meanResponseTime": self.mean_response_time(msgs),
+			#"meanMsgCountPerDay": self.mean_msg_count_per_day(msgs),
 			"meanLinksPerMsg": self.mean_links_per_msg(msgs),
 			"meanCodeSnippetsPerMsg": self.mean_code_snippets_per_msg(msgs),
 			#"dominantWritingStyles": self.dominant_writing_styles(msgs),
@@ -88,14 +86,13 @@ class FeatExtractor:
 				raise ValueError
 		return feats if all(v is not None for v in feats.values()) else []
 
-	def save_feats_for_later(self, feats, path):
+	def save_feats_for_later(self, feats, userID, path):
 		with open(path, "wb") as f:
 			pickle.dump(feats, f)
 		
-		with open(path + ".csv", "w") as f:
+		with open(path + ".csv", "a") as f:
 			writer = csv.writer(f)
-			for feat in feats:
-				writer.writerow(feat)
+			writer.writerow([userID] + feats)
 
 	def load_feats(self, path):
 		with open(path, "rb") as f:
@@ -104,7 +101,8 @@ class FeatExtractor:
 
 	def read_msgs_from_file(self, path):
 		with open(path, "r", encoding="utf8") as f:
-			fieldNames = ["uid", "timestamp", "content", "sentiment"]
+			#fieldNames = ["uid", "timestamp", "content", "sentiment"]
+			fieldNames = ["uid", "content", "sentiment"]
 			reader = csv.DictReader(f, fieldnames=fieldNames, delimiter="|")
 			next(reader)
 			header = reader.fieldnames
@@ -115,15 +113,17 @@ class FeatExtractor:
 			for msg in msgs:
 				msg.pop(None, None)
 				print(msg)
+		# return format: [{"uid": "user#1234", "content": "hello world", "sentiment": "pos"}, ...]
 		return msgs
 
 	def group_msgs_by_user(self, msgs):
 		groups = {}
 		for msg in msgs:
 			uid = msg["uid"]
+			content = msg["content"]
 			if uid not in groups:
 				groups[uid] = []
-			groups[uid].append(msg)
+			groups[uid].append(content)
 		return groups
 
 	def txt_to_csv(self, txtPath, csvPath, soughtUser):
@@ -178,7 +178,11 @@ class FeatExtractor:
 		return list(requiredFields)
 
 	def check_if_fields_exist(self, msgs, requiredFields):
-		if not "uid" in msgs[0] or not "content" in msgs[0] or not "timestamp" in msgs[0]:
+		#if not "uid" in msgs[0] or not "content" in msgs[0] or not "timestamp" in msgs[0]:
+		print(f"msgs[0]: {msgs[0]}")
+		print(f"msgs: {msgs}")
+		if not "uid" in msgs[0] or not "content" in msgs[0]:
+			#raise ValueError("Fields 'uid', 'content', and 'timestamp' must be present in the input data!")
 			raise ValueError("Fields 'uid' and 'content' must be present in the input data!")
 
 	def remove_none(self, msgs):
@@ -201,13 +205,18 @@ class FeatExtractor:
 
 	def extract_and_store_feats(self, msgs, userID=None, path="./pickles/"):
 		requiredFields = self.get_required_fields()
-		self.check_if_fields_exist(msgs, requiredFields)
+		#self.check_if_fields_exist(msgs, requiredFields) # disabled due to restructuring of msgs
 		groupedMsgs = self.group_msgs_by_user(msgs)
 
 		if userID is not None:
-			feats = []
-			msgs = groupedMsgs[userID]
-			feats = self.extract_feats(msgs=msgs)
+			print(f"msgs: {msgs}")
+			breakpoint()
+			#if userID not in groupedMsgs or len(groupedMsgs[userID]) < 25:
+			if len(msgs) < 25:
+				print(f"Skipping {userID} because they have less than 25 messages")
+				return None
+			#msgs = groupedMsgs[userID] # disabled for now
+			feats = self.extract_feats(msgs=msgs, userID=userID)
 			if not feats:
 				print(f"{userID} has 0 feats!")
 				return None
@@ -216,17 +225,16 @@ class FeatExtractor:
 				return feats
 
 		else:
-			feats = []
+			feats = {}
 			for uid, userMsgs in groupedMsgs.items():
 				if len(userMsgs) < 25:
 					print(f"Skipping {uid} because they have less than 25 messages")
 					continue
-				feats.append(self.extract_feats(userMsgs))
-				feats = [feat for feat in feats for feat in feat]
+				feats[uid] = self.extract_feats(msgs=userMsgs, userID=uid)
 				print(f"Extracted {len(feats)} features from {uid}")
 
 				picklePath = os.path.join(path, f"{uid.split('#')[0]}_feats.pkl") # using only the first part of the uid as the filename
-				self.save_feats_for_later(feats, picklePath)
+				self.save_feats_for_later(feats[uid], userID, picklePath)
 			return feats
 
 	### Feature extraction methods ###
@@ -366,11 +374,3 @@ if __name__ == "__main__":
 
 	if os.path.splitext("./datasets/messagesNew.txt")[1] == ".txt":
 		extractor.txt_to_csv("./datasets/messagesNew.txt", "./datasets/msgsNew.csv", args.uid)
-
-	#msgs = extractor.read_msgs_from_file("./datasets/sentAnal/sents_merged_cleaned.csv")
-	#print(msgs[0].keys())
-	#msgs = extractor.txt_to_csv("./datasets/msgLog.txt", "./datasets/reknezLog.csv", "Reknez#9257")
-
-	#breakpoint()
-
-	#extractor.extract_and_store_feats(msgs=msgs, userID=None, path="./pickles/")

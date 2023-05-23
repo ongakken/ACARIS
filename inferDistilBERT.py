@@ -35,6 +35,11 @@ class InferACARISBERT:
 			confidence = pred[0][maxProb[0]]
 			print(f"Label: {label}\nConfidence: {confidence}\n")
 
+	def push(self, modelName, org="ongknsro"):
+		self.model.push_to_hub(repo_id=f"{org}/{modelName}", private=True)
+		self.tokenizer.push_to_hub(repo_id=f"{org}/{modelName}")
+
 if __name__ == "__main__":
 	acaris_bert_infer = InferACARISBERT("./output")
-	acaris_bert_infer.infer()
+	#acaris_bert_infer.infer()
+	acaris_bert_infer.push("ACARISBERT-DistilBERT")

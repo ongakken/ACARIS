@@ -6,7 +6,8 @@ def load_data(dataType):
 		raise ValueError("dataType must be one of train, val, or test")
 
 	data = pd.read_csv(f"datasets/{dataType}.csv", sep="|")
-	data.columns = ["uid", "timestamp", "content", "sentiment"]
+#	data.columns = ["uid", "timestamp", "content", "sentiment"]
+	data.columns = ["uid", "content", "sentiment"]
 
 	if "neu" in data.columns:
 		data = data.rename(columns={"neu": "sentiment"})
@@ -58,4 +59,4 @@ def split_data(data, trainRatio, valRatio):
 
 if __name__ == "__main__":
 	#split_data("./datasets/sentAnal/sents_merged_cleaned.csv", 0.75, 0.1)
-	split_data("./datasets/all_noTimestamps.csv", 0.75, 0.1)
+	split_data("./datasets/currentlyWorkingDataset/all_noTimestamps_sent_ENSEMBLE.csv", 0.75, 0.1)

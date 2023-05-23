@@ -68,6 +68,7 @@ Interpersonal communication has always been an integral part of human lives and 
 	\item \textbf{Machine Learning with PyTorch and Scikit-Learn}\cite{raschka2022machine} by Yuxi Liu, Vahid Mirjalili, Sebastian Raschka
 	\item \textbf{Hands-on Machine Learning with Scikit-Learn, Keras, and TensorFlow}\cite{geron2022hands} by Aurélien Géron
 	\item \textbf{Transformers for Natural Language Processing}\cite{rothman2022transformers} by Denis Rothman, Antonio Gulli
+	\item 
 \end{itemize}
 \subsubsection{Related Work}
 \begin{itemize}
@@ -80,7 +81,7 @@ Our initial attempts of implementing ACARIS included the use of SVMs, DTs, LogRe
 Another issue was TF-IDF's lack of word order understanding. Knowing that the Transformer\cite{vaswani2017attention} architecture is capable of capturing these aspects due to its positional encodinds and self-attention mechanism, we decided to use it as the basis for ACARIS.
 
 \subsection{Short Intro on Transformers}
-The Transformer is a deep learning model proposed in 2017 by a team of Google Brain/Google Research researchers. It is mainly used in NLP, but it has also found its way into numerous vision projects (Latent Diffusion\cite{rombach2021highresolution}/Stable Diffusion/LLaVA\cite{liu2023visual}, to name a few).
+The Transformer is a deep learning model architecture proposed in 2017 by a team of Google Brain/Google Research researchers. It is mainly used in NLP, but it has also found its way into numerous vision projects (Latent Diffusion\cite{rombach2021highresolution}/Stable Diffusion/LLaVA\cite{liu2023visual}, to name a few). The architecture aims to replace RNNs by using attentions mechanisms (self-attention, in particular) and positional encodings to model long-term dependencies in sequential data.
 
 \section{Methodology}
 In this section, we provide a detailed description of our approach, including the computation of user embeddings, concatenation with word embeddings, modifications to the model architecture, and the training and evaluation processes.
@@ -161,7 +162,20 @@ The user embeddings $e_u$ are not updated during training. Instead, they are pre
 NaN
 
 \section{Validation}
-To validate our approach, we compared the performance of our model with the performance of a baseline model. We used the same model, DistilBERT, but without the user embeddings $e_u$. We fine-tuned both models on the same dataset and compared their performance on the same test set.
+To validate our approach, we compared the performance of our model to the performance of a baseline model. We used the same model, DistilBERT, but without the user embeddings $e_u$. We fine-tuned both models on the same dataset and compared their performance on the same test set. The base model performed as follows (mean scores over 5 training runs):
+\begin{itemize} %%% (1/5)
+	\item \textbf{Accuracy} $\approx$ 0.95
+	\item \textbf{Precision\textsubscript{\textnormal{mean of all three scores}}} = 0.93
+	\item \textbf{Recall\textsubscript{\textnormal{mean of all three scores}}} = 0.93
+	\item \textbf{F1\textsubscript{\textnormal{mean of all three scores}}} $\approx$ 0.93
+\end{itemize}
+The model with user embeddings $e_u$ performed as follows (mean scores over 5 training runs):
+\begin{itemize}
+	\item \textbf{Accuracy} $\approx$ 0.97
+	\item \textbf{Precision\textsubscript{\textnormal{mean of all three scores}}} = NaN
+	\item \textbf{Recall\textsubscript{\textnormal{mean of all three scores}}} = NaN
+	\item \textbf{F1\textsubscript{\textnormal{mean of all three scores}}} $\approx$ NaN
+\end{itemize}
 \section{Results}
 NaN
 

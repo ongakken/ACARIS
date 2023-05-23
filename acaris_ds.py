@@ -9,9 +9,11 @@ class ACARISDs(Dataset):
 		self.data = data
 		self.preprocessor = preprocessor
 		self.userEmbedder = userEmbedder
-
+		print(self.data.head())
+		print(f"Number of samples before filtering: {len(self.data)}")
+		breakpoint()
 		self.data = self.data.iloc[1:] # remove zeroth row (header)
-		self.data = self.data[self.data["uid"].apply(lambda uid: self.userEmbedder.get_user_embedding(uid) is not None)]
+		self.data = self.data[self.data["uid"].apply(lambda uid: isinstance(self.userEmbedder.get_user_embedding(uid), torch.Tensor))] # filter out users with no userEmbedding
 		print(f"Number of samples after filtering: {len(self.data)}")
 
 		self.tokenized = [self.preprocessor.tokenize(text, padding=False, truncation=False, returnTensors=None) for text in self.data["content"]]

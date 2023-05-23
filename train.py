@@ -70,37 +70,6 @@ class MdlTrainer:
 		trainer.train()
 
 if __name__ == "__main__":
-
-	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
-	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
-	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
-	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
-	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
-	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
-	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
-	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
-	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
-	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
-	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
-	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
-	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
-	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
-	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
-	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
-	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
-	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
-	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
-	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
-	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
-	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
-	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
-	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
-	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
-	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
-	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
-	####### !!!!!!!!!!!! DO NOT TRAIN UNTIL DATA IS FIXED !!!!!!!!!!!! ########
-	#2raise Exception("ERR: !!! DO NOT TRAIN UNTIL DATA IS FIXED !!!")
-
 	mdl = config["mdl"]
 	userEmbedder = UserEmbedder()
 	trainer = MdlTrainer(mdl=mdl, userEmbedder=userEmbedder)
@@ -117,7 +86,8 @@ if __name__ == "__main__":
 	print(f"train sent counts: {train['sentiment'].value_counts()}")
 	valDS = ACARISDs(val, preprocessor, userEmbedder)
 	print(f"val sent counts: {val['sentiment'].value_counts()}")
-
+	print(f"trainDS len: {len(trainDS)}")
+	breakpoint()
 	trainLoader = DataLoader(trainDS, batch_size=config["batchSize"], shuffle=True, collate_fn=collator, drop_last=False)
 	valLoader = DataLoader(valDS, batch_size=config["batchSize"], shuffle=False, collate_fn=collator, drop_last=False)
 

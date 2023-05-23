@@ -4,6 +4,8 @@ datasets/
 pickles/
 logs/
 output/
+reports/
+ACARIS/
 .env
 *.csv
 *.html

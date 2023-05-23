@@ -2,8 +2,10 @@ from transformers import Trainer, TrainerCallback, EvalPrediction
 import torch.nn as nn
 import torch
 from tqdm.auto import tqdm
-from sklearn.metrics import accuracy_score, f1_score
-
+from sklearn.metrics import accuracy_score, f1_score, precision_recall_fscore_support, confusion_matrix, roc_auc_score, classification_report
+import wandb
+from wandb import AlertLevel
+from alert import send_alert
 
 
 class ProgressCb(TrainerCallback):
@@ -47,6 +49,7 @@ class ACARISTrainer(Trainer):
 		super().__init__(*args, **kwargs)
 		self.trainLoader = trainLoader
 		self.evalLoader = evalLoader
+		self.lossFct = ACARISCrossEntropyLoss(model.bert.config.num_labels)
 
 	def get_train_dataloader(self):
 		if self.trainLoader is not None:
@@ -86,26 +89,50 @@ class ACARISTrainer(Trainer):
 			print(f"labels.shape in compute_loss: {labels.shape}")
 			print(f"logits.shape in compute_loss: {logits.shape}")
 
-			lossFct = ACARISCrossEntropyLoss(model.bert.config.num_labels)
+			
 			labels = torch.clamp(labels, min=0, max=model.bert.config.num_labels - 1)
-			loss = lossFct(logits, labels)
+			loss = self.lossFct(logits, labels)
 		else:
 			raise ValueError("labels is None")
 
 		return (loss, outputs) if return_outputs else loss
 
+	# def compute_metrics(self, evalPred: EvalPrediction):
+	# 	logits, labels = evalPred.predictions, evalPred.label_ids
+	# 	predictions = torch.argmax(logits, dim=-1)
+
+	# 	if len(labels) > 0:
+	# 		acc = (predictions == labels).sum().item() / len(labels)
+	# 	else:
+	# 		acc = 0
+			
+	# 	wandb.log({"eval_accuracy": acc})
+	# 	metrics = {"eval_accuracy": acc}
+	# 	print(f"metrics: {metrics}")
+	# 	return metrics
+
 	def compute_metrics(self, evalPred: EvalPrediction):
 		logits, labels = evalPred.predictions, evalPred.label_ids
-		predictions = torch.argmax(logits, dim=-1)
-
+		logits = torch.softmax(torch.Tensor(logits), dim=1)
+		preds = torch.argmax(logits, dim=1)
 		if len(labels) > 0:
-			acc = (predictions == labels).sum().item() / len(labels)
+			acc = (preds == labels).sum().item() / len(labels)
 		else:
 			acc = 0
-			
-		wandb.log({"eval_accuracy": acc})
-		metrics = {"eval_accuracy": acc}
-		print(f"metrics: {metrics}")
+		precision, recall, f1, _ = precision_recall_fscore_support(labels, preds, average=None)
+		accuracy = accuracy_score(labels, preds)
+		confMatrix = confusion_matrix(labels, preds)
+		rocAUC = roc_auc_score(labels, logits, multi_class="ovr")
+		metrics = {
+			"accuracy": accuracy,
+			"confusion_matrix": confMatrix,
+			"roc_auc": rocAUC
+		}
+		metricNames = ["precision", "recall", "f1"]
+		labelNames = ["neg", "neu", "pos"]
+		for metricName, metricValue in zip(metricNames, [precision, recall, f1]):
+			for labelName, value in zip(labelNames, metricValue):
+				metrics[f"{metricName}_{labelName}"] = float(value)
 		return metrics
 
 	def prediction_step(self, mdl, inputs, prediction_loss_only, ignore_keys=()):
@@ -118,11 +145,13 @@ class ACARISTrainer(Trainer):
 				userEmbs = userEmbs.to(inputs["input_ids"].device)
 				print(f"userEmbs: {userEmbs}")
 			else:
+				wandb.alert(title="userEmbs is None", text="userEmbs is None", level=AlertLevel.ERROR)
 				raise ValueError("userEmbedding is None")
 			print(f"mdl out before forward: {mdl(**inputs, userEmbedding=userEmbs)}")
 			outputs = mdl(**inputs, userEmbedding=userEmbs)
 			if outputs is None:
 				#return (None, None, None)
+				wandb.alert(title="outputs is None", text="outputs is None", level=AlertLevel.ERROR)
 				raise ValueError("outputs is None")
 			print(f"mdl output: {outputs}")
 			if labels is not None:
@@ -131,6 +160,7 @@ class ACARISTrainer(Trainer):
 				print(f"loss: {loss}")
 				if loss is None:
 					#return (None, None, None)
+					wandb.alert(title="loss is None", text="loss is None", level=AlertLevel.ERROR)
 					raise ValueError("loss is None")
 				loss = loss.mean().detach()
 				if self.args.prediction_loss_only:

@@ -9,15 +9,17 @@ from transformers import DistilBertTokenizerFast, DistilBertForSequenceClassific
 from transformers.modeling_outputs import SequenceClassifierOutput
 from datasets import load_dataset, Dataset
 import pandas as pd
-from sklearn.metrics import accuracy_score, precision_recall_fscore_support
+from sklearn.metrics import accuracy_score, precision_recall_fscore_support, confusion_matrix, roc_auc_score
 import wandb
 import huggingface_hub
 import os
+import random
+import numpy as np
 
 config = {
 	"mdl": "distilbert-base-uncased",
-	"epochs": 2,
-	"batchSize": 12,
+	"epochs": 5,
+	"batchSize": 14,
     "maxLen": 512,
     "warmupSteps": 0.1, # proportion of total steps, NOT absolute
     "weightDecay": 0.02,
@@ -25,13 +27,23 @@ config = {
     "earlyStopping": True,
     "earlyStoppingPatience": 2,
     "dropout": 0.1,
-    "lr": 5e-5,
+    "initlr": 5e-5,
     "epsilon": 1e-8
 }
 
 wandb.init(project="MarkIII_ACARIS", entity="simtoonia", config=config)
 
 
+def lockSeed(seed):
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(seed)
+        torch.backends.cudnn.deterministic = True
+
+#0 disabled, as determinism is not guaranteed and lowers performance
+#lockSeed(69) # setting a fixed seed for *some* reproducibility
 
 class DistilBertForMulticlassSequenceClassification(DistilBertForSequenceClassification):
     def __init__(self, config):
@@ -89,7 +101,7 @@ class ACARISBERT:
         return tokenized
     
     def get_data_loaders(self, trainDS, valDS):
-        trainLoader = DataLoader(trainDS, batch_size=config["batchSize"], shuffle=True)
+        trainLoader = DataLoader(trainDS, batch_size=config["batchSize"], shuffle=False)
         valLoader = DataLoader(valDS, batch_size=config["batchSize"], shuffle=False)
         return trainLoader, valLoader
     
@@ -97,8 +109,13 @@ class ACARISBERT:
         logits, labels = evalPred
         preds = torch.argmax(torch.Tensor(logits), dim=1)
         precision, recall, f1, _ = precision_recall_fscore_support(labels, preds, average=None)
+        accuracy = accuracy_score(labels, preds)
+        confMatrix = confusion_matrix(labels, preds)
+        rocAUC = roc_auc_score(labels, preds, multi_class="ovr")
         metrics = {
-            "accuracy": accuracy_score(labels, preds),
+            "accuracy": accuracy,
+            "confusion_matrix": confMatrix,
+            "roc_auc": rocAUC
         }
         metricNames = ["precision", "recall", "f1"]
         labelNames = ["neg", "neu", "pos"]
@@ -123,7 +140,7 @@ class ACARISBERT:
             weight_decay=config["weightDecay"],
             logging_dir="./logs",
             logging_steps=100,
-            learning_rate=config["lr"],
+            learning_rate=config["initlr"],
             evaluation_strategy="epoch",
             save_strategy="epoch",
             load_best_model_at_end=True,
