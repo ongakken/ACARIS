@@ -23,8 +23,8 @@ os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 config = {
 	"mdl": "distilbert-base-uncased",
-	"epochs": 1,
-	"batchSize": 12,
+	"epochs": 5,
+	"batchSize": 32,
 	"outputDir": "./output"
 }
 
@@ -70,7 +70,7 @@ class MdlTrainer:
 			eval_steps=500,
 			save_strategy="steps",
 			save_steps=1000,
-			fp16=True,
+			fp16=False,
 			logging_dir="./logs",
 			load_best_model_at_end=True,
 			metric_for_best_model="eval_accuracy"
