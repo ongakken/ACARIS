@@ -209,13 +209,11 @@ class FeatExtractor:
 		groupedMsgs = self.group_msgs_by_user(msgs)
 
 		if userID is not None:
-			print(f"msgs: {msgs}")
-			breakpoint()
 			#if userID not in groupedMsgs or len(groupedMsgs[userID]) < 25:
 			if len(msgs) < 25:
-				print(f"Skipping {userID} because they have less than 25 messages")
 				return None
 			#msgs = groupedMsgs[userID] # disabled for now
+			assert all(msg["uid"] == userID for msg in msgs), f"msgs contains messages from multiple users: {[msg['uid'] for msg in msgs]}" #sanity check to ensure that all dicts in msgs belong to the same user
 			feats = self.extract_feats(msgs=msgs, userID=userID)
 			if not feats:
 				print(f"{userID} has 0 feats!")

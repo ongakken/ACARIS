@@ -1,14 +1,14 @@
 # Fdb version 3
-["biber paper"] 0 "paper.bcf" "paper.bbl" "paper" 1684690378
-  "paper.bcf" 1684690377 106755 40cb4f91cf7fdd4e74d4140e8b3af851 "pdflatex"
+["biber paper"] 0 "paper.bcf" "paper.bbl" "paper" 1684929731
+  "paper.bcf" 1684929731 106755 40cb4f91cf7fdd4e74d4140e8b3af851 "pdflatex"
   (generated)
-  "paper.bbl"
   "paper.blg"
-["pdflatex"] 1684690377 "/home/simtoon/git/ACARIS/paper.tex" "/home/simtoon/git/ACARIS/paper.pdf" "paper" 1684690378
+  "paper.bbl"
+["pdflatex"] 1684929731 "/home/simtoon/git/ACARIS/paper.tex" "/home/simtoon/git/ACARIS/paper.pdf" "paper" 1684929731
   "/etc/texmf/web2c/texmf.cnf" 1683555395 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/simtoon/.texlive2020/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk" 1683842352 11524 66cbd4390da98fd7f7ce141ce5a2ebf4 ""
-  "/home/simtoon/git/ACARIS/paper.aux" 1684690377 6908 380fd8daeac5847a345caaba788af0e0 ""
-  "/home/simtoon/git/ACARIS/paper.tex" 1684690377 19238 d9986d7b337a8c99c370d1c144871ac5 ""
+  "/home/simtoon/git/ACARIS/paper.aux" 1684929731 6908 380fd8daeac5847a345caaba788af0e0 ""
+  "/home/simtoon/git/ACARIS/paper.tex" 1684929731 19237 48926c27495fbe12afe890aa113fef07 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1136768653 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -117,17 +117,17 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1613593815 38841 799d1dd9682a55ce442e10c99777ecc1 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1683829595 128028 f533b797fba58d231669ea19e894e23e ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1684642504 1283512 6b0f160df1ea2e085dd4e9cd0cfdee6a ""
-  "paper.aux" 1684690377 6908 380fd8daeac5847a345caaba788af0e0 "pdflatex"
+  "paper.aux" 1684929731 6908 380fd8daeac5847a345caaba788af0e0 "pdflatex"
   "paper.bbl" 1684287322 21849 efc57893bdb930455d988e855aafe956 "biber paper"
-  "paper.out" 1684690377 1402 7cb8887e368048528968194332625f95 "pdflatex"
-  "paper.run.xml" 1684690377 2306 ba8133db1549e3cd747c8dd74d036a7d "pdflatex"
-  "paper.tex" 1684690377 19238 d9986d7b337a8c99c370d1c144871ac5 ""
+  "paper.out" 1684929731 1402 7cb8887e368048528968194332625f95 "pdflatex"
+  "paper.run.xml" 1684929731 2306 ba8133db1549e3cd747c8dd74d036a7d "pdflatex"
+  "paper.tex" 1684929731 19237 48926c27495fbe12afe890aa113fef07 ""
   (generated)
-  "paper.log"
+  "paper.run.xml"
+  "paper.bcf"
+  "paper.out"
+  "/home/simtoon/git/ACARIS/paper.pdf"
+  "paper.aux"
   "paper.pdf"
   "/home/simtoon/git/ACARIS/paper.log"
-  "paper.out"
-  "paper.aux"
-  "paper.bcf"
-  "paper.run.xml"
-  "/home/simtoon/git/ACARIS/paper.pdf"
+  "paper.log"

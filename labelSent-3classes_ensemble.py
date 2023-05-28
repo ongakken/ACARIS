@@ -55,26 +55,6 @@ model = DistilBertForSequenceClassification.from_pretrained("distilbert-base-unc
 twitterRoberta = pipeline("sentiment-analysis", model="cardiffnlp/twitter-roberta-base-sentiment-latest", tokenizer="cardiffnlp/twitter-roberta-base-sentiment-latest")
 twitterRobertaTokenizer = transformers.AutoTokenizer.from_pretrained("cardiffnlp/twitter-roberta-base-sentiment-latest")
 
-# def get_chunks(text, tokenizer, maxLen):
-# 	words = text.split()
-# 	chunks = []
-# 	currentChunk = []
-# 	for word in words:
-# 		if len(tokenizer.encode(" ".join(currentChunk + [word]))) > maxLen:
-# 			chunks.append(" ".join(currentChunk))
-# 			currentChunk = [word]
-# 		else:
-# 			currentChunk.append(word)
-# 	if len(tokenizer.encode(" ".join(currentChunk))) > maxLen:
-# 		for word in currentChunk:
-# 			if len(tokenizer.encode(word)) > maxLen:
-# 				print(f"Word {word} is longer than maxLen {maxLen}, skipping")
-# 			else:
-# 				chunks.append(word)
-# 	else:
-# 		chunks.append(" ".join(currentChunk))
-# 	return chunks
-
 def get_sentiment(text):
 	try:
 		# sanity conversion

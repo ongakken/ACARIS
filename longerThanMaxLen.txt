@@ -28,3 +28,363 @@ Long seq:
 
 
 
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+
+Long seq:
+
+2021-10-31 13:49:04 upgrade bind9-host:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:04 upgrade libbind9-161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccfg163:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                2021-10-31 13:49:05 upgrade libisccc161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:06 upgrade libdns1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade libisc1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                  2021-10-31 13:49:07 upgrade liblwres161:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6                 2021-10-31 13:49:08 upgrade libisc-export1100:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6           2021-10-31 13:49:09 upgrade libdns-export1104:armhf 1:9.11.5.P4+dfsg-5.1+deb10u5 1:9.11.5.P4+dfsg-5.1+deb10u6
+
+
+

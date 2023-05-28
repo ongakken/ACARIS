@@ -5,7 +5,9 @@ pickles/
 logs/
 output/
 reports/
-ACARIS/
+venv/
+lib/
+/
 .env
 *.csv
 *.html

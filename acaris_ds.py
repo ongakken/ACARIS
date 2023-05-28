@@ -2,6 +2,7 @@ from torch.utils.data import Dataset
 import torch
 from preprocess import Preprocessor
 from user_embedder import UserEmbedder
+from tqdm import tqdm
 
 
 class ACARISDs(Dataset):
@@ -9,20 +10,24 @@ class ACARISDs(Dataset):
 		self.data = data
 		self.preprocessor = preprocessor
 		self.userEmbedder = userEmbedder
-		print(self.data.head())
-		print(f"Number of samples before filtering: {len(self.data)}")
-		breakpoint()
 		self.data = self.data.iloc[1:] # remove zeroth row (header)
 		self.data = self.data[self.data["uid"].apply(lambda uid: isinstance(self.userEmbedder.get_user_embedding(uid), torch.Tensor))] # filter out users with no userEmbedding
-		print(f"Number of samples after filtering: {len(self.data)}")
 
-		self.tokenized = [self.preprocessor.tokenize(text, padding=False, truncation=False, returnTensors=None) for text in self.data["content"]]
 		self.maxLen = 512
 
-	def __len__(self):
+	def __len__(self) -> int:
 		return len(self.data)
 
-	def __getitem__(self, idx: int):
+	def __getitem__(self, idx: int) -> dict:
+		"""
+		This function returns a dictionary containing tokenized input, attention mask, unique IDs, and
+		labels for a given index in a dataset.
+		
+		@param idx idx is an integer representing the index of the sample to retrieve from the dataset.
+		
+		@return A dictionary containing the input IDs, attention mask, unique IDs, and labels of a sample
+		from the dataset.
+		"""
 		sentMapping = {"pos": 2, "neg": 0, "neu": 1} # adjusted due to CrossEntropyLoss
 		try:
 			if idx < 0 or idx >= len(self.data):
@@ -33,12 +38,12 @@ class ACARISDs(Dataset):
 		content = sample["content"]
 		label = sentMapping[sample["sentiment"]]
 		try:
-			userID = sample["uid"]
-		except KeyError:
-			print(f"KeyError at index {idx} with text {content} and label {label}")
+			uids = sample["uid"]
+		except Exception as e:
+			print(sample)
 			raise
 
-		tokens = self.preprocessor.tokenize(content)
+		tokens = self.preprocessor.tokenize(content, padding=True, truncation=True, maxLen=self.maxLen, returnTensors="pt")
 
 		inputIDsPadded = torch.zeros(self.maxLen, dtype=torch.long)
 		attentionMaskPadded = torch.zeros(self.maxLen, dtype=torch.long)
@@ -46,12 +51,12 @@ class ACARISDs(Dataset):
 		inputIDsPadded[:len(tokens["input_ids"].squeeze())] = tokens["input_ids"].squeeze()
 		attentionMaskPadded[:len(tokens["attention_mask"].squeeze())] = tokens["attention_mask"].squeeze()
 
-		print(f"input_ids shapes: {tokens['input_ids'].squeeze().shape}")
-		print(f"attention_mask shapes: {tokens['attention_mask'].squeeze().shape}")
+		if uids is None:
+			raise ValueError(f"UIDs for sample {idx} are None")
 
 		return {
 			"input_ids": inputIDsPadded,
 			"attention_mask": attentionMaskPadded,
-			"userID": userID,
+			"uids": uids,
 			"labels": torch.tensor(label, dtype=torch.long)
 		}

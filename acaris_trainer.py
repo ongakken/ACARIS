@@ -36,64 +36,81 @@ class ACARISCrossEntropyLoss(nn.Module):
 
 	def forward(self, logits, labels):
 		mapped = (labels + 1) // 2
-		print(f"mapped labels: {mapped}")
-		print(f"mapped labels.shape: {mapped.shape}")
-		print(f"original labels: {labels}")
-		print(f"original labels.shape: {labels.shape}")
 		return self.loss(logits, mapped)
 
 
 
 class ACARISTrainer(Trainer):
-	def __init__(self, trainLoader, evalLoader, progressCb=None, *args, **kwargs):
-		super().__init__(*args, **kwargs)
+	def __init__(self, model, trainLoader, evalLoader, progressCb=None, *args, **kwargs):
+		super().__init__(model=model, *args, **kwargs)
 		self.trainLoader = trainLoader
 		self.evalLoader = evalLoader
 		self.lossFct = ACARISCrossEntropyLoss(model.bert.config.num_labels)
 
 	def get_train_dataloader(self):
+		"""
+		This function returns the training data loader if it exists, otherwise it calls the parent class's
+		function to get the training data loader.
+		
+		@return If `self.trainLoader` is not `None`, then `self.trainLoader` is returned. Otherwise, the
+		method `get_train_dataloader()` of the parent class is called and its output is returned.
+		"""
 		if self.trainLoader is not None:
 			return self.trainLoader
 		else:
 			return super().get_train_dataloader()
 
 	def get_eval_dataloader(self, *args, **kwargs):
+		"""
+		This function returns the evaluation dataloader if it exists, otherwise it calls the parent class's
+		get_eval_dataloader method.
+		
+		@return If `self.evalLoader` is not `None`, then it returns `self.evalLoader`. Otherwise, it calls
+		the `get_eval_dataloader` method of the parent class (using `super()`) and returns its output.
+		"""
 		if self.evalLoader is not None:
 			return self.evalLoader
 		else:
 			return super().get_eval_dataloader(*args, **kwargs)
 
 	def train(self):
+		"""
+		The `train` function is called on the parent class using `super()` in a subclass.
+		"""
 		super().train()
 
 
-	def compute_loss(self, model, inputs, labels=None, return_outputs=False):
-		labels = inputs.pop("labels", None)
-		userEmbedding = inputs.pop("userEmbedding", None)
-		if userEmbedding is None or labels is None:
-			return (None, None) if return_outputs else None
+	def compute_loss(self, model, inputs, return_outputs=False):
+		"""
+		This function computes the loss for a given model and inputs, and returns the loss value and outputs
+		if specified.
 		
-		inputs = {k: v.to(model.device) for k, v in inputs.items()}
-		userEmbedding = userEmbedding.to(model.device)
+		@param model The neural network model being used for training or inference.
+		@param inputs a dictionary containing the input data for the model, including the input ids,
+		attention masks, and token type ids.
+		@param return_outputs A boolean parameter that determines whether to return only the loss value or
+		both the loss value and the model outputs.
+		
+		@return The function `compute_loss` returns either the loss value or a tuple containing the loss
+		value and the outputs, depending on the value of the `return_outputs` parameter.
+		"""
+		uids = inputs.get("uids")
+		labels = inputs.get("labels")
+		if uids is not None:
+			pass
+		else:
+			raise ValueError("uids is None in compute_loss")
+		
+		inputs = {k: v.to(model.device) for k, v in inputs.items() if k != "uids"}
 
-		print(f"labels in compute_loss: {labels}")
-		print(f"userEmbedding in compute_loss: {userEmbedding}")
-
-		outputs = model(**inputs, userEmbedding=userEmbedding)
+		outputs = model(**inputs, uids=uids)
 		logits = outputs["logits"]
 
-		print(f"inputs in compute_loss: {inputs}")
-		print(f"logits in compute_loss: {logits}")
-
-		if labels is not None:
-			print(f"labels.shape in compute_loss: {labels.shape}")
-			print(f"logits.shape in compute_loss: {logits.shape}")
-
-			
+		if labels is not None and uids is not None:
 			labels = torch.clamp(labels, min=0, max=model.bert.config.num_labels - 1)
 			loss = self.lossFct(logits, labels)
 		else:
-			raise ValueError("labels is None")
+			raise ValueError("labels or uids is None")
 
 		return (loss, outputs) if return_outputs else loss
 
@@ -111,7 +128,20 @@ class ACARISTrainer(Trainer):
 	# 	print(f"metrics: {metrics}")
 	# 	return metrics
 
-	def compute_metrics(self, evalPred: EvalPrediction):
+	def compute_metrics(self, evalPred):
+		"""
+		This function computes various evaluation metrics such as accuracy, precision, recall, F1 score,
+		confusion matrix, and ROC AUC score for a given set of predicted and true labels.
+		
+		@param evalPred `evalPred` is an object of the `EvalPrediction` class which contains the predictions
+		and labels for a set of evaluation data. The `predictions` attribute contains the predicted logits
+		for each example in the evaluation set, and the `label_ids` attribute contains the true labels for
+		each example. The
+		
+		@return The function `compute_metrics` returns a dictionary containing various evaluation metrics
+		such as accuracy, confusion matrix, ROC AUC score, precision, recall, and F1 score for each label
+		(negative, neutral, and positive).
+		"""
 		logits, labels = evalPred.predictions, evalPred.label_ids
 		logits = torch.softmax(torch.Tensor(logits), dim=1)
 		preds = torch.argmax(logits, dim=1)
@@ -124,7 +154,7 @@ class ACARISTrainer(Trainer):
 		confMatrix = confusion_matrix(labels, preds)
 		rocAUC = roc_auc_score(labels, logits, multi_class="ovr")
 		metrics = {
-			"accuracy": accuracy,
+			"eval_accuracy": accuracy,
 			"confusion_matrix": confMatrix,
 			"roc_auc": rocAUC
 		}
@@ -135,31 +165,52 @@ class ACARISTrainer(Trainer):
 				metrics[f"{metricName}_{labelName}"] = float(value)
 		return metrics
 
-	def prediction_step(self, mdl, inputs, prediction_loss_only, ignore_keys=()):
-		labels = inputs.pop("labels", None)
+	def prediction_step(self, mdl, inputs: dict[str, torch.Tensor], prediction_loss_only, ignore_keys=None):
+		"""
+		This function performs a prediction step using a given model and inputs, and returns the loss,
+		logits, and labels (if available).
+		
+		@param mdl The model being used for prediction.
+		@param inputs a dictionary containing the inputs to the model, including the input ids, attention
+		masks, and token type ids
+		@param prediction_loss_only A boolean indicating whether to only return the prediction loss or the
+		full output. If True, only the loss will be returned. If False, the loss, logits, and labels (if
+		available) will be returned.
+		@param ignore_keys `ignore_keys` is a tuple of keys that should be ignored when extracting the
+		logits from the `outputs` dictionary. These keys are typically used for auxiliary outputs that are
+		not used for computing the final loss.
+		
+		@return a tuple containing different values depending on whether labels are provided or not. If
+		labels are provided, the tuple contains the loss, logits, and labels. If labels are not provided,
+		the tuple contains only the logits. If the argument `prediction_loss_only` is True, the tuple
+		contains only the loss and no logits or labels.
+		"""
+		labels = inputs.get("labels")
+		labels = torch.tensor(labels)
+		labels = labels.to(mdl.device)
 		inputs = self._prepare_inputs(inputs)
 
+		inputsCopy = inputs.copy()
+		input_ids = inputsCopy.pop("input_ids")
+		attention_mask = inputsCopy.pop("attention_mask")
+		uids = inputsCopy.pop("uids")
+		labels = inputsCopy.pop("labels") if "labels" in inputsCopy else None
+
 		with torch.no_grad():
-			userEmbs = inputs.pop("userEmbedding", None)
-			if userEmbs is not None:
-				userEmbs = userEmbs.to(inputs["input_ids"].device)
-				print(f"userEmbs: {userEmbs}")
+			if uids is not None:
+				pass
 			else:
-				wandb.alert(title="userEmbs is None", text="userEmbs is None", level=AlertLevel.ERROR)
-				raise ValueError("userEmbedding is None")
-			print(f"mdl out before forward: {mdl(**inputs, userEmbedding=userEmbs)}")
-			outputs = mdl(**inputs, userEmbedding=userEmbs)
+				wandb.alert(title="uids is None", text="uids is None", level=AlertLevel.ERROR)
+				send_alert("TRAINING WARNING", "uids is None", "normal", 60000)
+			outputs = mdl(input_ids=input_ids, attention_mask=attention_mask, labels=labels, uids=uids) # the two asterisks (**) unpack the dictionary
 			if outputs is None:
-				#return (None, None, None)
 				wandb.alert(title="outputs is None", text="outputs is None", level=AlertLevel.ERROR)
+				send_alert("TRAINING ERROR", "outputs is None", "critical", 60000)
 				raise ValueError("outputs is None")
-			print(f"mdl output: {outputs}")
 			if labels is not None:
-				print(f"labels before loss: {labels}")
-				loss, _ = self.compute_loss(mdl, inputs, labels=labels, return_outputs=True)
+				loss, _ = self.compute_loss(mdl, inputs, return_outputs=True)
 				print(f"loss: {loss}")
 				if loss is None:
-					#return (None, None, None)
 					wandb.alert(title="loss is None", text="loss is None", level=AlertLevel.ERROR)
 					raise ValueError("loss is None")
 				loss = loss.mean().detach()
@@ -168,15 +219,19 @@ class ACARISTrainer(Trainer):
 
 		if outputs is None:
 			return (None, None, None)
-		print(f"outputs before logits tuple: {outputs}\nitems: {outputs.items()}")
-		logits = tuple(v for k, v in outputs.items() if k not in ignore_keys)
+		if ignore_keys is not None:
+			logits = tuple(v for k, v in outputs.items() if k not in ignore_keys)
+		else:
+			logits = tuple(v for k, v in outputs.items())
 		if len(logits) == 1:
 			logits = logits[0]
 
 		if labels is not None:
-			labels = tuple(inputs.get(name).detach() for name in labels)
-			if len(labels) == 1:
-				labels = labels[0]
+			#labels = tuple(inputs.get(name).detach() for name in labels)
+			#labels = (inputs.get(name).detach() if inputs.get(name) is not None else None for name in labels)
+			if labels is None:
+				wandb.alert(title="labels is None", text="labels is None", level=AlertLevel.ERROR)
+				raise ValueError("labels is None")
 			return (loss, logits, labels)
 		else:
 			return (logits,)
