@@ -4,8 +4,12 @@ import json
 from time import sleep
 
 def send_alert(title, message, urgency, time, sound=False, discord=False):
-	subprocess.run(["xset", "dpms", "force", "on"])
-	subprocess.run(["notify-send", "-u", urgency, "-t", str(time), title, message]) # possible urgency values for notify-send: low, normal, critical
+	try:
+		subprocess.run(["xset", "dpms", "force", "on"])
+		subprocess.run(["notify-send", "-u", urgency, "-t", str(time), title, message]) # possible urgency values for notify-send: low, normal, critical
+	except Exception as e:
+		print(f"Failed to send alert: {e}")
+		pass
 	if discord:
 		data = {
 			"content": f"!!!!!!!!!! **{title}** !!!!!!!!!!\n{message}",

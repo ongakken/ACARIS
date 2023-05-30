@@ -112,7 +112,6 @@ class FeatExtractor:
 			msgs = [row for row in reader if any(row.values())]
 			for msg in msgs:
 				msg.pop(None, None)
-				print(msg)
 		# return format: [{"uid": "user#1234", "content": "hello world", "sentiment": "pos"}, ...]
 		return msgs
 
