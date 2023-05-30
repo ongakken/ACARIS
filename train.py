@@ -39,6 +39,44 @@ class MdlTrainer:
 		self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 		wandb.watch(self.model, log="all")
 
+	def compute_metrics(self, evalPred):
+		"""
+		This function computes various evaluation metrics such as accuracy, precision, recall, F1 score,
+		confusion matrix, and ROC AUC score for a given set of predicted and true labels.
+		
+		@param evalPred `evalPred` is an object of the `EvalPrediction` class which contains the predictions
+		and labels for a set of evaluation data. The `predictions` attribute contains the predicted logits
+		for each example in the evaluation set, and the `label_ids` attribute contains the true labels for
+		each example. The
+		
+		@return The function `compute_metrics` returns a dictionary containing various evaluation metrics
+		such as accuracy, confusion matrix, ROC AUC score, precision, recall, and F1 score for each label
+		(negative, neutral, and positive).
+		"""
+		logits, labels = evalPred.predictions, evalPred.label_ids
+		logits = torch.softmax(torch.Tensor(logits), dim=1)
+		preds = torch.argmax(logits, dim=1)
+		if len(labels) > 0:
+			acc = (preds == labels).sum().item() / len(labels)
+		else:
+			acc = 0
+		precision, recall, f1, _ = precision_recall_fscore_support(labels, preds, average=None)
+		accuracy = accuracy_score(labels, preds)
+		confMatrix = confusion_matrix(labels, preds)
+		rocAUC = roc_auc_score(labels, logits, multi_class="ovr")
+		metrics = {
+			"eval_accuracy": accuracy,
+			"confusion_matrix": confMatrix,
+			"roc_auc": rocAUC
+		}
+		metricNames = ["precision", "recall", "f1"]
+		labelNames = ["neg", "neu", "pos"]
+		for metricName, metricValue in zip(metricNames, [precision, recall, f1]):
+			for labelName, value in zip(labelNames, metricValue):
+				metrics[f"{metricName}_{labelName}"] = float(value)
+		print(f"metrics: {metrics}")
+		return metrics
+
 	def fine_tune(self, trainLoader, valLoader, epochs, batchSize, outputDir):
 		"""
 		This function fine-tunes a given model using the provided training and validation data loaders, for
@@ -82,6 +120,7 @@ class MdlTrainer:
 			args=trainingArgs,
 			trainLoader=trainLoader,
 			evalLoader=valLoader,
+			compute_metrics=self.compute_metrics,
 			callbacks=[ProgressCb()]
 		)
 		try:

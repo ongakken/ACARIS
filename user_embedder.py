@@ -19,17 +19,13 @@ class UserEmbedder:
 
 	def get_user_embedding(self, uid) -> torch.Tensor:
 		"""
-		This function retrieves or creates a user embedding tensor based on the user's messages.
+		This function retrieves or creates a user embedding for a given user ID.
 		
 		@param uid uid stands for "user ID", which is a unique identifier assigned to each user in a system
-		or application. In this code, it is used to retrieve or create an embedding (a numerical
-		representation) for a specific user based on their messages.
+		or application. In this code, it is used to retrieve or create an embedding vector for a specific
+		user.
 		
-		@return a torch.Tensor object, which is the user embedding for the given user ID. If the user
-		embedding has already been computed and stored in memory, it is returned directly. Otherwise, the
-		function extracts features from the user's messages, creates a user embedding from these features,
-		and stores the embedding in memory and on disk before returning it. If there are no messages for the
-		given user ID
+		@return a torch.Tensor object, which represents the embedding of a user with the given uid.
 		"""
 		path = os.path.join("./userEmbeddings", f"{uid}.pt")
 
