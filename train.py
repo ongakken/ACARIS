@@ -85,14 +85,14 @@ class MdlTrainer:
 			callbacks=[ProgressCb()]
 		)
 		try:
-			send_alert("**WE ARE EVALUATING**", f"Eval started on {socket.gethostname()}", "low", 5000, sound=False, discord=True)
+			send_alert("**WE ARE EVALUATING**", f"Eval started on `{socket.gethostname()}`", "low", 5000, sound=False, discord=True)
 			trainer.evaluate()
 			send_alert("**EVALUATION COMPLETE**", "Eval complete", "low", 5000, sound=False, discord=True)
 		except Exception as e:
 			send_alert("!! EVAL FAILED !!", str(e), "critical", 50000, sound=True, discord=True)
 			raise
 		try:
-			send_alert("**WE ARE TRAINING**", f"Training started on {socket.gethostname()}", "low", 5000, sound=False, discord=True)
+			send_alert("**WE ARE TRAINING**", f"Training started on `{socket.gethostname()}`", "low", 5000, sound=False, discord=True)
 			trainer.train()
 			send_alert("**TRAINING COMPLETE**", "Training complete", "low", 5000, sound=False, discord=True)
 		except Exception as e:
