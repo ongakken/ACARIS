@@ -8,7 +8,7 @@ def send_alert(title, message, urgency, time, sound=False, discord=False):
 		subprocess.run(["xset", "dpms", "force", "on"])
 		subprocess.run(["notify-send", "-u", urgency, "-t", str(time), title, message]) # possible urgency values for notify-send: low, normal, critical
 	except Exception as e:
-		print(f"Failed to send alert: {e}")
+		print(f"Failed to send alert as notif: {e}")
 		pass
 	if discord:
 		data = {
@@ -19,7 +19,11 @@ def send_alert(title, message, urgency, time, sound=False, discord=False):
 		response = requests.post("https://discord.com/api/webhooks/1109919684050034719/E0Nz1r5qXAsRP_EJfAGaJmRPXS_fnJLg3tCsxpcjssZUBC2JWdTP-zpbD3o2tmQShFvy", json=data)
 	if sound: # beep using sound that lasts 8 second until killed
 		while True:
-			subprocess.run(["aplay", "-q", "/home/simtoon/Documents/alarm.wav"])
+			try:
+				subprocess.run(["aplay", "-q", "/home/simtoon/Documents/alarm.wav"])
+			except Exception as e:
+				print(f"Failed to play sound: {e}")
+				pass
 			sleep(8)
 
 

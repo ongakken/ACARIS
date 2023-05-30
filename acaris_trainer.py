@@ -163,6 +163,7 @@ class ACARISTrainer(Trainer):
 		for metricName, metricValue in zip(metricNames, [precision, recall, f1]):
 			for labelName, value in zip(labelNames, metricValue):
 				metrics[f"{metricName}_{labelName}"] = float(value)
+		print(f"metrics: {metrics}")
 		return metrics
 
 	def prediction_step(self, mdl, inputs: dict[str, torch.Tensor], prediction_loss_only, ignore_keys=None):
