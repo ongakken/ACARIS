@@ -4,7 +4,7 @@ This module trains.
 
 import torch
 from torch.utils.data import DataLoader
-from transformers import AutoModelForSequenceClassification, Trainer, TrainingArguments
+from transformers import AutoModelForSequenceClassification, Trainer, TrainingArguments, AutoTokenizer, EvalPrediction
 from acaris_mdl import ACARISMdl
 from acaris_ds import ACARISDs
 from acaris_trainer import ACARISTrainer
@@ -18,6 +18,7 @@ import wandb
 from acaris_trainer import ProgressCb
 from alert import send_alert
 import socket
+from sklearn.metrics import accuracy_score, f1_score, precision_recall_fscore_support, confusion_matrix, roc_auc_score, classification_report
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 #os.environ["CUDA_LAUNCH_BLOCKING"] = "1"
