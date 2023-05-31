@@ -81,8 +81,6 @@ class ACARISBERT:
         self.tokenizer = DistilBertTokenizerFast.from_pretrained(config["mdl"])
         self.model = DistilBertForMulticlassSequenceClassification.from_pretrained(config["mdl"], num_labels=3, id2label={0: "neg", 1: "neu", 2: "pos"}, label2id={"neg": 0, "neu": 1, "pos": 2}, dropout=config["dropout"], attention_dropout=config["dropout"])
 
-
-
     def read_data(self, path):
         df = pd.read_csv(path, sep="|", usecols=["content", "sentiment"])
         return Dataset.from_pandas(df)
@@ -110,11 +108,11 @@ class ACARISBERT:
         preds = torch.argmax(torch.Tensor(logits), dim=1)
         precision, recall, f1, _ = precision_recall_fscore_support(labels, preds, average=None)
         accuracy = accuracy_score(labels, preds)
-        confMatrix = confusion_matrix(labels, preds)
+        #confMatrix = confusion_matrix(labels, preds)
         rocAUC = roc_auc_score(labels, preds, multi_class="ovr")
         metrics = {
             "accuracy": accuracy,
-            "confusion_matrix": confMatrix,
+            #"confusion_matrix": confMatrix,
             "roc_auc": rocAUC
         }
         metricNames = ["precision", "recall", "f1"]
