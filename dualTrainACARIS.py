@@ -1,6 +1,47 @@
 """
-This mod fine-tunes a DistilBERT model on the ACARIS dataset with user embeddings, resulting in an ACARIS model.
+This mod fine-tunes a BERT model on the ACARIS dataset for comparison with ACARISMdl.
 """
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+##################### !!! WORK IN PROGRESS !!! DO NOT USE !!! #####################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 import torch
 from torch import nn
@@ -15,11 +56,10 @@ import huggingface_hub
 import os
 import random
 import numpy as np
-from user_embedder import UserEmbedder
 
 config = {
 	"mdl": "distilbert-base-uncased",
-	"epochs": 2,
+	"epochs": 5,
 	"batchSize": 14,
 	"maxLen": 512,
 	"warmupSteps": 0.1, # proportion of total steps, NOT absolute
@@ -49,35 +89,13 @@ def lockSeed(seed):
 class DistilBertForMulticlassSequenceClassification(DistilBertForSequenceClassification):
 	def __init__(self, config):
 		super().__init__(config)
-		self.userEmbSize = 12
-		# self.userEmb = nn.Linear(self.userEmbSize, config.dim)
-		#0 a Linear (Dense) layer transforms its first arg dimensionality to its second arg dimensionality: (inputDim, outputDim): nn.Linear(inputDim, outputDim)
-		self.pre_classifier = nn.Linear(config.dim * 2, config.dim) # '2' because of the concat, which doubles the input size to the pre_classifier
-		self.classifier = nn.Linear(config.dim, 3) # '3' for our 3 classes
-		self.userEmb = nn.Sequential(
-			nn.Linear(self.userEmbSize, 512),
-			nn.ReLU(),
-			nn.Linear(512, config.dim), # config.dim.shape = (768,)
-			nn.LayerNorm(config.dim),
-			nn.Dropout(0.5),
-			nn.Linear(config.dim, 512),
-			nn.ReLU(),
-			nn.LayerNorm(512),
-			nn.Dropout(0.5),
-			nn.Linear(512, config.dim)
-		)
-		#self.small = nn.Linear(config.dim * 2, config.dim)
 
-	def forward(self, input_ids=None, attention_mask=None, userEmbs=None, head_mask=None, inputs_embeds=None, labels=None, output_attentions=None, output_hidden_states=None, return_dict=None):
+	def forward(self, input_ids=None, attention_mask=None, head_mask=None, inputs_embeds=None, labels=None, output_attentions=None, output_hidden_states=None, return_dict=None):
 		return_dict = return_dict if return_dict is not None else self.config.use_return_dict
 
 		outputs = self.distilbert(input_ids, attention_mask=attention_mask, head_mask=head_mask, inputs_embeds=inputs_embeds, output_attentions=output_attentions, output_hidden_states=output_hidden_states, return_dict=return_dict)
 
 		hidden_state = outputs[0]
-
-		userEmbs = self.userEmb(userEmbs)
-		userEmbsRep = userEmbs.unsqueeze(1).repeat(1, hidden_state.size(1), 1)
-		hidden_state = torch.cat((hidden_state, userEmbsRep), dim=-1)
 		pooled_output = hidden_state[:, 0]
 		pooled_output = self.pre_classifier(pooled_output)
 		pooled_output = nn.ReLU()(pooled_output)
@@ -97,41 +115,120 @@ class DistilBertForMulticlassSequenceClassification(DistilBertForSequenceClassif
 
 
 
-class ACARISModel:
+class ACARISUserEmber:
 	def __init__(self, trainPath, valPath):
 		self.trainPath = trainPath
 		self.valPath = valPath
 		self.tokenizer = DistilBertTokenizerFast.from_pretrained(config["mdl"])
 		self.model = DistilBertForMulticlassSequenceClassification.from_pretrained(config["mdl"], num_labels=3, id2label={0: "neg", 1: "neu", 2: "pos"}, label2id={"neg": 0, "neu": 1, "pos": 2}, dropout=config["dropout"], attention_dropout=config["dropout"])
-		self.userEmbedder = UserEmbedder(userEmbeddingSize=12) # 12 because of the 12 features we use # TODO: #9 make dynamically sized
 
 	def read_data(self, path):
-		df = pd.read_csv(path, sep="|", usecols=["uid", "content", "sentiment"])
+		df = pd.read_csv(path, sep="|", usecols=["content", "sentiment"])
 		return Dataset.from_pandas(df)
 	
 	def tokenize_data(self, dataset):
 		sentMapping = {"pos": 2, "neg": 0, "neu": 1}
-
-		df = dataset.to_pandas()
-		uids = df["uid"].unique()
-
-		# create a dictionary to hold all unique uid embeddings
-		userEmbs = {uid: self.userEmbedder.get_user_embedding(uid) for uid in uids}
-
-		def map(x):
-			return {
+		tokenized = dataset.map(
+			lambda x: {
 				**self.tokenizer(x["content"], truncation=True, padding="max_length", max_length=config["maxLen"]),
-				"labels": torch.tensor(sentMapping[x["sentiment"]]),
-				"userEmbs": userEmbs[x["uid"]],
-			}
+				"labels": torch.tensor([sentMapping[sent] for sent in x["sentiment"]])
+			},
+			batched=True,
+			remove_columns=["content", "sentiment"]
+		)
+		tokenized.set_format(type="torch", columns=["input_ids", "attention_mask", "labels"])
+		return tokenized
+	
+	def get_data_loaders(self, trainDS, valDS):
+		trainLoader = DataLoader(trainDS, batch_size=config["batchSize"], shuffle=False)
+		valLoader = DataLoader(valDS, batch_size=config["batchSize"], shuffle=False)
+		return trainLoader, valLoader
+	
+	def compute_metrics(self, evalPred):
+		logits, labels = evalPred
+		preds = torch.argmax(torch.Tensor(logits), dim=1)
+		probs = torch.nn.functional.softmax(torch.Tensor(logits), dim=1)
+		precision, recall, f1, _ = precision_recall_fscore_support(labels, preds, average=None)
+		accuracy = accuracy_score(labels, preds)
+		rocAUC = roc_auc_score(labels, probs, multi_class="ovr")
+		metrics = {
+			"accuracy": accuracy,
+			"roc_auc": rocAUC
+		}
+		metricNames = ["precision", "recall", "f1"]
+		labelNames = ["neg", "neu", "pos"]
+		for metricName, metricValue in zip(metricNames, [precision, recall, f1]):
+			for labelName, value in zip(labelNames, metricValue):
+				metrics[f"{metricName}_{labelName}"] = float(value)
+		return metrics
+	
+	def train(self):
+		trainDS = self.tokenize_data(self.read_data(self.trainPath))
+		valDS = self.tokenize_data(self.read_data(self.valPath))
 
-		try:
-			tokenized = dataset.map(map, remove_columns=["uid", "content", "sentiment"])
-			tokenized.set_format("torch", columns=["input_ids", "attention_mask", "labels", "userEmbs"])
-		except:
-			print(dataset["uid"])
-			raise
+		totalSteps = len(trainDS) // config["batchSize"] * config["epochs"]
+		warmupSteps = int(totalSteps * config["warmupSteps"])
+		
+		trainingArgs = TrainingArguments(
+			output_dir=config["outputDir"],
+			num_train_epochs=config["epochs"],
+			per_device_train_batch_size=config["batchSize"],
+			per_device_eval_batch_size=config["batchSize"],
+			warmup_steps=warmupSteps,
+			weight_decay=config["weightDecay"],
+			logging_dir="./logs",
+			logging_steps=100,
+			learning_rate=config["initlr"],
+			evaluation_strategy="epoch",
+			save_strategy="epoch",
+			load_best_model_at_end=True,
+			metric_for_best_model="accuracy",
+			save_total_limit=5,
+			adam_epsilon=config["epsilon"],
+			report_to="wandb",
+			fp16=True
+		)
+		
+		trainer = Trainer(
+			model=self.model,
+			args=trainingArgs,
+			train_dataset=trainDS,
+			eval_dataset=valDS,
+			compute_metrics=self.compute_metrics,
+			callbacks=[EarlyStoppingCallback(early_stopping_patience=config["earlyStoppingPatience"])]
+		)
+		print(f"Number of parameters: {trainer.model.num_parameters()}")
+		print("Running eval ...")
+		trainer.evaluate()
+		print("Running training ...")
+		trainer.train()
+		print("Saving model ...")
+		trainer.save_model(config["outputDir"])
 
+
+
+class ACARISLabeler:
+	def __init__(self, trainPath, valPath):
+		self.trainPath = trainPath
+		self.valPath = valPath
+		self.tokenizer = DistilBertTokenizerFast.from_pretrained(config["mdl"])
+		self.model = DistilBertForMulticlassSequenceClassification.from_pretrained(config["mdl"], num_labels=3, id2label={0: "neg", 1: "neu", 2: "pos"}, label2id={"neg": 0, "neu": 1, "pos": 2}, dropout=config["dropout"], attention_dropout=config["dropout"])
+
+	def read_data(self, path):
+		df = pd.read_csv(path, sep="|", usecols=["content", "sentiment"])
+		return Dataset.from_pandas(df)
+	
+	def tokenize_data(self, dataset):
+		sentMapping = {"pos": 2, "neg": 0, "neu": 1}
+		tokenized = dataset.map(
+			lambda x: {
+				**self.tokenizer(x["content"], truncation=True, padding="max_length", max_length=config["maxLen"]),
+				"labels": torch.tensor([sentMapping[sent] for sent in x["sentiment"]])
+			},
+			batched=True,
+			remove_columns=["content", "sentiment"]
+		)
+		tokenized.set_format(type="torch", columns=["input_ids", "attention_mask", "labels"])
 		return tokenized
 	
 	def get_data_loaders(self, trainDS, valDS):
@@ -202,6 +299,6 @@ class ACARISModel:
 		
 		
 if __name__ == "__main__":
-	acaris = ACARISModel("./datasets/train.csv", "./datasets/val.csv")
-	acaris.train()
+	acaris_bert = ACARISBERT("./datasets/train.csv", "./datasets/val.csv")
+	acaris_bert.train()
 	wandb.finish()

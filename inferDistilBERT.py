@@ -13,10 +13,11 @@ class InferACARISBERT:
 	def __init__(self, mdlPath):
 		self.mdlPath = mdlPath
 		self.tokenizer = DistilBertTokenizerFast.from_pretrained("distilbert-base-uncased")
-		self.model = DistilBertForMulticlassSequenceClassification.from_pretrained(self.mdlPath)
+		self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+		self.model = DistilBertForMulticlassSequenceClassification.from_pretrained(self.mdlPath).to(self.device)
 
 	def prepare_input(self, text):
-		inputs = self.tokenizer(text, truncation=True, padding="max_length", max_length=512, return_tensors="pt")
+		inputs = self.tokenizer(text, truncation=True, padding="max_length", max_length=512, return_tensors="pt").to(self.device)
 		return inputs
 
 	def predict(self, inputs):
@@ -35,11 +36,7 @@ class InferACARISBERT:
 			confidence = pred[0][maxProb[0]]
 			print(f"Label: {label}\nConfidence: {confidence}\n")
 
-	def push(self, modelName, org="ongknsro"):
-		self.model.push_to_hub(repo_id=f"{org}/{modelName}", private=True)
-		self.tokenizer.push_to_hub(repo_id=f"{org}/{modelName}")
 
 if __name__ == "__main__":
 	acaris_bert_infer = InferACARISBERT("./output")
-	#acaris_bert_infer.infer()
-	acaris_bert_infer.push("ACARISBERT-DistilBERT")
+	acaris_bert_infer.infer()

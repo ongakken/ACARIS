@@ -14,5 +14,5 @@ class InferACARISBERT:
 		self.tokenizer.push_to_hub(repo_id=f"{org}/{modelName}")
 
 if __name__ == "__main__":
-	acaris_bert_infer = InferACARISBERT("./output/checkpoint-3540")
-	acaris_bert_infer.push("ACARIS-DistilBERT-iter1-fp16-batchSize14")
+	acaris_bert_infer = InferACARISBERT("./output/")
+	acaris_bert_infer.push("ACARIS-DistilBERT_MLPUserEmbs-iter2-fp16-batchSize14")

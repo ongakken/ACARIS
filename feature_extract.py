@@ -17,6 +17,7 @@ import pickle
 import csv
 import argparse
 import os
+from nltk import pos_tag
 
 
 emojiPattern = re.compile("["
@@ -61,20 +62,25 @@ class FeatExtractor:
 		msgs = self.removeDscEmoji(msgs)
 
 		feats = {
+			#0 current userEmb dimensionality: 12
 			"meanWordcount": self.mean_wordcount(msgs),
 			"vocabRichness": self.vocab_richness(msgs),
 			"meanEmojiCount": self.mean_emoji_count(msgs),
 			"meanEmoticonCount": self.mean_emoticon_count(msgs),
 			"meanPunctuationCount": self.mean_punctuation_count(msgs),
 			"meanSentimentScore": self.mean_sentiment_score(msgs),
-			"dominantTopics": self.dominant_topics(msgs),
+			#"dominantTopics": self.dominant_topics(msgs),
 			#"meanResponseTime": self.mean_response_time(msgs),
 			#"meanMsgCountPerDay": self.mean_msg_count_per_day(msgs),
 			"meanLinksPerMsg": self.mean_links_per_msg(msgs),
-			"meanCodeSnippetsPerMsg": self.mean_code_snippets_per_msg(msgs),
+			#"meanCodeSnippetsPerMsg": self.mean_code_snippets_per_msg(msgs),
 			#"dominantWritingStyles": self.dominant_writing_styles(msgs),
 			"meanAbbreviationsPerMsg": self.mean_abbreviations_per_msg(msgs),
-			"meanHashtagCountPerMsg": self.mean_hashtag_count_per_msg(msgs),
+			#"meanHashtagCountPerMsg": self.mean_hashtag_count_per_msg(msgs),
+			"meanSentenceLen": self.mean_sentence_len(msgs),
+			"meanNounFreq": self.mean_noun_freq(msgs),
+			"meanVerbFreq": self.mean_verb_freq(msgs),
+			"meanAdjFreq": self.mean_adjective_freq(msgs)
 			#"meanAttachmentCountPerMsg": self.mean_attachment_count_per_msg(msgs),
 			#"meanQuoteCountPerMsg": self.mean_quote_count_per_msg(msgs),
 			#"dominantActiveHours": self.dominant_active_hours(msgs)
@@ -343,6 +349,51 @@ class FeatExtractor:
 		hashtagCount = [len(hashtagPattern.findall(msg["content"])) for msg in msgs]
 		return round(np.mean(hashtagCount), 2)
 	mean_hashtag_count_per_msg.requiredFields = ["content"]
+
+	def mean_sentence_len(self, msgs):
+		print("Extracting mean sentence length...")
+		content = " ".join([msg["content"] for msg in msgs])
+		sentences = re.findall(r'\w[^.!?]*[.!?]', content)
+		nSentences = len(sentences)
+		nWords = len(re.findall(r'\w+', content))
+		try:
+			return nWords / nSentences
+		except ZeroDivisionError:
+			return 0
+	mean_sentence_len.requiredFields = ["content"]
+
+	def mean_noun_freq(self, msgs):
+		print("Extracting mean noun frequency...")
+		words = [word for msg in msgs for word in msg["content"].split()]
+		tagged = pos_tag(words)
+		pos = Counter(tag for _, tag in tagged)
+		try:
+			return pos["NN"] / sum(pos.values())
+		except ZeroDivisionError:
+			return 0
+	mean_noun_freq.requiredFields = ["content"]
+
+	def mean_verb_freq(self, msgs):
+		print("Extracting mean verb frequency...")
+		words = [word for msg in msgs for word in msg["content"].split()]
+		tagged = pos_tag(words)
+		pos = Counter(tag for _, tag in tagged)
+		try:
+			return pos["VB"] / sum(pos.values())
+		except ZeroDivisionError:
+			return 0
+	mean_verb_freq.requiredFields = ["content"]
+
+	def mean_adjective_freq(self, msgs):
+		print("Extracting mean adjective frequency...")
+		words = [word for msg in msgs for word in msg["content"].split()]
+		tagged = pos_tag(words)
+		pos = Counter(tag for _, tag in tagged)
+		try:
+			return pos["JJ"] / sum(pos.values())
+		except ZeroDivisionError:
+			return 0
+	mean_adjective_freq.requiredFields = ["content"]
 
 	def mean_attachment_count_per_msg(self, msgs):
 		print("Extracting mean attachment count per message...")

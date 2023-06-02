@@ -14,7 +14,7 @@ class InferACARIS:
 
 	def predict(self, uids, contents):
 		userEmbs = [self.userEmbedder.get_user_embedding(uid) for uid in uids]
-		inputs = self.tokenizer(contents, truncation=True, padding="max_length", max_length=128, return_tensors="pt")
+		inputs = self.tokenizer(contents, truncation=True, padding="max_length", max_length=512, return_tensors="pt")
 		inputs = {name: tensor.to(self.device) for name, tensor in inputs.items()}
 		userEmbs = torch.stack(userEmbs).to(self.device)
 
@@ -33,7 +33,8 @@ class InferACARIS:
 
 if __name__ == "__main__":
 	infer = InferACARIS("./output/checkpoint-3540/")
-	uids = ["Reknez#9257"]
-	contents = ["ok"]
+	uids = [""]
+	contents = ["xP"]
 	labels, probs = infer.predict(uids, contents)
+	print(f"probs shape: {probs.shape}")
 	print(labels, probs)
