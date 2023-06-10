@@ -261,6 +261,47 @@
       \verb https://books.google.de/books?id=u9FjEAAAQBAJ
       \endverb
     \endentry
+    \entry{kamath2022transformers}{book}{}
+      \name{author}{3}{}{%
+        {{hash=29c74bec2424d6369dafd32e5aae9196}{%
+           family={Kamath},
+           familyi={K\bibinitperiod},
+           given={U.},
+           giveni={U\bibinitperiod}}}%
+        {{hash=e51f7c313c6ffb9ed05ae78acd5c8d93}{%
+           family={Graham},
+           familyi={G\bibinitperiod},
+           given={K.L.},
+           giveni={K\bibinitperiod}}}%
+        {{hash=bdfd9fd9b94a7157b075abaadcdfd21b}{%
+           family={Emara},
+           familyi={E\bibinitperiod},
+           given={W.},
+           giveni={W\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {CRC Press}%
+      }
+      \strng{namehash}{7a2465daee3b2840f921e9c5ca18e415}
+      \strng{fullhash}{7a2465daee3b2840f921e9c5ca18e415}
+      \strng{bibnamehash}{7a2465daee3b2840f921e9c5ca18e415}
+      \strng{authorbibnamehash}{7a2465daee3b2840f921e9c5ca18e415}
+      \strng{authornamehash}{7a2465daee3b2840f921e9c5ca18e415}
+      \strng{authorfullhash}{7a2465daee3b2840f921e9c5ca18e415}
+      \field{sortinit}{7}
+      \field{sortinithash}{f615fb9c6fba11c6f962fb3fd599810e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9781000587098}
+      \field{title}{Transformers for Machine Learning: A Deep Dive}
+      \field{year}{2022}
+      \verb{urlraw}
+      \verb https://books.google.de/books?id=zENpEAAAQBAJ
+      \endverb
+      \verb{url}
+      \verb https://books.google.de/books?id=zENpEAAAQBAJ
+      \endverb
+    \endentry
     \entry{sharma2022humanai}{online}{}
       \name{author}{5}{}{%
         {{hash=b05620aa2ec177d220e7ad210f055d74}{%
@@ -295,8 +336,8 @@
       \strng{authorbibnamehash}{28ab34db547f72d11ccdd3e77502bfb9}
       \strng{authornamehash}{28ab34db547f72d11ccdd3e77502bfb9}
       \strng{authorfullhash}{289c00d7004fd0cd21ac705cd952b987}
-      \field{sortinit}{7}
-      \field{sortinithash}{f615fb9c6fba11c6f962fb3fd599810e}
+      \field{sortinit}{8}
+      \field{sortinithash}{1b24cab5087933ef0826a7cd3b99e994}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{eprintclass}{cs.CL}
@@ -341,8 +382,8 @@
       \strng{authorbibnamehash}{6ca198f848df6f79ed3fdec100e4c574}
       \strng{authornamehash}{6ca198f848df6f79ed3fdec100e4c574}
       \strng{authorfullhash}{d56a12e2aed95542076579ee8f94ef32}
-      \field{sortinit}{8}
-      \field{sortinithash}{1b24cab5087933ef0826a7cd3b99e994}
+      \field{sortinit}{9}
+      \field{sortinithash}{54047ffb55bdefa0694bbd554c1b11a0}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Abstract Applying machine learning algorithms to automatically infer relationships between concepts from large-scale collections of documents presents a unique opportunity to investigate at scale how human semantic knowledge is organized, how people use it to make fundamental judgments (“How similar are cats and bears?”), and how these judgments depend on the features that describe concepts (e.g., size, furriness). However, efforts to date have exhibited a substantial discrepancy between algorithm predictions and human empirical judgments. Here, we introduce a novel approach to generating embeddings for this purpose motivated by the idea that semantic context plays a critical role in human judgment. We leverage this idea by constraining the topic or domain from which documents used for generating embeddings are drawn (e.g., referring to the natural world vs. transportation apparatus). Specifically, we trained state-of-the-art machine learning algorithms using contextually-constrained text corpora (domain-specific subsets of Wikipedia articles, 50+ million words each) and showed that this procedure greatly improved predictions of empirical similarity judgments and feature ratings of contextually relevant concepts. Furthermore, we describe a novel, computationally tractable method for improving predictions of contextually-unconstrained embedding models based on dimensionality reduction of their internal representation to a small number of contextually relevant semantic features. By improving the correspondence between predictions derived automatically by machine learning methods using vast amounts of data and more limited, but direct empirical measurements of human judgments, our approach may help leverage the availability of online corpora to better understand the structure of human semantic representations and how people make judgments based on those.}
@@ -500,6 +541,370 @@
       \field{booktitle}{58th Annual Meeting of the Association for Computational Linguistics (ACL)}
       \field{title}{{GoEmotions: A Dataset of Fine-Grained Emotions}}
       \field{year}{2020}
+    \endentry
+    \entry{Cop_2021}{online}{}
+      \name{author}{1}{}{%
+        {{hash=6b8879466c185f4a1da6831572651c4b}{%
+           family={Cop},
+           familyi={C\bibinitperiod},
+           given={Cyber},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{6b8879466c185f4a1da6831572651c4b}
+      \strng{fullhash}{6b8879466c185f4a1da6831572651c4b}
+      \strng{bibnamehash}{6b8879466c185f4a1da6831572651c4b}
+      \strng{authorbibnamehash}{6b8879466c185f4a1da6831572651c4b}
+      \strng{authornamehash}{6b8879466c185f4a1da6831572651c4b}
+      \strng{authorfullhash}{6b8879466c185f4a1da6831572651c4b}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Kaggle}
+      \field{month}{9}
+      \field{title}{Tweet sentiment and emotion analysis}
+      \field{year}{2021}
+      \verb{urlraw}
+      \verb https://www.kaggle.com/datasets/subhajournal/tweet-sentiment-and-emotion-analysis?select=all_tweets.csv
+      \endverb
+      \verb{url}
+      \verb https://www.kaggle.com/datasets/subhajournal/tweet-sentiment-and-emotion-analysis?select=all_tweets.csv
+      \endverb
+    \endentry
+    \entry{Kumar_2022}{online}{}
+      \name{author}{1}{}{%
+        {{hash=c3ac9e7dae03c093a86970853c449196}{%
+           family={Kumar},
+           familyi={K\bibinitperiod},
+           given={Saurabh},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{c3ac9e7dae03c093a86970853c449196}
+      \strng{fullhash}{c3ac9e7dae03c093a86970853c449196}
+      \strng{bibnamehash}{c3ac9e7dae03c093a86970853c449196}
+      \strng{authorbibnamehash}{c3ac9e7dae03c093a86970853c449196}
+      \strng{authornamehash}{c3ac9e7dae03c093a86970853c449196}
+      \strng{authorfullhash}{c3ac9e7dae03c093a86970853c449196}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Kaggle}
+      \field{month}{7}
+      \field{title}{Twitter-sentiment data}
+      \field{year}{2022}
+      \verb{urlraw}
+      \verb https://www.kaggle.com/datasets/codersaurabh/twittersentiment-data?select=Tweet-Sentimental-Data.csv
+      \endverb
+      \verb{url}
+      \verb https://www.kaggle.com/datasets/codersaurabh/twittersentiment-data?select=Tweet-Sentimental-Data.csv
+      \endverb
+    \endentry
+    \entry{wandb}{misc}{}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labeltitlesource}{title}
+      \field{title}{Weights and Biases}
+      \verb{urlraw}
+      \verb https://wandb.ai/site
+      \endverb
+      \verb{url}
+      \verb https://wandb.ai/site
+      \endverb
+    \endentry
+    \entry{falcon40b}{article}{}
+      \name{author}{13}{}{%
+        {{hash=3d377a6926ae8c3bd676a9f886a850a1}{%
+           family={Almazrouei},
+           familyi={A\bibinitperiod},
+           given={Ebtesam},
+           giveni={E\bibinitperiod}}}%
+        {{hash=20110935e15a85dde3a64f3a953bfc21}{%
+           family={Alobeidli},
+           familyi={A\bibinitperiod},
+           given={Hamza},
+           giveni={H\bibinitperiod}}}%
+        {{hash=f3c98aeeef797891cd552cd59208b1ad}{%
+           family={Alshamsi},
+           familyi={A\bibinitperiod},
+           given={Abdulaziz},
+           giveni={A\bibinitperiod}}}%
+        {{hash=7017e6b55df2608d952b93aaff08b5e9}{%
+           family={Cappelli},
+           familyi={C\bibinitperiod},
+           given={Alessandro},
+           giveni={A\bibinitperiod}}}%
+        {{hash=78cd7a8d12bd2a8111b3376103502566}{%
+           family={Cojocaru},
+           familyi={C\bibinitperiod},
+           given={Ruxandra},
+           giveni={R\bibinitperiod}}}%
+        {{hash=7d72fddcb2a0bc6488394d820125cc88}{%
+           family={Debbah},
+           familyi={D\bibinitperiod},
+           given={Merouane},
+           giveni={M\bibinitperiod}}}%
+        {{hash=400e5e95de82862ff75bbe250cb28f2b}{%
+           family={Goffinet},
+           familyi={G\bibinitperiod},
+           given={Etienne},
+           giveni={E\bibinitperiod}}}%
+        {{hash=4027b407e5680bd84fffce07d1d3696f}{%
+           family={Heslow},
+           familyi={H\bibinitperiod},
+           given={Daniel},
+           giveni={D\bibinitperiod}}}%
+        {{hash=a13f56a4bc861f7b9d350d668ff03600}{%
+           family={Launay},
+           familyi={L\bibinitperiod},
+           given={Julien},
+           giveni={J\bibinitperiod}}}%
+        {{hash=44e697ae5ed34d24426f56d0c541e779}{%
+           family={Malartic},
+           familyi={M\bibinitperiod},
+           given={Quentin},
+           giveni={Q\bibinitperiod}}}%
+        {{hash=c7a47f1fb5c0b610227af2af0ed92db6}{%
+           family={Noune},
+           familyi={N\bibinitperiod},
+           given={Badreddine},
+           giveni={B\bibinitperiod}}}%
+        {{hash=f3526985fe9216909da66f6a8da1b734}{%
+           family={Pannier},
+           familyi={P\bibinitperiod},
+           given={Baptiste},
+           giveni={B\bibinitperiod}}}%
+        {{hash=4805d7dfc36e7883156020c29c44a3f3}{%
+           family={Penedo},
+           familyi={P\bibinitperiod},
+           given={Guilherme},
+           giveni={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{9317459f126e2dc832b5a0ec413c5711}
+      \strng{fullhash}{582f7211a9bfb744f4e3effa1ecaa30e}
+      \strng{bibnamehash}{9317459f126e2dc832b5a0ec413c5711}
+      \strng{authorbibnamehash}{9317459f126e2dc832b5a0ec413c5711}
+      \strng{authornamehash}{9317459f126e2dc832b5a0ec413c5711}
+      \strng{authorfullhash}{582f7211a9bfb744f4e3effa1ecaa30e}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Falcon-40B}: an open large language model with state-of-the-art performance}
+      \field{year}{2023}
+    \endentry
+    \entry{clark2018think}{misc}{}
+      \name{author}{7}{}{%
+        {{hash=2db5de0aa2d8b8effcc6e63e976b4edb}{%
+           family={Clark},
+           familyi={C\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+        {{hash=40acbd8a3bdb0d6f7881a7a608f329f7}{%
+           family={Cowhey},
+           familyi={C\bibinitperiod},
+           given={Isaac},
+           giveni={I\bibinitperiod}}}%
+        {{hash=24a50614f7ed5b3e1d70594a0e2c2a2a}{%
+           family={Etzioni},
+           familyi={E\bibinitperiod},
+           given={Oren},
+           giveni={O\bibinitperiod}}}%
+        {{hash=d52b94839fda8bece4ad0c811146f04f}{%
+           family={Khot},
+           familyi={K\bibinitperiod},
+           given={Tushar},
+           giveni={T\bibinitperiod}}}%
+        {{hash=a9e0631f7cb86b51f2dbfd908c164960}{%
+           family={Sabharwal},
+           familyi={S\bibinitperiod},
+           given={Ashish},
+           giveni={A\bibinitperiod}}}%
+        {{hash=295b73860bf51e24333e651d5d7c1239}{%
+           family={Schoenick},
+           familyi={S\bibinitperiod},
+           given={Carissa},
+           giveni={C\bibinitperiod}}}%
+        {{hash=21dbac8bb4ba1ed555216a1d80595c20}{%
+           family={Tafjord},
+           familyi={T\bibinitperiod},
+           given={Oyvind},
+           giveni={O\bibinitperiod}}}%
+      }
+      \strng{namehash}{4fd804525e38a0fa4371b95d31fc4585}
+      \strng{fullhash}{c73080df046134da3613334c185e0473}
+      \strng{bibnamehash}{4fd804525e38a0fa4371b95d31fc4585}
+      \strng{authorbibnamehash}{4fd804525e38a0fa4371b95d31fc4585}
+      \strng{authornamehash}{4fd804525e38a0fa4371b95d31fc4585}
+      \strng{authorfullhash}{c73080df046134da3613334c185e0473}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{cs.AI}
+      \field{eprinttype}{arXiv}
+      \field{title}{Think you have Solved Question Answering? Try ARC, the AI2 Reasoning Challenge}
+      \field{year}{2018}
+      \verb{eprint}
+      \verb 1803.05457
+      \endverb
+    \endentry
+    \entry{zellers2019hellaswag}{misc}{}
+      \name{author}{5}{}{%
+        {{hash=560f431bda2e90c8056046656d2b7f8b}{%
+           family={Zellers},
+           familyi={Z\bibinitperiod},
+           given={Rowan},
+           giveni={R\bibinitperiod}}}%
+        {{hash=c32ace2a5a2590ef3542c3713e05925d}{%
+           family={Holtzman},
+           familyi={H\bibinitperiod},
+           given={Ari},
+           giveni={A\bibinitperiod}}}%
+        {{hash=4cc4ca13eda1b8380f1589532b8e33ae}{%
+           family={Bisk},
+           familyi={B\bibinitperiod},
+           given={Yonatan},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=396c6ddedb6f986906fc3e4994d19974}{%
+           family={Farhadi},
+           familyi={F\bibinitperiod},
+           given={Ali},
+           giveni={A\bibinitperiod}}}%
+        {{hash=64d48b2f4b0370b6692c87cfc65f19b9}{%
+           family={Choi},
+           familyi={C\bibinitperiod},
+           given={Yejin},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \strng{namehash}{a0039a739658bc14f2025d49d2e80750}
+      \strng{fullhash}{f6687d08ef441f6ce2eb6407dc46b06e}
+      \strng{bibnamehash}{a0039a739658bc14f2025d49d2e80750}
+      \strng{authorbibnamehash}{a0039a739658bc14f2025d49d2e80750}
+      \strng{authornamehash}{a0039a739658bc14f2025d49d2e80750}
+      \strng{authorfullhash}{f6687d08ef441f6ce2eb6407dc46b06e}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{cs.CL}
+      \field{eprinttype}{arXiv}
+      \field{title}{HellaSwag: Can a Machine Really Finish Your Sentence?}
+      \field{year}{2019}
+      \verb{eprint}
+      \verb 1905.07830
+      \endverb
+    \endentry
+    \entry{hendrycks2021measuring}{misc}{}
+      \name{author}{7}{}{%
+        {{hash=86d0b4ecd6b6066d49e7aecde6e5e630}{%
+           family={Hendrycks},
+           familyi={H\bibinitperiod},
+           given={Dan},
+           giveni={D\bibinitperiod}}}%
+        {{hash=624605ebd8b6b403b251522e3d1029ff}{%
+           family={Burns},
+           familyi={B\bibinitperiod},
+           given={Collin},
+           giveni={C\bibinitperiod}}}%
+        {{hash=35f72302a7aebfd095414ce218b8fb5d}{%
+           family={Basart},
+           familyi={B\bibinitperiod},
+           given={Steven},
+           giveni={S\bibinitperiod}}}%
+        {{hash=4817500e279ce97b8c8f18b92a2a6ead}{%
+           family={Zou},
+           familyi={Z\bibinitperiod},
+           given={Andy},
+           giveni={A\bibinitperiod}}}%
+        {{hash=cf291551acefa6a31206eb6853b65648}{%
+           family={Mazeika},
+           familyi={M\bibinitperiod},
+           given={Mantas},
+           giveni={M\bibinitperiod}}}%
+        {{hash=d458d5f9b64652055bd81d57e4777b22}{%
+           family={Song},
+           familyi={S\bibinitperiod},
+           given={Dawn},
+           giveni={D\bibinitperiod}}}%
+        {{hash=fe7a7e80c1857d185d3ab01f15fe584d}{%
+           family={Steinhardt},
+           familyi={S\bibinitperiod},
+           given={Jacob},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{f461c117afa272374439d2db3ee67282}
+      \strng{fullhash}{37926f74925a7ec5129b3f44dd0fd2f0}
+      \strng{bibnamehash}{f461c117afa272374439d2db3ee67282}
+      \strng{authorbibnamehash}{f461c117afa272374439d2db3ee67282}
+      \strng{authornamehash}{f461c117afa272374439d2db3ee67282}
+      \strng{authorfullhash}{37926f74925a7ec5129b3f44dd0fd2f0}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{cs.CY}
+      \field{eprinttype}{arXiv}
+      \field{title}{Measuring Massive Multitask Language Understanding}
+      \field{year}{2021}
+      \verb{eprint}
+      \verb 2009.03300
+      \endverb
+    \endentry
+    \entry{open-llm-leaderboard}{misc}{}
+      \name{author}{7}{}{%
+        {{hash=a808806062951f806149ec504e4161fd}{%
+           family={Beeching},
+           familyi={B\bibinitperiod},
+           given={Edward},
+           giveni={E\bibinitperiod}}}%
+        {{hash=dc1e0099bdba58ed8cbc4fa463f44177}{%
+           family={Han},
+           familyi={H\bibinitperiod},
+           given={Sheon},
+           giveni={S\bibinitperiod}}}%
+        {{hash=607a26c0223e87bec6d3a10ad4179a6a}{%
+           family={Lambert},
+           familyi={L\bibinitperiod},
+           given={Nathan},
+           giveni={N\bibinitperiod}}}%
+        {{hash=21208f1a8ee0fba74718e422e7c72252}{%
+           family={Rajani},
+           familyi={R\bibinitperiod},
+           given={Nazneen},
+           giveni={N\bibinitperiod}}}%
+        {{hash=a469dcb703924c15a13209ab424574de}{%
+           family={Sanseviero},
+           familyi={S\bibinitperiod},
+           given={Omar},
+           giveni={O\bibinitperiod}}}%
+        {{hash=c501d80117f163f338c3006a620cdc8c}{%
+           family={Tunstall},
+           familyi={T\bibinitperiod},
+           given={Lewis},
+           giveni={L\bibinitperiod}}}%
+        {{hash=c34c67badfd5b3624027e9c8c77a69f6}{%
+           family={Wolf},
+           familyi={W\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Hugging Face}%
+      }
+      \strng{namehash}{e09b6df68d44a7b1cdcab89919c58498}
+      \strng{fullhash}{cb7638cf1231ca4818cc275cbd083bc8}
+      \strng{bibnamehash}{e09b6df68d44a7b1cdcab89919c58498}
+      \strng{authorbibnamehash}{e09b6df68d44a7b1cdcab89919c58498}
+      \strng{authornamehash}{e09b6df68d44a7b1cdcab89919c58498}
+      \strng{authorfullhash}{cb7638cf1231ca4818cc275cbd083bc8}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard}}
+      \field{title}{Open LLM Leaderboard}
+      \field{year}{2023}
     \endentry
   \enddatalist
 \endrefsection

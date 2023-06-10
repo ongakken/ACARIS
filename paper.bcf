@@ -2350,13 +2350,23 @@
     <bcf:citekey order="4">raschka2022machine</bcf:citekey>
     <bcf:citekey order="5">geron2022hands</bcf:citekey>
     <bcf:citekey order="6">rothman2022transformers</bcf:citekey>
-    <bcf:citekey order="7">sharma2022humanai</bcf:citekey>
-    <bcf:citekey order="8">https://doi.org/10.1111/cogs.13085</bcf:citekey>
-    <bcf:citekey order="9">vaswani2017attention</bcf:citekey>
-    <bcf:citekey order="10">rombach2021highresolution</bcf:citekey>
-    <bcf:citekey order="11">liu2023visual</bcf:citekey>
-    <bcf:citekey order="12">demszky2020goemotions</bcf:citekey>
-    <bcf:citekey order="13">sanh2020distilbert</bcf:citekey>
+    <bcf:citekey order="7">kamath2022transformers</bcf:citekey>
+    <bcf:citekey order="8">sharma2022humanai</bcf:citekey>
+    <bcf:citekey order="9">https://doi.org/10.1111/cogs.13085</bcf:citekey>
+    <bcf:citekey order="10">vaswani2017attention</bcf:citekey>
+    <bcf:citekey order="11">rombach2021highresolution</bcf:citekey>
+    <bcf:citekey order="12">liu2023visual</bcf:citekey>
+    <bcf:citekey order="13">demszky2020goemotions</bcf:citekey>
+    <bcf:citekey order="14">Cop_2021</bcf:citekey>
+    <bcf:citekey order="15">Kumar_2022</bcf:citekey>
+    <bcf:citekey order="16">sanh2020distilbert</bcf:citekey>
+    <bcf:citekey order="17">wandb</bcf:citekey>
+    <bcf:citekey order="18">wandb</bcf:citekey>
+    <bcf:citekey order="19">falcon40b</bcf:citekey>
+    <bcf:citekey order="20">clark2018think</bcf:citekey>
+    <bcf:citekey order="21">zellers2019hellaswag</bcf:citekey>
+    <bcf:citekey order="22">hendrycks2021measuring</bcf:citekey>
+    <bcf:citekey order="23">open-llm-leaderboard</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">

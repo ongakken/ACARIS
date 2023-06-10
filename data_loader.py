@@ -67,6 +67,8 @@ def split_data(data, trainRatio, valRatio, filterInsufficient):
 
 		pbar.update()
 
+		# the resulting sets have the following percentages: train: 75%, val: 10%, test: 15%
+
 	print(f"Train columns: {trainData.columns}")
 
 	print(f"Dropped {dropped} rows")

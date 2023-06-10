@@ -20,14 +20,14 @@ from user_embedder import UserEmbedder
 config = {
 	"mdl": "distilbert-base-uncased",
 	"epochs": 2,
-	"batchSize": 14,
+	"batchSize": 32,
 	"maxLen": 512,
-	"warmupSteps": 0.1, # proportion of total steps, NOT absolute
+	"warmupSteps": 0.05, # proportion of total steps, NOT absolute
 	"weightDecay": 0.02,
 	"outputDir": "./output",
 	"earlyStopping": True,
 	"earlyStoppingPatience": 2,
-	"dropout": 0.1,
+	"dropout": 0.2,
 	"initlr": 5e-5,
 	"epsilon": 1e-8
 }
@@ -59,11 +59,11 @@ class DistilBertForMulticlassSequenceClassification(DistilBertForSequenceClassif
 			nn.ReLU(),
 			nn.Linear(512, config.dim), # config.dim.shape = (768,)
 			nn.LayerNorm(config.dim),
-			nn.Dropout(0.5),
+			nn.Dropout(0.1),
 			nn.Linear(config.dim, 512),
 			nn.ReLU(),
 			nn.LayerNorm(512),
-			nn.Dropout(0.5),
+			nn.Dropout(0.1),
 			nn.Linear(512, config.dim)
 		)
 		#self.small = nn.Linear(config.dim * 2, config.dim)
@@ -115,8 +115,7 @@ class ACARISModel:
 		df = dataset.to_pandas()
 		uids = df["uid"].unique()
 
-		# create a dictionary to hold all unique uid embeddings
-		userEmbs = {uid: self.userEmbedder.get_user_embedding(uid) for uid in uids}
+		userEmbs = {uid: self.userEmbedder.get_user_embedding(uid) for uid in uids} # create a dictionary to hold all unique uid embeddings
 
 		def map(x):
 			return {
@@ -181,7 +180,7 @@ class ACARISModel:
 			save_total_limit=5,
 			adam_epsilon=config["epsilon"],
 			report_to="wandb",
-			fp16=True
+			fp16=False
 		)
 		
 		trainer = Trainer(

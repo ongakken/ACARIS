@@ -27,7 +27,7 @@ def preprocess_msgs(msgs):
 	processedMsgs = []
 	for msg in msgs:
 		words = re.findall(r"\b(?!\d+\b)\w+\b", msg)
-		words = [word.lower() for word in words if word.lower() not in stopWords and "smiling" not in word.lower() and "eyes" not in word.lower() and "face" not in word.lower() and "https" not in word.lower() and "grinning" not in word.lower() and "clyde" not in word.lower() and "unclyde" not in word.lower()]
+		words = [word.lower() for word in words if word.lower() not in stopWords and "smiling" not in word.lower() and "eyes" not in word.lower() and "face" not in word.lower() and "https" not in word.lower() and "grinning" not in word.lower() and "clyde" not in word.lower() and "unclyde" not in word.lower() and "com" != word.lower()]
 		processedMsgs.append(words)
 	return processedMsgs
 
