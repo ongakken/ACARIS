@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.12.0 (TeX Live 2020/Debian)  (format=lualatex 2023.6.10)  10 JUN 2023 18:54
+This is LuaHBTeX, Version 1.12.0 (TeX Live 2020/Debian)  (format=lualatex 2023.6.10)  13 JUN 2023 06:46
  restricted system commands enabled.
 **paper.tex
 (./paper.tex
@@ -1733,7 +1733,7 @@ Package microtype Info: Character `textless ' is missing
 Package microtype Info: Character `textgreater ' is missing
 (microtype)             in font `TU/NotoColorEmoji(0)/m/n/10'.
 (microtype)             Ignoring protrusion settings for this character.
-[3</tmp/lua_DYqhVc>]
+[3</tmp/lua_UVQxvx>]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 77.
@@ -1778,7 +1778,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 174--186
 
  []
 
-[8] [9] [10]
+[8] [9]
+Underfull \hbox (badness 10000) in paragraph at lines 239--240
+
+ []
+
+[10]
 <images/baseline.png, id=261, 1796.7125pt x 843.15pt>
 File: images/baseline.png Graphic file (type png)
 <use images/baseline.png>
@@ -1798,16 +1803,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 259--261
 
  []
 
-[11<./images/baseline.png>] [12<./images/ACARIS.png>]
-<images/confusion_matrix.png, id=316, 722.7pt x 289.08pt>
+[11<./images/baseline.png>] [12<./images/ACARIS.png>] [13]
+<images/confusion_matrix.png, id=320, 722.7pt x 289.08pt>
 File: images/confusion_matrix.png Graphic file (type png)
 <use images/confusion_matrix.png>
 Package luatex.def Info: images/confusion_matrix.png  used on input line 302.
 (luatex.def)             Requested size: 344.99533pt x 170.71451pt.
- [13<./images/confusion_matrix.png>] [14] [15] [16] (./paper.aux)
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
+ [14<./images/confusion_matrix.png>] [15] [16] [17] (./paper.aux)
 
 Package rerunfilecheck Warning: File `paper.out' has changed.
 (rerunfilecheck)                Rerun to get outlines right
@@ -1822,13 +1824,13 @@ Package logreq Info: Writing requests to 'paper.run.xml'.
 )
 
 Here is how much of LuaTeX's memory you used:
- 28454 strings out of 478824
- 305417,1373583 words of node,token memory allocated
+ 28455 strings out of 478824
+ 305416,1373583 words of node,token memory allocated
  661 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 1 dir, 2 glue, 4 kern, 1 glyph, 31 attribute, 66 gl
 ue_spec, 17 attribute_list, 1 write, 5 pdf_action nodes
-   avail lists: 1:6,2:4458,3:395,4:97,5:6338,6:66,7:12158,8:129,9:12470,10:28,11
-:861
+   avail lists: 1:2,2:4458,3:395,4:97,5:6342,6:53,7:12238,8:129,9:12470,10:28,11
+:867
  47248 multiletter control sequences out of 65536+600000
  71 fonts using 9731807 bytes
  96i,13n,98p,1956b,1681s stack positions out of 5000i,500n,10000p,200000b,200000s
@@ -1852,10 +1854,10 @@ ts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1
 /public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmsy7.pfb>
-Output written on paper.pdf (16 pages, 389078 bytes).
+Output written on paper.pdf (17 pages, 390720 bytes).
 
-PDF statistics: 505 PDF objects out of 1000 (max. 8388607)
- 418 compressed objects within 5 object streams
- 151 named destinations out of 1000 (max. 131072)
+PDF statistics: 509 PDF objects out of 1000 (max. 8388607)
+ 421 compressed objects within 5 object streams
+ 152 named destinations out of 1000 (max. 131072)
  217 words of extra memory for PDF output out of 10000 (max. 100000000)
 

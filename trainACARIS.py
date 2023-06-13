@@ -84,7 +84,8 @@ class DistilBertForMulticlassSequenceClassification(DistilBertForSequenceClassif
 		pooled_output = self.dropout(pooled_output)
 		logits = self.classifier(pooled_output)
 
-		loss = None
+		loss = None # the fuck did this come from???!
+
 		if labels is not None:
 			lossFct = nn.CrossEntropyLoss()
 			loss = lossFct(logits.view(-1, self.num_labels), labels.view(-1))

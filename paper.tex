@@ -15,7 +15,7 @@
 %\usepackage{multicol}
 \usepackage{emoji}
 
-\title{ACARIS: Improving Conversational AI and Human Social Skills using User Embeddings}
+\title{ACARIS: Attempting to Improve Conversational AI and Human Social Skills using User Embeddings}
 \author{Simon Slamka\\
 \small\textbf{OngakkenAI}}
 \date{June 21, 2023}
@@ -107,7 +107,7 @@ Interpersonal communication has always been an integral part of human lives and 
 \end{itemize}
 
 \subsection{Initial attempts}
-Our initial attempts of implementing ACARIS included the use of SVMs, DTs, LogReg, and RFs, each paired with TF-IDF in the preprocessing stage. None of these methods have proven to be accurate enough (barely reaching 50\% accuracy) for large amounts of complex language, especially casual language that often includes slang, sarcasm, emoji, and similar elements. The primary issue was the lack of these methods' ability to capture semantical and contextual aspects of our dataset. SVMs, DTs, LogReg, and RFs weren't built specifically for sequential data. For sequential data, RNNs and CNNs were classically used. However, due to the long-range dependency problem of RNNs, we made the decision to not use them, as we believed that they would not be able to capture the long-range dependencies in our dataset. Additionally, we weren't able to guarantee that during inference, there would be no long-range dependencies.
+Our initial attempts of implementing ACARIS included the use of SVMs, DTs, LogReg, and RFs, each paired with TF-IDF in the preprocessing stage. None of these methods have proven to be accurate enough (barely reaching 50\% accuracy) for large amounts of complex language, especially casual language that often includes slang, sarcasm, emoji, and similar elements. The primary issue was the lack of these methods' ability to capture semantic and contextual aspects of our dataset. SVMs, DTs, LogReg, and RFs weren't built specifically for sequential data. For sequential data, RNNs and CNNs were classically used. However, due to the long-range dependency problem of RNNs, we made the decision to not use them, as we believed that they would not be able to capture the long-range dependencies in our dataset. Additionally, we weren't able to guarantee that during inference, there would be no long-range dependencies.
 Another issue was TF-IDF's lack of word order and semantic meaning understanding. Knowing that the Transformer\cite{vaswani2017attention} architecture is capable of capturing these aspects due to its positional encodings and self-attention mechanism, we decided to use it as the basis for ACARIS.
 
 \subsection{Short intro on Transformers}
@@ -172,8 +172,8 @@ To accommodate the concatenated embeddings, we create a custom FFNN, as such:
 	&e'_u = \text{\texttt{Linear}}_{\text{\texttt{512, $d_m$}}}(h_{3}) \\
 	\end{aligned}
 \end{equation}
-The FFNN contains 3 layers, each with a ReLU activation function, a layer normalization, and dropout for regularization.
-The first linear (dense) layer is a function $y = xw + b$, where $x$ is a user embedding vector, that takes in the $d_e$-dimensional user embedding and learns to transform it to a dimensionality of 512.
+The FFNN contains 3 layers, each with a ReLU activation, a layer normalization, and dropout for regularization.
+The first linear (dense) layer is a function $y = xw + b$, where $x$ is a user embedding vector that takes in the $d_e$-dimensional user embedding and learns to transform it to a dimensionality of 512.
 After the first linear transformation, ReLU will return 0 if its input is negative, and the value of the input if it's 0 or positive. This operation is applied element-wise and introduces non-linearity to the model.
 The second linear layer transforms its input from 512 to $d_m$, which is the dimensionality of our word embedding, and is of value 768.
 Layer normalization normalizes the features of the output of the linear layer to have a mean of 0 and a standard deviation of 1 to stabilize the learning process.
@@ -182,7 +182,7 @@ The third linear layer transforms its input from $d_m$ back to 512. We, once aga
 The final linear layer reduces its input dimensionality to $d_m$, which is 768. The output of the FFNN is the user embedding $e'_u$ (of size $d_m$).\\
 \\
 \\
-The following is the model definition:\\
+The following is the model definition (shared with permission from OngakkenAI):\\
 	
 
 \begin{lstlisting}
@@ -233,13 +233,13 @@ def forward(self, input_ids=None, attention_mask=None, userEmbs=None, head_mask=
 	return SequenceClassifierOutput(loss=loss, logits=logits, hidden_states=outputs.hidden_states, attentions=outputs.attentions)
 \end{lstlisting}
 
-The $userEmbsRep$ variable is created to associate a user embedding with each token in an input sequence. Initially, the user embedding is a matrix of shape $(batchSize, userEmbSize)$. To associate the user embedding with each token, we need to repeat it along a third dimension, which we need to add, making the user embedding a 3D tensor. We first add a singleton dimension to the position 1 using the unsqueeze() method, changing the shape to $(batchSize, 1, userEmbSize)$, and subsequently repeat the user embedding along this dimension using the repeat() method, changing the second dimension from $1$ to $seqLen$ (input sequence length), as such $(batchSize, seqLen, userEmbSize)$. The unsqueeze() method doesn't affect the data inside the tensor, only its shape. This resulting user embedding is then concatenated with the model's hidden state, which represents word embeddings for all tokens in an input sequence, along the last dimension.
+The $userEmbsRep$ variable is created to associate a user embedding with each token in an input sequence. Initially, the user embedding is a matrix of shape $(batchSize, userEmbSize)$. To associate the user embedding with each token, we need to repeat it along a third dimension, which we need to add, making the user embedding a 3D tensor. We first add a singleton dimension to the position 1 using the unsqueeze() method, changing the shape to $(batchSize, 1, userEmbSize)$, and subsequently, repeat the user embedding along this dimension using the repeat() method, changing the second dimension from $1$ to $seqLen$ (input sequence length), as such $(batchSize, seqLen, userEmbSize)$. The unsqueeze() method doesn't affect the data inside the tensor, only its shape. This resulting user embedding is then concatenated with the model's hidden state, which represents word embeddings for all tokens in an input sequence, along the last dimension.
 
 \subsection{Training with user embeddings}
-For each training step, we pass the concatenated embeddings $e_\textnormal{joint}$ through the model and compute the cross-entropy loss $L$ (negative logarithmic likelihood). Then, we backpropagate gradients from the loss to the model parameters and update the parameters using Adam. The model thus learns to associate every message $m$ with a user embedding $e_u$ and a sentiment label $y$.
+For each training step, we retrieve the underlying DistilBERT model's output at position 0 and store it in $hidden_state$. We then pass the user embedding $e_u$ to the user embedding FFNN, which returns the user embedding's $e'_u$. Subsequently, we initialize a variable $userEmbsRep$, as explained above. After concatenating the user embeddings $e'_u$ with the hidden state, we supply the resulting $pooled_output$ to the final classifier, returning logits. Having logits, we can calculate loss, which we do using the negative logaritmic likelihood loss function (CrossEntropyLoss). Lastly, we return the loss and logits or a SequenceClassifierOutput object (depending on the value of return\_dict).\\
 
 \subsection{Updating user embeddings}
-The user embeddings $e_u$ are not updated during training. Instead, they are pre-computed during data preprocessing and stored in a .pt file, one file per user. We repeat training every week, using new data from the previous week to update the user embeddings $e_u$. The reason for this decision is that we want the user embeddings $e_u$ in a static state to prevent any potential issues with losses. We considered updating the user embeddings $e_u$ during training, but we decided against it because we believe that it would be too computationally expensive and would not provide any significant benefits. It could actually worsen the model's performance, as the user embeddings $e_u$ would be constantly changing, which could lead to the model being unable to learn to associate messages $m$ with user embeddings $e_u$.
+The user embeddings $e_u$ are not updated during training. Instead, they are pre-computed during data preprocessing and stored in a .pt file, one file per user. As such, we can reuse them later, without the need to run feature extraction again. We repeat training every week, using new data from the previous week to update the user embeddings $e_u$. The reason for this decision is that we want the user embeddings $e_u$ in a static state to prevent any potential issues with losses. We considered updating the user embeddings $e_u$ during training, but we decided against it because we believe that it would be too computationally expensive and would not provide any significant benefits. It could actually worsen the model's performance, as the user embeddings $e_u$ would be constantly changing, which could lead to the model being unable to learn to associate messages $m$ with user embeddings $e_u$.
 
 \section{Evaluation}
 \begin{figure}[h!]
@@ -256,7 +256,7 @@ The user embeddings $e_u$ are not updated during training. Instead, they are pre
 \end{figure}
 
 \section{Validation}
-To validate our approach, we compare the performance of our model to the performance of a baseline model. We use the same model, DistilBERT, but without user embeddings $e_u$. We fine-tune both models on the same dataset and compared their performance on the same test set.\\\\
+To validate our approach, we compare the performance of our model to the performance of a baseline model. We use the same model, DistilBERT, but without user embeddings $e_u$. We fine-tune both models on the same dataset and compare their performance on the same test set.\\\\
 The base model performed as follows:
 \begin{lstlisting}
 	Baseline metrics:
@@ -309,7 +309,7 @@ Both models performed similarly.
 Given all the information and performance metrics presently available as a result of the current implementation, we must conclude that we failed to reject the null hypothesis $H_0$, and as such, in this particular work, rejected the hypothesis $H_1$. The ACARIS model does not exhibit any statistically nor practically significant improvements over the baseline model.
 
 \section{Future work}
-Generally speaking, we still believe that the first part of the hypothesis $H_1$ applies, and that individualizing model outputs to each user is the way to go. It's just a matter of data sufficiency and correct approach. We plan to continue experimenting with various pre-trained models, especially those released in the recent weeks, such as the Falcon-40B\cite{falcon40b}, which performs incredibly well on eval tests, such as the ARC (25-shot)\cite{clark2018think}, HellaSwag (10-shot)\cite{zellers2019hellaswag}, and MMLU (5-shot)\cite{hendrycks2021measuring}, and is presently the number one open-source model\cite{open-llm-leaderboard} in terms of its performance. The recent weeks have also seen numerous optimization techniques that enable more efficient training of larger language models, so even with our limited hardware, we are able to fine-tune models of 13B and more parameters. In addition, we also want to rethink our approach to user embeddings, and perhaps learn them during training, if we find a way to do so efficiently. Until then, we'll continue working with pre-computed user embeddings, but will expand them to add more complexity. Another area of improvement, in our opinion, is the concatenation operation. We believe that summation may offer different results, and will try to implement it in the future. Finally, and this is the most important factor, is the lack of user-specific data. We don't presently have sufficient messages for many users to train a model that generalizes well. We suspect that this is the main reason why our model failed to outperform the baseline model.
+Generally speaking, we still believe that the first part of the hypothesis $H_1$ applies, and that individualizing model outputs to each user is the way to go. It's just a matter of data sufficiency and correct approach. We plan to continue experimenting with various pre-trained models, especially those released in the recent weeks, such as the Falcon-40B\cite{falcon40b}, which performs incredibly well on eval tests, such as the ARC (25-shot)\cite{clark2018think}, HellaSwag (10-shot)\cite{zellers2019hellaswag}, and MMLU (5-shot)\cite{hendrycks2021measuring}, and is presently the number one open-source model\cite{open-llm-leaderboard} in terms of its performance. The recent weeks have also seen numerous optimization techniques that enable more efficient training of larger language models, so even with our limited hardware, we are able to fine-tune models of 13B and more parameters. In addition, we also want to rethink our approach to user embeddings, and perhaps learn them during training, if we find a way to do so efficiently. Until then, we'll continue working with pre-computed user embeddings, but will expand them to add more complexity. Another area of improvement, in our opinion, is the concatenation operation. We believe that summation with word embeddings instead of concatenation may offer different results, and will try to implement it in the future. Finally, and this is the most important factor, is the lack of user-specific data. We don't presently have sufficient messages for many users to train a model that generalizes well, most likely due to our aggressive filtering procedure (all users with less than 25 messages and messages of less than 25 characters are discarded). We suspect that this is the main reason why our model failed to outperform the baseline model.
 \newpage
 
 \printbibliography
