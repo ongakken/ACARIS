@@ -34,6 +34,8 @@ ds = pd.concat([smallerDs] + processedDs, ignore_index=True)
 del processedDs, smallerDs
 gc.collect()
 
+ds.to_csv("datasets/personality/MBTI/mbti_all.csv", index=True)
+
 # sanity checks
 print(ds.head())
 print("Shape:", ds.shape)
@@ -121,19 +123,23 @@ def plot_word_frequency(ds, words):
 	'''
 	Plot the frequency of words given as input
 	'''
-	ds["tokens"] = ds["posts"].apply(tokenize)
+	tokenized = ds["posts"].apply(tokenize)
 
 	# count the frequency of words for each type
 	freqs = {}
 	counts = {}
 	for w in words:
-		freqs[w] = ds.apply(lambda row: row["tokens"].count(w), axis=1)
+		wordCounts = ds["posts"].apply(lambda post: post.split().count(w))
+		freqs[w] = wordCounts
 		counts[w] = ds.groupby("type").apply(lambda x: x["tokens"].apply(lambda y: y.count(w)).sum())
 
 	freqsDf = pd.DataFrame(freqs)
 	freqsDf["type"] = ds["type"]
 
 	countsDf = pd.DataFrame(counts)
+
+	del tokenized
+	gc.collect()
 
 	# plot the mean frequency of words for each type and word
 	for word, freq in freqsDf.groupby("type").mean().items():
@@ -157,7 +163,7 @@ def plot_word_frequency(ds, words):
 	
 
 if __name__ == "__main__":
-	basic_stats(ds)
-	visualize(ds)
-	#gen_wordclouds(ds, ["ISTJ", "ISFJ", "INFJ", "INTJ", "ISTP", "ISFP", "INFP", "INTP", "ESTP", "ESFP", "ENFP", "ENTP", "ESTJ", "ESFJ", "ENFJ", "ENTJ"], 100) # explore all types
+	#basic_stats(ds)
+	#visualize(ds)
+	# gen_wordclouds(ds, ["ISTJ", "ISFJ", "INFJ", "INTJ", "ISTP", "ISFP", "INFP", "INTP", "ESTP", "ESFP", "ENFP", "ENTP", "ESTJ", "ESFJ", "ENFJ", "ENTJ"], 100) # explore all types
 	plot_word_frequency(ds, ["sex"])
