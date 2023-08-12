@@ -11,36 +11,17 @@ from nltk.corpus import stopwords
 from IPython.display import display
 import gc
 import re
+from collections import defaultdict
 
 
-def extract_type(txt):
-	pattern = r"INFJ|ENTP|INTP|INTJ|ENTJ|ENFJ|INFP|ENFP|ISFP|ISTP|ISFJ|ISTJ|ESTP|ESFP|ESTJ|ESFJ" # regex pattern for MBTI types
-	match = re.search(pattern, txt) # search for the pattern in the text
-	return match.group(0) if match else None # return the match if it exists, else None
 
-# load the datasets sequentially, concat into one, and get rid of the originals
-smallerDs = pd.read_csv("datasets/personality/MBTI/mbti_1.csv")
-datasets = [f"datasets/personality/MBTI/full_pull_v2{str(i).zfill(12)}.csv" for i in range(18)]
-processedDs = []
-for dataset in datasets:
-	temp = pd.read_csv(dataset)
-	temp = temp.rename(columns={"flair_text": "type", "body": "posts"})
-	temp["type"] = temp["type"].apply(extract_type)
-	temp = temp.dropna(subset=["type", "posts"])
-	processedDs.append(temp)
-
-ds = pd.concat([smallerDs] + processedDs, ignore_index=True)
-
-del processedDs, smallerDs
-gc.collect()
-
-ds.to_csv("datasets/personality/MBTI/mbti_all.csv", index=True)
+ds = pd.read_csv("datasets/personality/MBTI/mbti_all_deduplicated_filtered.csv", dtype={"type": "category", "posts": "string"})
 
 # sanity checks
 print(ds.head())
+print(ds["type"].value_counts())
 print("Shape:", ds.shape)
 print("Columns:", ds.columns)
-print("Info:", ds.info())
 print("Describe:", ds.describe())
 
 def basic_stats(ds):
@@ -123,26 +104,27 @@ def plot_word_frequency(ds, words):
 	'''
 	Plot the frequency of words given as input
 	'''
-	tokenized = ds["posts"].apply(tokenize)
 
 	# count the frequency of words for each type
-	freqs = {}
-	counts = {}
-	for w in words:
-		wordCounts = ds["posts"].apply(lambda post: post.split().count(w))
-		freqs[w] = wordCounts
-		counts[w] = ds.groupby("type").apply(lambda x: x["tokens"].apply(lambda y: y.count(w)).sum())
+	totalCounts = defaultdict(int)
+	typeWordCounts = defaultdict(lambda: defaultdict(int))
 
-	freqsDf = pd.DataFrame(freqs)
-	freqsDf["type"] = ds["type"]
+	for _, row in ds.iterrows():
+		post = str(row["posts"])
+		post = row["posts"]
+		type = row["type"]
+		for w in words:
+			count = post.split().count(w)
+			totalCounts[w] += count
+			typeWordCounts[type][w] += count
 
-	countsDf = pd.DataFrame(counts)
+	meanFreqs = {word: {type: count / len(ds[ds["type"] == type]) for type, count in counts.items()} for word, counts in typeWordCounts.items()}
 
 	del tokenized
 	gc.collect()
 
 	# plot the mean frequency of words for each type and word
-	for word, freq in freqsDf.groupby("type").mean().items():
+	for word, freq in meanFreqs.items():
 		plt.figure(figsize=(16, 6))
 		sns.barplot(x=freq.index, y=freq.values, palette="viridis")
 		plt.title(f"Mean frequency of \"{word}\" for each type")
@@ -152,7 +134,7 @@ def plot_word_frequency(ds, words):
 		display(plt.show())
 
 	# plot the count of words for each type and word
-	for word, count in countsDf.items():
+	for word, count in typeWordCounts.items():
 		plt.figure(figsize=(16, 6))
 		sns.barplot(x=count.index, y=count.values, palette="viridis")
 		plt.title(f"Count of \"{word}\" for each type")
