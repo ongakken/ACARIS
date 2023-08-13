@@ -15,15 +15,6 @@ from collections import defaultdict
 
 
 
-ds = pd.read_csv("datasets/personality/MBTI/mbti_all_deduplicated_filtered.csv", dtype={"type": "category", "posts": "string"})
-
-# sanity checks
-print(ds.head())
-print(ds["type"].value_counts())
-print("Shape:", ds.shape)
-print("Columns:", ds.columns)
-print("Describe:", ds.describe())
-
 def basic_stats(ds):
 	'''
 	Extract basic stats about a dataset
@@ -85,7 +76,7 @@ def gen_wordclouds(ds, type, nWords):
 
 	for t in type:
 		words = ds[ds["type"] == t]["posts"].apply(tokenize).explode().tolist()
-
+		words = [str(word) for word in words]
 		wordcloud = WordCloud( # instantiate a dark-themed wordcloud that ingores stopwords
 			stopwords=stopWords,
 			background_color="black",
@@ -104,29 +95,30 @@ def plot_word_frequency(ds, words):
 	'''
 	Plot the frequency of words given as input
 	'''
-
 	# count the frequency of words for each type
 	totalCounts = defaultdict(int)
 	typeWordCounts = defaultdict(lambda: defaultdict(int))
 
-	for _, row in ds.iterrows():
-		post = str(row["posts"])
+	typeCounts = ds["type"].value_counts()
+
+	def count_words(row):
 		post = row["posts"]
 		type = row["type"]
 		for w in words:
-			count = post.split().count(w)
+			count = str(post).split().count(w)
 			totalCounts[w] += count
 			typeWordCounts[type][w] += count
 
-	meanFreqs = {word: {type: count / len(ds[ds["type"] == type]) for type, count in counts.items()} for word, counts in typeWordCounts.items()}
+	ds.apply(count_words, axis=1)
 
-	del tokenized
+	meanFreqs = {word: {type: counts.get(word, 0) / typeCounts[type] for type, count in counts.items()} for word, counts in typeWordCounts.items()}
+
 	gc.collect()
 
 	# plot the mean frequency of words for each type and word
 	for word, freq in meanFreqs.items():
 		plt.figure(figsize=(16, 6))
-		sns.barplot(x=freq.index, y=freq.values, palette="viridis")
+		sns.barplot(x=list(freq.keys()), y=list(freq.values()), palette="viridis")
 		plt.title(f"Mean frequency of \"{word}\" for each type")
 		plt.ylabel("Frequency (mean)")
 		plt.xlabel("Type")
@@ -136,7 +128,7 @@ def plot_word_frequency(ds, words):
 	# plot the count of words for each type and word
 	for word, count in typeWordCounts.items():
 		plt.figure(figsize=(16, 6))
-		sns.barplot(x=count.index, y=count.values, palette="viridis")
+		sns.barplot(x=list(count.keys()), y=list(count.values()), palette="viridis")
 		plt.title(f"Count of \"{word}\" for each type")
 		plt.ylabel("Count (total)")
 		plt.xlabel("Type")
@@ -145,7 +137,16 @@ def plot_word_frequency(ds, words):
 	
 
 if __name__ == "__main__":
-	#basic_stats(ds)
-	#visualize(ds)
+	ds = pd.read_csv("datasets/personality/MBTI/mbti_all_deduplicated_filtered.csv", dtype={"type": "category", "posts": "string"})
+
+	# sanity checks
+	print(ds.head())
+	print(ds["type"].value_counts())
+	print("Shape:", ds.shape)
+	print("Columns:", ds.columns)
+	print("Describe:", ds.describe())
+
+	basic_stats(ds)
+	visualize(ds)
 	# gen_wordclouds(ds, ["ISTJ", "ISFJ", "INFJ", "INTJ", "ISTP", "ISFP", "INFP", "INTP", "ESTP", "ESFP", "ENFP", "ENTP", "ESTJ", "ESFJ", "ENFJ", "ENTJ"], 100) # explore all types
 	plot_word_frequency(ds, ["sex"])
