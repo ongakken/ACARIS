@@ -28,14 +28,15 @@ def basic_stats(ds):
 	ds["postLengths"] = ds["posts"].apply(len)
 	print(f"Post length describe:\n{ds.groupby('type')['postLengths'].describe()}")
 
+
 def visualize(ds):
 	'''
 	Visualize the dataset
 	'''
-	plt.figure(figsize=(16, 6)) # width, height of plots
+	plt.figure(figsize=(16, 6))
 
 	# distribution of types
-	sns.countplot(data=ds, x="type", order=ds["type"].value_counts().index, palette="viridis") # order by value counts. "viridis" is a color palette
+	sns.countplot(data=ds, x="type", order=ds["type"].value_counts().index, palette="magma") # order by value counts. "magma" is a color palette
 	plt.title("Distribution of types")
 	plt.ylabel("Count")
 	plt.xlabel("Type")
@@ -44,29 +45,32 @@ def visualize(ds):
 
 	# histogram for post lengths
 	plt.figure(figsize=(16, 6))
-	sns.histplot(ds["postLengths"], bins=50, color="skyblue", kde=True) # bins is the number of bars. kde is the density line
-	plt.title("Distribution of post lengths")
-	plt.ylabel("Count")
-	plt.xlabel("Post length")
+	sns.histplot(ds["postLengths"], bins=50, kde=True, log_scale=True) # bins is the number of bars. kde is the density line
+	plt.title("Log distribution of post lengths")
+	plt.ylabel("Count") # count of posts
+	plt.xlabel("Post length in characters") # length of posts
 	plt.grid(axis="y")
 	display(plt.show())
+	print(ds["postLengths"].describe())
 
 	# mean number of words per post
 	ds["nWords"] = ds["posts"].apply(lambda x: len(tokenize(x)))
 	meanWordsPerPost = ds.groupby("type")["nWords"].mean().sort_values(ascending=False)
 	plt.figure(figsize=(16, 6))
-	sns.barplot(x=meanWordsPerPost.index, y=meanWordsPerPost.values, palette="viridis")
+	sns.barplot(x=meanWordsPerPost.index, y=meanWordsPerPost.values, palette="magma")
 	plt.title("Mean number of words per post")
 	plt.ylabel("Mean number of words")
 	plt.xlabel("Type")
 	plt.grid(axis="y")
 	display(plt.show())
 
+
 def tokenize(posts):
 	'''
 	Tokenize the posts
 	'''
 	return posts.lower().replace("|||", " ").split()
+
 
 def gen_wordclouds(ds, type, nWords):
 	'''
@@ -91,27 +95,32 @@ def gen_wordclouds(ds, type, nWords):
 		plt.title(f"Wordcloud for {t} type")
 		display(plt.show())
 
+
 def plot_word_frequency(ds, words):
 	'''
 	Plot the frequency of words given as input
 	'''
-	# count the frequency of words for each type
 	totalCounts = defaultdict(int)
 	typeWordCounts = defaultdict(lambda: defaultdict(int))
-
 	typeCounts = ds["type"].value_counts()
+	try:
+		# count the frequency of words for each type>
+		def count_words(row):
+			post = row["posts"]
+			type = row["type"]
+			for w in words:
+				count = str(post).split().count(w)
+				totalCounts[w] += count
+				if w not in typeWordCounts[type]:
+					typeWordCounts[type][w] = 0
+				typeWordCounts[type][w] += count
 
-	def count_words(row):
-		post = row["posts"]
-		type = row["type"]
-		for w in words:
-			count = str(post).split().count(w)
-			totalCounts[w] += count
-			typeWordCounts[type][w] += count
+		ds.apply(count_words, axis=1)
 
-	ds.apply(count_words, axis=1)
-
-	meanFreqs = {word: {type: counts.get(word, 0) / typeCounts[type] for type, count in counts.items()} for word, counts in typeWordCounts.items()}
+		meanFreqs = {word: {type: counts.get(word, 0) / typeCounts[type] for type, count in counts.items()} for word, counts in typeWordCounts.items()}
+	except Exception as e:
+		print(e)
+		raise e
 
 	gc.collect()
 
@@ -137,16 +146,17 @@ def plot_word_frequency(ds, words):
 	
 
 if __name__ == "__main__":
-	ds = pd.read_csv("datasets/personality/MBTI/mbti_all_deduplicated_filtered.csv", dtype={"type": "category", "posts": "string"})
+	if "ds" not in locals(): # don't load the dataset if it's already loaded - Jupyter notebooks
+		ds = pd.read_csv("datasets/personality/MBTI/mbti_all_deduplicated_filtered.csv", dtype={"type": "category", "posts": "string"})
 
 	# sanity checks
 	print(ds.head())
-	print(ds["type"].value_counts())
-	print("Shape:", ds.shape)
 	print("Columns:", ds.columns)
 	print("Describe:", ds.describe())
 
-	basic_stats(ds)
-	visualize(ds)
+	#basic_stats(ds)
+	#visualize(ds)
 	# gen_wordclouds(ds, ["ISTJ", "ISFJ", "INFJ", "INTJ", "ISTP", "ISFP", "INFP", "INTP", "ESTP", "ESFP", "ENFP", "ENTP", "ESTJ", "ESFJ", "ENFJ", "ENTJ"], 100) # explore all types
+	print(f"The count of occurences of the word \"sex\" in the dataset: {ds['posts'].str.contains('sex').sum()}")
+	breakpoint()
 	plot_word_frequency(ds, ["sex"])

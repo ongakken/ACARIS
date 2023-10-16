@@ -4,7 +4,7 @@ This mod fine-tunes a RoBERTa model on the ACARIS dataset for comparison with AC
 
 import torch
 from torch import nn
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import DataLoader
 from transformers import RobertaTokenizerFast, RobertaForSequenceClassification, TrainingArguments, Trainer, AdamW, EarlyStoppingCallback
 from datasets import load_dataset, Dataset
 import pandas as pd
@@ -23,7 +23,7 @@ config = {
     "earlyStoppingPatience": 2
 }
 
-wandb.init(project="MarkIII_ACARIS", entity="simtoonia", config=config)
+wandb.init(project="MarkIV_ACARIS", entity="simtoonia", config=config) # this project is now under MarkIV (branch: @v2)
 
 l2id = {"pos": 2, "neg": 0, "neu": 1}
 id2l = {2: "pos", 0: "neg", 1: "neu"}
