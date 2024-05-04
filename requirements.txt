@@ -67,7 +67,7 @@ tokenizers==0.13.3
 torch==2.0.1
 torchaudio==2.0.2
 torchvision==0.15.2
-tqdm==4.65.0
+tqdm==4.66.3
 transformers==4.30.0
 triton==2.0.0
 typing-inspect==0.8.0
