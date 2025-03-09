@@ -18,7 +18,7 @@ gitdb==4.0.10
 GitPython==3.1.31
 huggingface-hub==0.14.1
 idna==3.4
-Jinja2==3.1.2
+Jinja2==3.1.6
 joblib==1.2.0
 lit==16.0.5
 MarkupSafe==2.1.2
